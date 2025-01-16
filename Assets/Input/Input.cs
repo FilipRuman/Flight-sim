@@ -46,11 +46,11 @@ public partial class @Input: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Throtle"",
-                    ""type"": ""Value"",
+                    ""name"": ""Throttle"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""de46900f-49a1-454f-8293-6d573789c292"",
-                    ""expectedControlType"": ""Double"",
-                    ""processors"": """",
+                    ""expectedControlType"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
@@ -80,12 +80,23 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e7542a0d-b248-4886-9fdf-be63402afb14"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": """",
+                    ""action"": ""Throttle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2ed92a47-28b9-4a54-86d8-f5670fa326ec"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Throtle"",
+                    ""action"": ""Throttle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -98,7 +109,7 @@ public partial class @Input: IInputActionCollection2, IDisposable
         m_Plane = asset.FindActionMap("Plane", throwIfNotFound: true);
         m_Plane_Rightstick = m_Plane.FindAction("Right stick", throwIfNotFound: true);
         m_Plane_Leftstick = m_Plane.FindAction("Left stick", throwIfNotFound: true);
-        m_Plane_Throtle = m_Plane.FindAction("Throtle", throwIfNotFound: true);
+        m_Plane_Throttle = m_Plane.FindAction("Throttle", throwIfNotFound: true);
     }
 
     ~@Input()
@@ -167,14 +178,14 @@ public partial class @Input: IInputActionCollection2, IDisposable
     private List<IPlaneActions> m_PlaneActionsCallbackInterfaces = new List<IPlaneActions>();
     private readonly InputAction m_Plane_Rightstick;
     private readonly InputAction m_Plane_Leftstick;
-    private readonly InputAction m_Plane_Throtle;
+    private readonly InputAction m_Plane_Throttle;
     public struct PlaneActions
     {
         private @Input m_Wrapper;
         public PlaneActions(@Input wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rightstick => m_Wrapper.m_Plane_Rightstick;
         public InputAction @Leftstick => m_Wrapper.m_Plane_Leftstick;
-        public InputAction @Throtle => m_Wrapper.m_Plane_Throtle;
+        public InputAction @Throttle => m_Wrapper.m_Plane_Throttle;
         public InputActionMap Get() { return m_Wrapper.m_Plane; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -190,9 +201,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Leftstick.started += instance.OnLeftstick;
             @Leftstick.performed += instance.OnLeftstick;
             @Leftstick.canceled += instance.OnLeftstick;
-            @Throtle.started += instance.OnThrotle;
-            @Throtle.performed += instance.OnThrotle;
-            @Throtle.canceled += instance.OnThrotle;
+            @Throttle.started += instance.OnThrottle;
+            @Throttle.performed += instance.OnThrottle;
+            @Throttle.canceled += instance.OnThrottle;
         }
 
         private void UnregisterCallbacks(IPlaneActions instance)
@@ -203,9 +214,9 @@ public partial class @Input: IInputActionCollection2, IDisposable
             @Leftstick.started -= instance.OnLeftstick;
             @Leftstick.performed -= instance.OnLeftstick;
             @Leftstick.canceled -= instance.OnLeftstick;
-            @Throtle.started -= instance.OnThrotle;
-            @Throtle.performed -= instance.OnThrotle;
-            @Throtle.canceled -= instance.OnThrotle;
+            @Throttle.started -= instance.OnThrottle;
+            @Throttle.performed -= instance.OnThrottle;
+            @Throttle.canceled -= instance.OnThrottle;
         }
 
         public void RemoveCallbacks(IPlaneActions instance)
@@ -227,6 +238,6 @@ public partial class @Input: IInputActionCollection2, IDisposable
     {
         void OnRightstick(InputAction.CallbackContext context);
         void OnLeftstick(InputAction.CallbackContext context);
-        void OnThrotle(InputAction.CallbackContext context);
+        void OnThrottle(InputAction.CallbackContext context);
     }
 }

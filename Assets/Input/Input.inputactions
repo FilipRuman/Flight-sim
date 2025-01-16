@@ -24,11 +24,11 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Throtle",
-                    "type": "Value",
+                    "name": "Throttle",
+                    "type": "PassThrough",
                     "id": "de46900f-49a1-454f-8293-6d573789c292",
-                    "expectedControlType": "Double",
-                    "processors": "",
+                    "expectedControlType": "",
+                    "processors": "AxisDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -58,12 +58,23 @@
                 },
                 {
                     "name": "",
+                    "id": "e7542a0d-b248-4886-9fdf-be63402afb14",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Throttle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2ed92a47-28b9-4a54-86d8-f5670fa326ec",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throtle",
+                    "action": "Throttle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
