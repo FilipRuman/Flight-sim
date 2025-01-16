@@ -1,6 +1,7 @@
 namespace Plane
 {
     using System.Collections;
+    using Plane.Wing;
     using UnityEngine;
 
     public class PlaneMain : MonoBehaviour
@@ -9,6 +10,7 @@ namespace Plane
 
         public Rigidbody rb;
         public PlaneInputManager planeInputManager;
+        public PlaneWingsManager planeWingsManager;
         public Engine engine;
 
 
@@ -29,7 +31,7 @@ namespace Plane
             {
                 print("Test??");
                 engine.UpdateThrust();
-
+                planeWingsManager.CalculateWingsPhysics();
                 yield return new WaitForSeconds(1 / physicUpdatePerSecond);
             }
         }
