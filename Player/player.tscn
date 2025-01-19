@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://gebnblpa811q"]
+
+[ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
+radius = 0.232468
+
+[node name="Player" type="RigidBody3D"]
+
+[node name="Plane" parent="." instance=ExtResource("1_aoggf")]
+
+[node name="Wh Back" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0686921, -2.2212)
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Wh FL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.219, 1.814)
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Wh FR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.219, 1.814)
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 1.821, 0.632)
