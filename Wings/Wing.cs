@@ -38,6 +38,7 @@ public partial class Wing : Node3D
 	}
 	public Vector3 SurfaceDirectionVector => Quaternion.FromEuler(GlobalRotation) * Vector3.Forward;
 	public Vector3 LiftDirectionModifier = Vector3.Right * Mathf.DegToRad(90);
+	[Export] public bool rotateWholeWing;
 	[Export] public float flapAngle;
 	[Export] public float flapAngleModifier = 20;
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://p8hu1d662mb3"]
+[gd_scene load_steps=3 format=3 uid="uid://p8hu1d662mb3"]
 
 [ext_resource type="PackedScene" uid="uid://dddw3enkhdlc5" path="res://model/model.fbx" id="1_wobh6"]
+[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_hwk5y"]
 
 [node name="Plane" instance=ExtResource("1_wobh6")]
 
@@ -144,3 +145,15 @@ transform = Transform3D(0.915714, 0.401822, -0.00270086, -0.401628, 0.915016, -0
 
 [node name="Base_tren_aterrizaje1" parent="Avion/Tren_aterrizaje" index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000921876, 0.460437, 1.84325)
+
+[node name="Aleron_Der" parent="Avion" index="2"]
+script = ExtResource("2_hwk5y")
+
+[node name="Aleron_Izq" parent="Avion" index="4"]
+script = ExtResource("2_hwk5y")
+
+[node name="Timon_Der" parent="Avion" index="5"]
+script = ExtResource("2_hwk5y")
+
+[node name="Timon_Izq" parent="Avion" index="6"]
+script = ExtResource("2_hwk5y")

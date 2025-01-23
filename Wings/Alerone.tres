@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="WingConfig" load_steps=5 format=3 uid="uid://cj1j11x4ioxe5"]
+[gd_resource type="Resource" script_class="WingConfig" load_steps=5 format=3 uid="uid://dexuxy72bwww5"]
 
-[ext_resource type="Script" uid="uid://ce4psv8t6403s" path="res://Wings/WingConfig.cs" id="1_mqeue"]
+[ext_resource type="Script" uid="uid://ce4psv8t6403s" path="res://Wings/WingConfig.cs" id="1_d01e1"]
 
 [sub_resource type="Curve" id="Curve_cl1yy"]
 _limits = [0.0, 0.2, -90.0, 90.0]
@@ -27,8 +27,8 @@ metadata/_snap_count = 100
 metadata/_snap_enabled = true
 
 [resource]
-script = ExtResource("1_mqeue")
-debugColor = Color(0.721569, 0, 0.670588, 1)
+script = ExtResource("1_d01e1")
+debugColor = Color(0.781043, 0.50216, 0.175217, 1)
 displaySize = true
 forcesModifiers = Vector3(1, 1, 1)
 liftBasedOnAoA = SubResource("Curve_si4k6")

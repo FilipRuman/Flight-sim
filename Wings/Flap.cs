@@ -7,6 +7,9 @@ public partial class Flap : Node3D
 
 	public override void _Process(double delta)
 	{
-		RotationDegrees = Vector3.Right * wing.flapAngle;
+		if (wing.rotateWholeWing)
+			RotationDegrees = Vector3.Right * wing.RotationDegrees.X;
+		else
+			RotationDegrees = Vector3.Right * wing.flapAngle;
 	}
 }

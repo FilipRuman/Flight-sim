@@ -50,11 +50,11 @@ public partial class WingsManager : Node3D
 
         if (Input.IsActionPressed(pitchUp))
         {
-            pitch = Input.GetActionStrength(pitchUp);
+            pitch = -Input.GetActionStrength(pitchUp);
         }
         if (Input.IsActionPressed(pitchDown))
         {
-            pitch = -Input.GetActionStrength(pitchDown);
+            pitch = Input.GetActionStrength(pitchDown);
         }
         if (Input.IsActionPressed(rollLeft))
         {
@@ -67,17 +67,33 @@ public partial class WingsManager : Node3D
 
         foreach (var wing in pitchWings)
         {
-            wing.flapAngle = pitch * wing.flapAngleModifier;
+            float angle = pitch * wing.flapAngleModifier;
+            SetControlSurface(wing, angle);
         }
         foreach (var wing in rollWings)
         {
-            wing.flapAngle = roll * wing.flapAngleModifier;
+            float angle = roll * wing.flapAngleModifier;
+            SetControlSurface(wing, angle);
         }
         foreach (var wing in yawWings)
         {
-            wing.flapAngle = yaw * wing.flapAngleModifier;
+            float angle = yaw * wing.flapAngleModifier;
+            SetControlSurface(wing, angle);
         }
 
         base._Process(delta);
+    }
+
+    private static void SetControlSurface(Wing wing, float angle)
+    {
+        if (!wing.rotateWholeWing)
+        {
+            wing.flapAngle = angle;
+        }
+        else
+        {
+            wing.flapAngle = 0;
+            wing.RotationDegrees = new(angle, wing.RotationDegrees.Y, wing.RotationDegrees.Z);
+        }
     }
 }
