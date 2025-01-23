@@ -36,11 +36,10 @@ public partial class WingsManager : Node3D
         }
     }
 
-    private float flapAngleModifier = 20;
     private const string pitchUp = "pitchUp";
     private const string pitchDown = "pitchDown";
-    /*   private const string rollLeft = "rollLeft";
-      private const string rollRight = "rollRight"; */
+    private const string rollLeft = "rollLeft";
+    private const string rollRight = "rollRight";
     public override void _Process(double delta)
     {
         if (Engine.IsEditorHint())
@@ -57,26 +56,26 @@ public partial class WingsManager : Node3D
         {
             pitch = -Input.GetActionStrength(pitchDown);
         }
-        /*  if (Input.IsActionPressed(rollLeft))
-         {
-             roll = Input.GetActionStrength(rollLeft);
-         }
-         if (Input.IsActionPressed(rollRight))
-         {
-             roll = -Input.GetActionStrength(rollRight);
-         } */
+        if (Input.IsActionPressed(rollLeft))
+        {
+            roll = Input.GetActionStrength(rollLeft);
+        }
+        if (Input.IsActionPressed(rollRight))
+        {
+            roll = -Input.GetActionStrength(rollRight);
+        }
 
         foreach (var wing in pitchWings)
         {
-            wing.flapAngle = pitch * flapAngleModifier;
+            wing.flapAngle = pitch * wing.flapAngleModifier;
         }
         foreach (var wing in rollWings)
         {
-            wing.flapAngle = roll * flapAngleModifier;
+            wing.flapAngle = roll * wing.flapAngleModifier;
         }
         foreach (var wing in yawWings)
         {
-            wing.flapAngle = yaw * flapAngleModifier;
+            wing.flapAngle = yaw * wing.flapAngleModifier;
         }
 
         base._Process(delta);

@@ -39,6 +39,8 @@ public partial class Wing : Node3D
 	public Vector3 SurfaceDirectionVector => Quaternion.FromEuler(GlobalRotation) * Vector3.Forward;
 	public Vector3 LiftDirectionModifier = Vector3.Right * Mathf.DegToRad(90);
 	[Export] public float flapAngle;
+	[Export] public float flapAngleModifier = 20;
+
 	public float angleOfAttack;
 	[Export] public Vector3 relativePosition;
 	public void CalculateForces(Vector3 airVelocity, float airDensity, Vector3 relativePosition, out Vector3 forces, out Vector3 torque)

@@ -62,6 +62,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.629, 0.951, 1.025)
 script = ExtResource("3_fhl08")
 size = Vector2(4, 1.7)
 configResource = ExtResource("4_vtle1")
+flapAngleModifier = -20.0
 relativePosition = Vector3(-2.629, 0.951, 1.025)
 
 [node name="Wg BL" type="Node3D" parent="wings"]
