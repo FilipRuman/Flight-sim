@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=15 format=3 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_00tjw"]
@@ -15,6 +15,32 @@ radius = 0.232468
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_00tjw"]
 size = Vector3(4.09311, 0.156006, 1.98804)
+
+[sub_resource type="ImageTexture" id="ImageTexture_00tjw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3vf3"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.230469, 0.230469, 0.230469, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apopc"]
+bg_color = Color(1, 0.632813, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 8.0
+expand_margin_right = 8.0
 
 [node name="Player" type="RigidBody3D"]
 physics_interpolation_mode = 1
@@ -49,6 +75,7 @@ shape = SubResource("SphereShape3D_hdd2g")
 
 [node name="Wheal Colider FL" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.0300107, 1.814)
+visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
 [node name="Wing Colider FL" type="CollisionShape3D" parent="."]
@@ -66,6 +93,7 @@ shape = SubResource("SphereShape3D_hdd2g")
 
 [node name="Tp cam" type="Camera3D" parent="."]
 transform = Transform3D(-1, 6.85911e-09, -8.71533e-08, 0, 0.996917, 0.0784591, 8.74228e-08, 0.0784591, -0.996917, 0, 2.721, -6.115)
+far = 7000.0
 
 [node name="Fp cam" type="Camera3D" parent="."]
 transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 1.821, 0.632)
@@ -98,7 +126,7 @@ relativePosition = Vector3(-2.629, 0.951, 1.5489)
 [node name="Alerone FL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62898, 0.950839, 0.206304)
 script = ExtResource("3_fhl08")
-size = Vector2(4.12, 0.665)
+size = Vector2(5.405, 1.92)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
@@ -107,7 +135,7 @@ relativePosition = Vector3(2.62898, 0.950839, 0.206304)
 [node name="Alerone FR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.629, 0.951, 0.205984)
 script = ExtResource("3_fhl08")
-size = Vector2(4.12, 0.665)
+size = Vector2(5.405, 1.92)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = -10.0
@@ -134,7 +162,7 @@ relativePosition = Vector3(-1.08234, 1.099, -2.93508)
 [node name="Alerone BL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929239, 1.099, -4.32136)
 script = ExtResource("3_fhl08")
-size = Vector2(1.94, 1.385)
+size = Vector2(2.81, 2.17)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
@@ -143,7 +171,7 @@ relativePosition = Vector3(0.929239, 1.099, -4.32136)
 [node name="Alerone BR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08234, 1.099, -4.32136)
 script = ExtResource("3_fhl08")
-size = Vector2(1.94, 1.385)
+size = Vector2(2.81, 2.17)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
@@ -177,71 +205,66 @@ yawWings = [NodePath("../Alerone S")]
 wind = Vector3(0, 0, -5)
 rb = NodePath("../..")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "speed", "AoA")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "speed", "AoA", "throttle")]
 script = ExtResource("6_a3tn1")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
-speed = NodePath("Speed/Label")
-AoA = NodePath("Aoa/Value")
+thruster = NodePath("../Thruster")
+speed = NodePath("Panel/HBoxContainer/Speed")
+AoA = NodePath("Panel/HBoxContainer/AoA")
+throttle = NodePath("Panel/Throttle")
 
-[node name="Aoa" type="Panel" parent="CanvasLayer"]
-anchors_preset = 2
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -124.0
-offset_right = 200.0
-offset_bottom = -55.0
+offset_left = -124.0
+offset_top = -88.0
+offset_right = 127.0
+offset_bottom = -10.0
+grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Aoa"]
+[node name="Throttle" type="VSlider" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -6.0
+offset_right = -11.0
+offset_bottom = 10.0
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("ImageTexture_00tjw")
+theme_override_styles/slider = SubResource("StyleBoxFlat_x3vf3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_apopc")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -10.0
-offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
-text = "AoA:
-"
+theme_override_constants/separation = 25
+
+[node name="AoA" type="Label" parent="CanvasLayer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 35
+text = "120°"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="CanvasLayer/Aoa"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = 14.0
-offset_right = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Speed!
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Speed" type="Panel" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -55.0
-offset_right = 200.0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Speed"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Speed!
-"
+[node name="Speed" type="Label" parent="CanvasLayer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 35
+text = "120°"
 horizontal_alignment = 1
 vertical_alignment = 1
 

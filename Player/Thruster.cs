@@ -10,7 +10,7 @@ public partial class Thruster : Node3D
 	[Export] Curve curve;
 
 	[Export] public float thrusterStrength = 100;
-	private float throttle = 0;
+	public float throttle = 0;
 	private double throttleChangeSpeedModifier = 2;
 
 	public override void _Process(double delta)

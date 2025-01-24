@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Flight-sim"
-run/main_scene="res://TEst scene.tscn"
+run/main_scene="uid://bijbbsx1cx5cx"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
