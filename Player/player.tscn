@@ -19,6 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
 mass = 300.0
 center_of_mass_mode = 1
 continuous_cd = true
+linear_damp = 0.2
 
 [node name="Plane" parent="." instance=ExtResource("1_aoggf")]
 
@@ -37,6 +38,7 @@ wing = NodePath("../../../wings/Alerone BL")
 [node name="Timon_Prof" parent="Plane/Avion" index="7" node_paths=PackedStringArray("wing")]
 script = ExtResource("2_00tjw")
 wing = NodePath("../../../wings/Alerone S")
+yaw = true
 
 [node name="Wh Back" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460364, -2.2212)
