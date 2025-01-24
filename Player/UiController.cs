@@ -17,7 +17,8 @@ namespace Player
 		public override void _Process(double delta)
 		{
 			AoA.Text = Math.Round(wingsManager.wings[0].angleOfAttack, 1).ToString();
-			speed.Text = $"{Math.Round((rb.Basis.Z * rb.LinearVelocity).Z, 1)} m/s";
+			float velocity = (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z * 3.6f; /* in km/h */
+			speed.Text = $"{(velocity < 20 ? 0 : Math.Round(velocity, 1))} km/h";
 		}
 	}
 }

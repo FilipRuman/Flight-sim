@@ -56,10 +56,24 @@ rollRight={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 ]
 }
+yawLeft={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
+]
+}
+yawRight={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
+]
+}
+
+[physics]
+
+common/physics_ticks_per_second=300
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 
 anti_aliasing/quality/msaa_2d=2
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1
-anti_aliasing/quality/use_taa=true

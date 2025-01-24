@@ -33,7 +33,7 @@ public partial class Thruster : Node3D
 	public override void _PhysicsProcess(double delta)
 	{
 
-		rb.ApplyForce(rb.Transform.Basis.Z * throttle * (float)delta * thrusterStrength);
+		rb.ApplyForce(rb.Transform.Basis.Z * throttle * thrusterStrength);
 		base._PhysicsProcess(delta);
 	}
 

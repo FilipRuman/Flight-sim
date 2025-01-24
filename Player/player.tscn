@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=11 format=3 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
+[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_00tjw"]
 [ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Player/Thruster.cs" id="2_3vl5u"]
 [ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Wings/Wing.cs" id="3_fhl08"]
 [ext_resource type="Resource" uid="uid://cj1j11x4ioxe5" path="res://Wings/default Wing configuration.tres" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c631vcp26dh6i" path="res://Wings/WingsManager.cs" id="5_fhl08"]
 [ext_resource type="Resource" uid="uid://dexuxy72bwww5" path="res://Wings/Alerone.tres" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="6_a3tn1"]
+[ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Wings/Stab.tres" id="6_od3ui"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
 radius = 0.232468
@@ -14,25 +16,27 @@ radius = 0.232468
 [node name="Player" type="RigidBody3D"]
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-mass = 1000.0
+mass = 300.0
 center_of_mass_mode = 1
 continuous_cd = true
 
 [node name="Plane" parent="." instance=ExtResource("1_aoggf")]
 
 [node name="Aleron_Der" parent="Plane/Avion" index="2" node_paths=PackedStringArray("wing")]
-wing = NodePath("../../../wings/Wg FR")
+wing = NodePath("../../../wings/Alerone FR")
 
 [node name="Aleron_Izq" parent="Plane/Avion" index="4" node_paths=PackedStringArray("wing")]
-wing = NodePath("../../../wings/Wg FL")
+wing = NodePath("../../../wings/Alerone FL")
 
 [node name="Timon_Der" parent="Plane/Avion" index="5" node_paths=PackedStringArray("wing")]
 wing = NodePath("../../../wings/Alerone BR")
 
 [node name="Timon_Izq" parent="Plane/Avion" index="6" node_paths=PackedStringArray("wing")]
 wing = NodePath("../../../wings/Alerone BL")
+
+[node name="Timon_Prof" parent="Plane/Avion" index="7" node_paths=PackedStringArray("wing")]
+script = ExtResource("2_00tjw")
+wing = NodePath("../../../wings/Alerone S")
 
 [node name="Wh Back" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460364, -2.2212)
@@ -57,26 +61,44 @@ visible = false
 [node name="Thruster" type="Node3D" parent="." node_paths=PackedStringArray("rb")]
 script = ExtResource("2_3vl5u")
 rb = NodePath("..")
-thrusterStrength = 1.9e+06
+thrusterStrength = 10000.0
 
 [node name="Wings" type="Node" parent="."]
 
 [node name="wings" type="Node3D" parent="."]
 
 [node name="Wg FL" type="Node3D" parent="wings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62898, 0.950839, 1.02532)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62898, 0.950839, 1.54922)
 script = ExtResource("3_fhl08")
-size = Vector2(2.855, 1.7)
+size = Vector2(4.14, 1.7)
 configResource = ExtResource("4_vtle1")
-relativePosition = Vector3(2.62898, 0.950839, 1.02532)
+relativePosition = Vector3(2.62898, 0.950839, 1.54922)
 
 [node name="Wg FR" type="Node3D" parent="wings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.629, 0.951, 1.025)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.629, 0.951, 1.5489)
 script = ExtResource("3_fhl08")
-size = Vector2(2.855, 1.7)
+size = Vector2(4.14, 1.7)
 configResource = ExtResource("4_vtle1")
 flapAngleModifier = -20.0
-relativePosition = Vector3(-2.629, 0.951, 1.025)
+relativePosition = Vector3(-2.629, 0.951, 1.5489)
+
+[node name="Alerone FL" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62898, 0.950839, 0.206304)
+script = ExtResource("3_fhl08")
+size = Vector2(4.12, 0.665)
+configResource = ExtResource("5_vtle1")
+rotateWholeWing = true
+flapAngleModifier = 10.0
+relativePosition = Vector3(2.62898, 0.950839, 0.206304)
+
+[node name="Alerone FR" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.629, 0.951, 0.205984)
+script = ExtResource("3_fhl08")
+size = Vector2(4.12, 0.665)
+configResource = ExtResource("5_vtle1")
+rotateWholeWing = true
+flapAngleModifier = -10.0
+relativePosition = Vector3(-2.629, 0.951, 0.205984)
 
 [node name="Wg BL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929239, 1.099, -2.93508)
@@ -97,30 +119,49 @@ flapAngleModifier = 8.0
 relativePosition = Vector3(-1.08234, 1.099, -2.93508)
 
 [node name="Alerone BL" type="Node3D" parent="wings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929239, 1.099, -3.97157)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929239, 1.099, -4.32136)
 script = ExtResource("3_fhl08")
-size = Vector2(1.94, 0.77)
+size = Vector2(1.94, 1.385)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
-flapAngleModifier = 8.0
-relativePosition = Vector3(0.929239, 1.099, -3.97157)
+flapAngleModifier = 10.0
+relativePosition = Vector3(0.929239, 1.099, -4.32136)
 
 [node name="Alerone BR" type="Node3D" parent="wings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08234, 1.099, -3.97157)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08234, 1.099, -4.32136)
 script = ExtResource("3_fhl08")
-size = Vector2(1.94, 0.77)
+size = Vector2(1.94, 1.385)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
+flapAngleModifier = 10.0
+relativePosition = Vector3(-1.08234, 1.099, -4.32136)
+
+[node name="Wg S" type="Node3D" parent="wings"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.0208343, 1.86711, -3.00531)
+script = ExtResource("3_fhl08")
+size = Vector2(1.3, 0.77)
+configResource = ExtResource("6_od3ui")
+rotateWholeWing = true
 flapAngleModifier = 8.0
-relativePosition = Vector3(-1.08234, 1.099, -3.97157)
+relativePosition = Vector3(0.0208343, 1.86711, -3.00531)
+
+[node name="Alerone S" type="Node3D" parent="wings"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.021, 1.867, -3.82)
+script = ExtResource("3_fhl08")
+size = Vector2(1.3, 0.77)
+configResource = ExtResource("6_od3ui")
+rotateWholeWing = true
+flapAngleModifier = 10.0
+relativePosition = Vector3(0.021, 1.867, -3.82)
 
 [node name="wings manager" type="Node3D" parent="wings" node_paths=PackedStringArray("wings", "pitchWings", "rollWings", "yawWings", "rb")]
 script = ExtResource("5_fhl08")
 gravity = 10.0
-wings = [NodePath("../Wg FL"), NodePath("../Wg FR"), NodePath("../Wg BL"), NodePath("../Wg BR"), NodePath("../Alerone BL"), NodePath("../Alerone BR")]
+wings = [NodePath("../Wg FL"), NodePath("../Wg FR"), NodePath("../Wg BL"), NodePath("../Wg BR"), NodePath("../Alerone BL"), NodePath("../Alerone BR"), NodePath("../Alerone FL"), NodePath("../Alerone FR"), NodePath("../Wg S"), NodePath("../Alerone S")]
 pitchWings = [NodePath("../Alerone BL"), NodePath("../Alerone BR")]
-rollWings = [NodePath("../Wg FL"), NodePath("../Wg FR")]
-yawWings = []
+rollWings = [NodePath("../Alerone FL"), NodePath("../Alerone FR")]
+yawWings = [NodePath("../Alerone S")]
+wind = Vector3(0, 0, -5)
 rb = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "speed", "AoA")]

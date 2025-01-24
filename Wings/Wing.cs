@@ -1,11 +1,13 @@
 
 
+using System.Data.Common;
 using Godot;
 using Player.wings;
 [Tool, GlobalClass]
 
 public partial class Wing : Node3D
 {
+	[Export] public bool displayDebug;
 	[Export] public Vector2 size;
 	//TODO could be pre calculated
 	[Export] public Resource configResource;
@@ -16,6 +18,8 @@ public partial class Wing : Node3D
 	private const float displayArrowsSizeModifier = .1f;
 	public override void _Process(double delta)
 	{
+		if (!displayDebug)
+			return;
 
 		if (configResource is not WingConfig config)
 			return;
@@ -37,12 +41,11 @@ public partial class Wing : Node3D
 		DebugDraw3D.Config.LineAfterHitColor = new(252, 85, 7, .4f);
 	}
 	public Vector3 SurfaceDirectionVector => Quaternion.FromEuler(GlobalRotation) * Vector3.Forward;
-	public Vector3 LiftDirectionModifier = Vector3.Right * Mathf.DegToRad(90);
 	[Export] public bool rotateWholeWing;
 	[Export] public float flapAngle;
 	[Export] public float flapAngleModifier = 20;
 
-	public float angleOfAttack;
+	[Export] public float angleOfAttack;
 	[Export] public Vector3 relativePosition;
 	public void CalculateForces(Vector3 airVelocity, float airDensity, Vector3 relativePosition, out Vector3 forces, out Vector3 torque)
 	{
@@ -54,15 +57,15 @@ public partial class Wing : Node3D
 		this.airVelocity = airVelocity;
 		Vector3 dragDirection = airVelocity.Normalized();
 
-		liftDirection = Quaternion.FromEuler(LiftDirectionModifier) * dragDirection;
+		liftDirection = GlobalBasis.Y;
 
 		float area = size.X * size.Y;
 		float dynamicPressure = 0.5f * airDensity * airVelocity.LengthSquared();
 
-		var rotatedAirVelocity = Quaternion * airVelocity;
+		var localAirVelocity = GlobalTransform.Basis.Inverse() * airVelocity;
 		// https://en.wikipedia.org/wiki/Lift_(force)
 		if (airVelocity != Vector3.Zero)
-			angleOfAttack = (SurfaceDirectionVector.Y <= dragDirection.Y ? 1 : -1) * Mathematics.GetAngleBetween(SurfaceDirectionVector, dragDirection);
+			angleOfAttack = Mathf.RadToDeg(Mathf.Atan2(localAirVelocity.Y, -localAirVelocity.Z));
 		else angleOfAttack = 0;
 		CalculateCoefficients(angleOfAttack, flapAngle, out float liftC, out float dragC, out float torqueC);
 		Vector3 lift = liftDirection * liftC * dynamicPressure * area;

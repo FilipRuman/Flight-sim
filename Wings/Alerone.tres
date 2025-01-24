@@ -11,9 +11,9 @@ metadata/_snap_count = 100
 metadata/_snap_enabled = true
 
 [sub_resource type="Curve" id="Curve_si4k6"]
-_limits = [-2.0, 3.0, -30.0, 30.0]
+_limits = [-4.0, 4.0, -30.0, 30.0]
 bake_resolution = 1000
-_data = [Vector2(-29.4, -0.48), 0.0, 0.0, 0, 0, Vector2(-15, -2), -0.0935634, -0.0935634, 0, 0, Vector2(-2.4, 0.04), 0.187389, 0.187389, 0, 0, Vector2(14.4, 3), 0.130374, 0.130374, 0, 0, Vector2(30, -0.6), 0.0581543, 0.0, 0, 0]
+_data = [Vector2(-29.4, -0.48), 0.0, 0.0, 0, 0, Vector2(-18, -4), -0.0935634, -0.0935634, 0, 0, Vector2(-2.4, 0.04), 0.187389, 0.187389, 0, 0, Vector2(18, 4), 0.130374, 0.130374, 0, 0, Vector2(30, -0.6), 0.0581543, 0.0, 0, 0]
 point_count = 5
 metadata/_snap_count = 100
 metadata/_snap_enabled = true
@@ -30,7 +30,7 @@ metadata/_snap_enabled = true
 script = ExtResource("1_d01e1")
 debugColor = Color(0.781043, 0.50216, 0.175217, 1)
 displaySize = true
-forcesModifiers = Vector3(1, 1, 1)
+forcesModifiers = Vector3(3, 5, 9)
 liftBasedOnAoA = SubResource("Curve_si4k6")
 dragBasedOnAoA = SubResource("Curve_cl1yy")
 torqueBasedOnAoA = SubResource("Curve_ylufn")
