@@ -4,6 +4,9 @@ namespace Player
 	using System;
 	public partial class UiController : CanvasLayer
 	{
+		[Export] Camera3D fp;
+		[Export] Camera3D tp;
+
 		[Export] private RigidBody3D rb;
 		[Export] private WingsManager wingsManager;
 		[Export] private Thruster thruster;
@@ -17,8 +20,17 @@ namespace Player
 		[Export] float FramesPerUpdate = 10;
 
 		int frameIndex = 0;
+		private const string switchCam = "switchCam";
+
 		public override void _Process(double delta)
 		{
+			if (Input.IsActionJustPressed(switchCam))
+			{
+				GD.Print("switchCam");
+				fp.Current = !fp.Current;
+				/* 				tp.Current = !tp.Current;
+				 */
+			}
 			frameIndex++;
 
 			if (frameIndex < FramesPerUpdate)

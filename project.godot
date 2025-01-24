@@ -15,6 +15,10 @@ run/main_scene="uid://bijbbsx1cx5cx"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -23,6 +27,10 @@ window/size/viewport_height=1080
 [dotnet]
 
 project/assembly_name="Flight-sim"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ninetailsrabbit.terrainy/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
@@ -64,6 +72,11 @@ yawLeft={
 yawRight={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
+]
+}
+switchCam={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":11,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 

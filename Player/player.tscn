@@ -43,6 +43,8 @@ expand_margin_left = 8.0
 expand_margin_right = 8.0
 
 [node name="Player" type="RigidBody3D"]
+process_priority = 1
+process_physics_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
 mass = 300.0
@@ -91,13 +93,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.0300107, 1.814)
 visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Tp cam" type="Camera3D" parent="."]
-transform = Transform3D(-1, 6.85911e-09, -8.71533e-08, 0, 0.996917, 0.0784591, 8.74228e-08, 0.0784591, -0.996917, 0, 2.721, -6.115)
-far = 7000.0
-
 [node name="Fp cam" type="Camera3D" parent="."]
 transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 1.821, 0.632)
-visible = false
 
 [node name="Thruster" type="Node3D" parent="." node_paths=PackedStringArray("rb")]
 script = ExtResource("2_3vl5u")
@@ -205,8 +202,10 @@ yawWings = [NodePath("../Alerone S")]
 wind = Vector3(0, 0, -5)
 rb = NodePath("../..")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "speed", "AoA", "throttle")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("fp", "tp", "rb", "wingsManager", "thruster", "speed", "AoA", "throttle")]
 script = ExtResource("6_a3tn1")
+fp = NodePath("../Fp cam")
+tp = NodePath("../Camera3D")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
 thruster = NodePath("../Thruster")
@@ -267,5 +266,14 @@ theme_override_font_sizes/font_size = 35
 text = "120°"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LookAtTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91685, 2.3498)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+process_priority = 1
+physics_interpolation_mode = 1
+transform = Transform3D(-0.999997, -0.00150845, -0.00172923, -0.00172918, 0.990746, 0.135716, 0.0015085, 0.135718, -0.990746, -0.001, 4.119, -8.697)
+current = true
 
 [editable path="Plane"]
