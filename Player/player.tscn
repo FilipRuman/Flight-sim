@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=12 format=3 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_00tjw"]
@@ -12,6 +12,9 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
 radius = 0.232468
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00tjw"]
+size = Vector3(4.09311, 0.156006, 1.98804)
 
 [node name="Player" type="RigidBody3D"]
 physics_interpolation_mode = 1
@@ -40,16 +43,24 @@ script = ExtResource("2_00tjw")
 wing = NodePath("../../../wings/Alerone S")
 yaw = true
 
-[node name="Wh Back" type="CollisionShape3D" parent="."]
+[node name="Wheal Colider Back" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460364, -2.2212)
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Wh FL" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.219, 1.814)
+[node name="Wheal Colider FL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.0300107, 1.814)
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Wh FR" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.219, 1.814)
+[node name="Wing Colider FL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.57453, 1.15885, 0.893878)
+shape = SubResource("BoxShape3D_00tjw")
+
+[node name="Wing Colider  FR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.575, 1.159, 0.894)
+shape = SubResource("BoxShape3D_00tjw")
+
+[node name="Wheal Colider FR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.0300107, 1.814)
 visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
