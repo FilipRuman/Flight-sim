@@ -8,12 +8,20 @@
 
 config_version=5
 
+[Flight-sim]
+
+config/ninetailsrabbit.terrainy/update_notification_enabled=true
+
 [application]
 
 config/name="Flight-sim"
 run/main_scene="uid://bijbbsx1cx5cx"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://n6avc46gv0ct"
 
 [autoload]
 
@@ -30,7 +38,7 @@ project/assembly_name="Flight-sim"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ninetailsrabbit.terrainy/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/ninetailsrabbit.terrainy/plugin.cfg")
 
 [input]
 

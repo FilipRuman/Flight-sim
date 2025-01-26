@@ -7,12 +7,10 @@ public partial class Thruster : Node3D
 	private const string throttleUpAction = "throttleUp";
 	private const string throttleDownAction = "throttleDown";
 
-	[Export] Curve curve;
-
 	[Export] public float thrusterStrength = 100;
 	public float throttle = 0;
-	private double throttleChangeSpeedModifier = 2;
-
+	private double throttleChangeSpeedModifier = .2;
+	[Export] private EngineSoundController engineSoundController;
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionPressed(throttleUpAction))
@@ -23,11 +21,13 @@ public partial class Thruster : Node3D
 		{
 			ChangeThrottle(-Input.GetActionStrength(throttleDownAction), delta);
 		}
+
 	}
 
 	private void ChangeThrottle(float amount, double delta)
 	{
 		throttle = (float)Mathf.Clamp(throttle + amount * delta * throttleChangeSpeedModifier, 0, 1);
+		engineSoundController.Throttle = throttle;
 	}
 
 	public override void _PhysicsProcess(double delta)

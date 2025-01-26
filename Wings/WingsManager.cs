@@ -9,7 +9,7 @@ public partial class WingsManager : Node3D
     [Export] public Wing[] rollWings;
     [Export] public Wing[] yawWings;
 
-
+    [Export] Vector3 forcesModifiers = Vector3.One;
     [Export] public Vector3 wind = new(0, 0, 5);
     [Export] RigidBody3D rb;
     public override void _PhysicsProcess(double delta)
@@ -30,7 +30,7 @@ public partial class WingsManager : Node3D
         foreach (var surface in wings)
         {
             Vector3 relativePosition = surface.GlobalPosition - GlobalPosition + rb.CenterOfMass;
-            surface.CalculateForces(wind - rb.LinearVelocity - rb.AngularVelocity.Cross(relativePosition), airDensity, relativePosition, out Vector3 _forces, out Vector3 _torque);
+            surface.CalculateForces(wind - rb.LinearVelocity - rb.AngularVelocity.Cross(relativePosition), airDensity, relativePosition, forcesModifiers, out Vector3 _forces, out Vector3 _torque);
             forces += _forces;
             torque += _torque;
         }

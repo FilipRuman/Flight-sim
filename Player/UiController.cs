@@ -18,7 +18,7 @@ namespace Player
 		[Export] private Slider throttle;
 
 		[Export] float FramesPerUpdate = 10;
-
+		[Export] WindController windController;
 		int frameIndex = 0;
 		private const string switchCam = "switchCam";
 
@@ -32,7 +32,8 @@ namespace Player
 				 */
 			}
 			frameIndex++;
-
+			float velocity = (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z * 3.6f; /* in km/h */
+			windController.Speed = velocity;
 			if (frameIndex < FramesPerUpdate)
 				return;
 			frameIndex = 0;
@@ -41,7 +42,7 @@ namespace Player
 			 */
 			throttle.Value = thruster.throttle;
 			AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}°";
-			float velocity = (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z * 3.6f; /* in km/h */
+
 			speed.Text = $"{(velocity < 20 ? 0 : Math.Round(velocity))} km/h";
 		}
 	}

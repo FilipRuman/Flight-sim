@@ -47,7 +47,7 @@ public partial class Wing : Node3D
 
 	[Export] public float angleOfAttack;
 	[Export] public Vector3 relativePosition;
-	public void CalculateForces(Vector3 airVelocity, float airDensity, Vector3 relativePosition, out Vector3 forces, out Vector3 torque)
+	public void CalculateForces(Vector3 airVelocity, float airDensity, Vector3 relativePosition, Vector3 forcesModifiers, out Vector3 forces, out Vector3 torque)
 	{
 		this.relativePosition = relativePosition;
 
@@ -68,13 +68,13 @@ public partial class Wing : Node3D
 			angleOfAttack = Mathf.RadToDeg(Mathf.Atan2(localAirVelocity.Y, -localAirVelocity.Z));
 		else angleOfAttack = 0;
 		CalculateCoefficients(angleOfAttack, flapAngle, out float liftC, out float dragC, out float torqueC);
-		Vector3 lift = liftDirection * liftC * dynamicPressure * area;
-		Vector3 drag = dragDirection * dragC * dynamicPressure * area;
+		Vector3 lift = liftDirection * liftC * dynamicPressure * area * forcesModifiers.Y;
+		Vector3 drag = dragDirection * dragC * dynamicPressure * area * forcesModifiers.Z;
 
 		forces = lift + drag;
 		torque = Vector3.Zero/* -Basis.Z * torqueC * dynamicPressure * area * size.Y */;
 
-		torque += relativePosition.Cross(forces) / 5;
+		torque += relativePosition.Cross(forces) / 5 * forcesModifiers.X;
 
 		CurrentLift = lift;
 		CurrentDrag = drag;
