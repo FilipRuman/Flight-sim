@@ -21,6 +21,6 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - download and run exe form releas page
 ### Edit project
 - download <a href="https://godotengine.org/download/archive/4.4-beta1/">godot 4.4 beta1</a>  in .Net version
-- setup your godot <a href="https://www.youtube.com/watch?v=Yi1iIM-B7XQ&t=716s">like in this video </a>
+- setup your godot <a href="https://www.youtube.com/watch?v=Yi1iIM-B7XQ">like in this video </a>
 - clone this github repo
 - open cloned directory with godot 4.4 
