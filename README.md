@@ -24,3 +24,4 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - setup your godot <a href="https://www.youtube.com/watch?v=Yi1iIM-B7XQ">like in this video </a>
 - clone this github repo
 - open cloned directory with godot 4.4 
+## If you have any questions regarding this project contact me: LeaveMyAlpacaAlone@outlook.com
