@@ -11,6 +11,9 @@ public partial class Thruster : Node3D
 	public float throttle = 0;
 	private double throttleChangeSpeedModifier = .2;
 	[Export] private EngineSoundController engineSoundController;
+
+
+
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionPressed(throttleUpAction))
@@ -21,7 +24,6 @@ public partial class Thruster : Node3D
 		{
 			ChangeThrottle(-Input.GetActionStrength(throttleDownAction), delta);
 		}
-
 	}
 
 	private void ChangeThrottle(float amount, double delta)
