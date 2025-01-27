@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=23 format=4 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_00tjw"]
@@ -10,8 +10,10 @@
 [ext_resource type="Resource" uid="uid://dexuxy72bwww5" path="res://Wings/Alerone.tres" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="6_a3tn1"]
 [ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Wings/Stab.tres" id="6_od3ui"]
+[ext_resource type="Texture2D" uid="uid://casyvd7sw1beb" path="res://Sprites/keyboard_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="10_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="10_x3vf3"]
-[ext_resource type="Texture2D" uid="uid://d1oly21sre0wm" path="res://Prop.png" id="12_5htga"]
+[ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="11_dkpta"]
+[ext_resource type="Texture2D" uid="uid://d1oly21sre0wm" path="res://Sprites/Prop.png" id="12_5htga"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
 radius = 0.232468
@@ -247,7 +249,7 @@ forcesModifiers = Vector3(1, 1.8, 0.4)
 wind = Vector3(0, 0, -5)
 rb = NodePath("../..")
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("fp", "tp", "rb", "wingsManager", "thruster", "windController", "speed", "AoA", "throttle", "propellor", "propAtHighSpeed")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("fp", "tp", "rb", "wingsManager", "thruster", "windController", "speed", "AoA", "throttle", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
 script = ExtResource("6_a3tn1")
 fp = NodePath("../Fp cam")
 tp = NodePath("../Camera3D")
@@ -260,6 +262,8 @@ AoA = NodePath("Panel/HBoxContainer/AoA")
 throttle = NodePath("Panel/Throttle")
 propellor = NodePath("../Propeller")
 propAtHighSpeed = NodePath("../Propeller at high speed sprite")
+controls = NodePath("Controls")
+controlsToggleButton = NodePath("Toggle controls Button")
 
 [node name="Panel" type="Panel" parent="UIController"]
 anchors_preset = 7
@@ -314,6 +318,131 @@ theme_override_font_sizes/font_size = 35
 text = "120°"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Controls" type="Panel" parent="UIController"]
+offset_top = 27.0
+offset_right = 210.0
+offset_bottom = 258.0
+
+[node name="TextureRect" type="TextureRect" parent="UIController/Controls"]
+layout_mode = 2
+offset_left = 78.0
+offset_right = 104.0
+offset_bottom = 26.0
+texture = ExtResource("10_gu6f8")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="UIController/Controls"]
+layout_mode = 2
+offset_left = 149.0
+offset_top = -1.0
+offset_right = 177.0
+offset_bottom = 26.0
+texture = ExtResource("11_dkpta")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="roll" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "roll:"
+
+[node name="Label3" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "e/q"
+
+[node name="Label4" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "left stick"
+
+[node name="pitch" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "pitch:"
+
+[node name="Label6" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "s/w"
+
+[node name="Label7" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "left stick"
+
+[node name="yaw" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "yaw:"
+
+[node name="Label8" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "a/d"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "right stick"
+horizontal_alignment = 1
+
+[node name="Throttle" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Throttle:"
+
+[node name="Label16" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Scroll"
+horizontal_alignment = 1
+
+[node name="Label17" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Triggers"
+horizontal_alignment = 1
+
+[node name="VerticalTrim" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Vertical
+Trim:"
+
+[node name="Label12" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "1/2"
+horizontal_alignment = 1
+
+[node name="Label13" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "D-pad:
+Up/down"
+horizontal_alignment = 1
+
+[node name="Change camera" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Change 
+camera:"
+
+[node name="Label14" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "R"
+horizontal_alignment = 1
+
+[node name="Label15" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Y Or △"
+horizontal_alignment = 1
+
+[node name="Toggle controls Button" type="Button" parent="UIController"]
+offset_right = 82.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 10
+toggle_mode = true
+action_mode = 0
+text = "Toggle controls"
 
 [node name="LookAtTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91685, 2.3498)

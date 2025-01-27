@@ -26,6 +26,14 @@ namespace Player
 		[Export] private Node3D propellor;
 		[Export] private Sprite3D propAtHighSpeed;
 		[Export] private float propRotationModifier = 300;
+		[ExportGroup("Controls")]
+		[Export] private Panel controls;
+		[Export] private Button controlsToggleButton;
+		public override void _Ready()
+		{
+			controlsToggleButton.Pressed += () => controls.Visible = !controls.Visible;
+			base._Ready();
+		}
 		public override void _Process(double delta)
 		{
 			if (Input.IsActionJustPressed(switchCam))
