@@ -144,7 +144,7 @@ transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.9993
 [node name="Thruster" type="Node3D" parent="." node_paths=PackedStringArray("rb", "engineSoundController")]
 script = ExtResource("2_3vl5u")
 rb = NodePath("..")
-thrusterStrength = 21000.0
+thrusterStrength = 26000.0
 engineSoundController = NodePath("../SoundScene/Engine controller")
 
 [node name="Wings" type="Node" parent="."]
@@ -454,6 +454,9 @@ transform = Transform3D(-0.999997, -0.00150845, -0.00172923, -0.00172918, 0.9907
 current = true
 
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
+
+[node name="WindController" parent="SoundScene" index="4"]
+volumeMinMax = Vector2(-30, 15)
 
 [node name="Propeller at high speed sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23312, 3.01147)
