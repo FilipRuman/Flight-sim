@@ -12,6 +12,8 @@ public partial class WingsManager : Node3D
     [Export] Vector3 forcesModifiers = Vector3.One;
     [Export] public Vector3 wind = new(0, 0, 5);
     [Export] RigidBody3D rb;
+
+
     public override void _PhysicsProcess(double delta)
     {
 
@@ -42,6 +44,11 @@ public partial class WingsManager : Node3D
     private const string rollRight = "rollRight";
     private const string yawRight = "yawRight";
     private const string yawLeft = "yawLeft";
+    private const string trimUp = "trimUp";
+    private const string trimDown = "trimDown";
+
+    private float trimVertical;
+    [Export] private float trimStepSize = .1f;
 
     public override void _Process(double delta)
     {
@@ -51,44 +58,47 @@ public partial class WingsManager : Node3D
         float roll = 0;
         float yaw = 0;
 
+        if (Input.IsActionJustPressed(trimUp))
+            trimVertical = Mathf.Clamp(trimVertical + trimStepSize, -1, 1);
+        if (Input.IsActionJustPressed(trimDown))
+            trimVertical = Mathf.Clamp(trimVertical - trimStepSize, -1, 1);
+
+
         if (Input.IsActionPressed(pitchUp))
-        {
             pitch = -Input.GetActionStrength(pitchUp);
-        }
+
         if (Input.IsActionPressed(pitchDown))
-        {
             pitch = Input.GetActionStrength(pitchDown);
-        }
+
         if (Input.IsActionPressed(rollLeft))
-        {
             roll = Input.GetActionStrength(rollLeft);
-        }
+
         if (Input.IsActionPressed(rollRight))
-        {
             roll = -Input.GetActionStrength(rollRight);
-        }
+
         if (Input.IsActionPressed(yawLeft))
-        {
             yaw = -Input.GetActionStrength(yawLeft);
-        }
+
         if (Input.IsActionPressed(yawRight))
-        {
+
             yaw = Input.GetActionStrength(yawRight);
-        }
+
         foreach (var wing in pitchWings)
         {
-            float angle = pitch * wing.flapAngleModifier;
-            SetControlSurface(wing, angle, false);
+            float flapAngleModifier = wing.flapAngleModifier;
+
+            float angle = Mathf.Clamp((pitch + trimVertical) * flapAngleModifier, -flapAngleModifier, flapAngleModifier);
+            SetControlSurface(wing, angle, yaw: false);
         }
         foreach (var wing in rollWings)
         {
             float angle = roll * wing.flapAngleModifier;
-            SetControlSurface(wing, angle, false);
+            SetControlSurface(wing, angle, yaw: false);
         }
         foreach (var wing in yawWings)
         {
             float angle = yaw * wing.flapAngleModifier;
-            SetControlSurface(wing, angle, true);
+            SetControlSurface(wing, angle, yaw: true);
         }
 
         base._Process(delta);
@@ -103,7 +113,11 @@ public partial class WingsManager : Node3D
         else
         {
             wing.flapAngle = 0;
-            wing.RotationDegrees = yaw ? new(wing.RotationDegrees.X, angle, wing.RotationDegrees.Z) : new(angle, wing.RotationDegrees.Y, wing.RotationDegrees.Z);
+            if (yaw)
+                wing.RotationDegrees = new(wing.RotationDegrees.X, angle, wing.RotationDegrees.Z);
+            else
+                wing.RotationDegrees = new(angle, wing.RotationDegrees.Y, wing.RotationDegrees.Z);
+
         }
     }
 }
