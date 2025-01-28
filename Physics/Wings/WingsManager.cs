@@ -12,6 +12,11 @@ public partial class WingsManager : Node3D
     [Export] RigidBody3D rb;
 
     public float Altitude => rb.GlobalPosition.Y;
+    public float FrontalVelocity => (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z;
+
+
+
+
     public override void _PhysicsProcess(double delta)
     {
         ProjectSettings.SetSetting("physics/2d/default_gravity", ConstantsManager.gravity);

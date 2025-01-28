@@ -14,17 +14,13 @@ public static class Air
 
     public static float GetLocalAirDensity(float altitude/* h */)
     {
-        // Calculate temperature at altitude
-        double temperatureAtAltitude = seaLevelTemperature - (temperatureLapseRate * altitude);
+        double temperature = seaLevelTemperature - (temperatureLapseRate * altitude);
 
-        // Calculate pressure at altitude
         double powX = 1 - (temperatureLapseRate * altitude / seaLevelTemperature);
         double powY = ConstantsManager.gravity * molarMassOfDryAir / (idealGasConstant * temperatureLapseRate);
-        double pressureAtAltitude = seaLevelPressure * Math.Pow(powX, powY);
+        double pressure = seaLevelPressure * Math.Pow(powX, powY);
 
         // Calculate air density using the ideal gas law
-        double airDensity = pressureAtAltitude * molarMassOfDryAir / (idealGasConstant * temperatureAtAltitude);
-
-        return (float)airDensity;
+        return (float)(pressure * molarMassOfDryAir / (idealGasConstant * temperature));
     }
 }

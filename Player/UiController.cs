@@ -21,6 +21,7 @@ namespace Player
 		[Export] private Slider throttle;
 		[Export] private Label altitude;
 		[Export] private Label airDensity;
+		[Export] private Label thrustOfPropeller;
 
 		[Export] float FramesPerUpdate = 10;
 		int frameIndex = 0;
@@ -49,10 +50,10 @@ namespace Player
 				 */
 			}
 			frameIndex++;
-			float velocity = (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z * 3.6f; /* in km/h */
+			float velocity = wingsManager.FrontalVelocity * 3.6f; /* in km/h */
 			windController.Speed = velocity;
 
-			UpdateProp(velocity);
+			UpdatePropeller(velocity);
 
 
 
@@ -67,12 +68,14 @@ namespace Player
 			airDensity.Text = $"{Math.Round(Air.GetLocalAirDensity(altitude), 2)} kg/m^3";
 
 			throttle.Value = thruster.throttle;
-			AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}°";
+			thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller)} N";
+
+			AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)} °";
 
 			speed.Text = $"{(velocity < 20 ? 0 : Math.Round(velocity))} km/h";
 		}
 
-		private void UpdateProp(float velocity)
+		private void UpdatePropeller(float velocity)
 		{
 			bool ShowSprite = thruster.throttle > .2f || velocity > 20;
 			propellor.Visible = !ShowSprite;
