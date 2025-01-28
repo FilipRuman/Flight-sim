@@ -1,15 +1,15 @@
 [gd_scene load_steps=23 format=4 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
-[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_00tjw"]
+[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_00tjw"]
 [ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Player/Thruster.cs" id="2_3vl5u"]
-[ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Wings/Wing.cs" id="3_fhl08"]
-[ext_resource type="Material" uid="uid://b8vf83sfrwui0" path="res://model/Materials/Helice.tres" id="4_apopc"]
-[ext_resource type="Resource" uid="uid://cj1j11x4ioxe5" path="res://Wings/default Wing configuration.tres" id="4_vtle1"]
-[ext_resource type="Script" uid="uid://c631vcp26dh6i" path="res://Wings/WingsManager.cs" id="5_fhl08"]
-[ext_resource type="Resource" uid="uid://dexuxy72bwww5" path="res://Wings/Alerone.tres" id="5_vtle1"]
+[ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Physics/Wings/Wing.cs" id="3_fhl08"]
+[ext_resource type="Material" uid="uid://b8vf83sfrwui0" path="res://3'rd party/model/Materials/Helice.tres" id="4_apopc"]
+[ext_resource type="Resource" uid="uid://cj1j11x4ioxe5" path="res://Physics/Wings/default Wing configuration.tres" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://c631vcp26dh6i" path="res://Physics/Wings/WingsManager.cs" id="5_fhl08"]
+[ext_resource type="Resource" uid="uid://dexuxy72bwww5" path="res://Physics/Wings/Alerone.tres" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="6_a3tn1"]
-[ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Wings/Stab.tres" id="6_od3ui"]
+[ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Physics/Wings/Stab.tres" id="6_od3ui"]
 [ext_resource type="Texture2D" uid="uid://casyvd7sw1beb" path="res://Sprites/keyboard_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="10_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="10_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="11_dkpta"]
@@ -93,6 +93,36 @@ center_of_mass_mode = 1
 continuous_cd = true
 
 [node name="Plane" parent="." instance=ExtResource("1_aoggf")]
+
+[node name="Skeleton3D" parent="Plane/Avion_CTRL/Joints" index="0"]
+bones/0/position = Vector3(0.400013, 0.0749002, 1.8748)
+bones/0/rotation = Quaternion(0.361681, 0.928817, -0.0274012, -0.0757251)
+bones/1/rotation = Quaternion(0.169672, 0.982464, -0.0131551, 0.0761732)
+bones/2/rotation = Quaternion(-0.0249261, 0.0747611, -0.361881, 0.928887)
+bones/4/rotation = Quaternion(-0.352562, 0.932761, -0.0249335, 0.0709566)
+bones/6/position = Vector3(-0.416361, 0.0759844, 1.87691)
+bones/6/rotation = Quaternion(-0.0279474, -0.0720955, 0.352331, 0.932676)
+bones/8/rotation = Quaternion(-0.0228481, 0.0696286, 0.202708, 0.976493)
+bones/10/position = Vector3(0.400013, 0.0749002, 1.8257)
+bones/10/rotation = Quaternion(0.364076, 0.9286, -0.0123485, 0.0706977)
+bones/11/rotation = Quaternion(0.172061, 0.985086, -2.02892e-15, -3.54383e-16)
+bones/12/position = Vector3(-0.416361, 0.0759844, 1.82888)
+bones/12/rotation = Quaternion(-0.0127386, 0.0719179, 0.354418, 0.932231)
+bones/14/rotation = Quaternion(-0.00260063, -0.0624857, -0.379083, 0.923247)
+bones/16/position = Vector3(0.397496, -0.0615451, 1.80649)
+bones/16/rotation = Quaternion(0.399679, 0.916164, -0.00627751, 0.0293611)
+bones/18/position = Vector3(0.00496953, 0.361736, 1.77247)
+bones/18/rotation = Quaternion(-0.00777684, -0.028707, -0.399726, 0.916152)
+bones/20/position = Vector3(0.00496953, 0.361736, 1.92528)
+bones/20/rotation = Quaternion(0.00417734, 0.01542, -0.399936, 0.916404)
+bones/22/position = Vector3(0.397496, -0.0615451, 1.90703)
+bones/22/rotation = Quaternion(0.399922, 0.916407, 0.00337199, -0.0157715)
+bones/24/rotation = Quaternion(-0.388079, 0.921197, -0.00607676, -0.0274644)
+bones/26/position = Vector3(-0.418546, -0.0615451, 1.80641)
+bones/26/rotation = Quaternion(-0.00607676, 0.0274644, 0.388079, 0.921197)
+bones/28/rotation = Quaternion(-0.388257, 0.92139, 0.0038912, 0.0167774)
+bones/30/position = Vector3(-0.418546, -0.0615451, 1.90544)
+bones/30/rotation = Quaternion(0.00363499, -0.0168853, 0.388252, 0.921391)
 
 [node name="Aleron_Der" parent="Plane/Avion" index="2" node_paths=PackedStringArray("wing")]
 wing = NodePath("../../../wings/Alerone FR")
@@ -443,6 +473,39 @@ theme_override_font_sizes/font_size = 10
 toggle_mode = true
 action_mode = 0
 text = "Toggle controls"
+
+[node name="Air relatedStuff" type="Panel" parent="UIController"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_right = 178.0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Air relatedStuff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "Altitude:"
+
+[node name="Altitude" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "20 m"
+
+[node name="Label" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "Air density:"
+
+[node name="AirDensity" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "20 kg/m^3"
 
 [node name="LookAtTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91685, 2.3498)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://p8hu1d662mb3"]
 
-[ext_resource type="PackedScene" uid="uid://dddw3enkhdlc5" path="res://model/model.fbx" id="1_wobh6"]
-[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Wings/Flap.cs" id="2_hwk5y"]
+[ext_resource type="PackedScene" uid="uid://dddw3enkhdlc5" path="res://3'rd party/model/model.fbx" id="1_wobh6"]
+[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_hwk5y"]
 
 [node name="Plane" instance=ExtResource("1_wobh6")]
 

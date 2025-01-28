@@ -1,0 +1,77 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dddw3enkhdlc5"
+path="res://.godot/imported/model.fbx-67ed0b05cd6e836e8645a72177294017.scn"
+
+[deps]
+
+source_file="res://3'rd party/model/model.fbx"
+dest_files=["res://.godot/imported/model.fbx-67ed0b05cd6e836e8645a72177294017.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"materials": {
+"Alerones_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://dlqrdpb1cq00q"
+},
+"Cabina_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://e8e4am7n2i"
+},
+"Chasis_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://dahdewtepf55w"
+},
+"Helice_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://b8vf83sfrwui0"
+},
+"Motor_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://bpoolulv2gyw5"
+},
+"Pernos_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://b4vggaxf3tcc7"
+},
+"Ruedas_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://yj26u8x0nsvi"
+},
+"Tensor_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://dpab3qefod2ct"
+},
+"Tren_aterrizaje_MAT": {
+"use_external/enabled": true,
+"use_external/path": "uid://db25sdlfq8vll"
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
