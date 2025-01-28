@@ -279,8 +279,10 @@ throttle = NodePath("Engine related stuff/Throttle")
 altitude = NodePath("Air relatedStuff/GridContainer/Altitude")
 airDensity = NodePath("Air relatedStuff/GridContainer/Air density")
 thrustOfPropeller = NodePath("Engine related stuff/GridContainer/thrust")
+FramesPerUpdate = 1.0
 propellor = NodePath("../Propeller")
 propAtHighSpeed = NodePath("../Propeller at high speed sprite")
+propRotationModifier = 1.0
 controls = NodePath("Controls")
 controlsToggleButton = NodePath("Toggle controls Button")
 

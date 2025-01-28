@@ -77,11 +77,11 @@ namespace Player
 
 		private void UpdatePropeller(float velocity)
 		{
-			bool ShowSprite = thruster.throttle > .2f || velocity > 20;
+			bool ShowSprite = velocity > 40;
 			propellor.Visible = !ShowSprite;
 			if (!ShowSprite)
 			{
-				propellor.Rotate(Vector3.Forward, propRotationModifier * thruster.throttle);
+				propellor.Rotate(Vector3.Forward, propRotationModifier * (velocity + thruster.throttle * 10f));
 			}
 
 			propAtHighSpeed.Visible = ShowSprite;
