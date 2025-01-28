@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_00tjw"]
-[ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Player/Thruster.cs" id="2_3vl5u"]
+[ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Physics/Thruster.cs" id="2_3vl5u"]
 [ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Physics/Wings/Wing.cs" id="3_fhl08"]
 [ext_resource type="Material" uid="uid://b8vf83sfrwui0" path="res://3'rd party/model/Materials/Helice.tres" id="4_apopc"]
 [ext_resource type="Resource" uid="uid://cj1j11x4ioxe5" path="res://Physics/Wings/default Wing configuration.tres" id="4_vtle1"]
@@ -95,34 +95,10 @@ continuous_cd = true
 [node name="Plane" parent="." instance=ExtResource("1_aoggf")]
 
 [node name="Skeleton3D" parent="Plane/Avion_CTRL/Joints" index="0"]
-bones/0/position = Vector3(0.400013, 0.0749002, 1.8748)
-bones/0/rotation = Quaternion(0.361681, 0.928817, -0.0274012, -0.0757251)
-bones/1/rotation = Quaternion(0.169672, 0.982464, -0.0131551, 0.0761732)
 bones/2/rotation = Quaternion(-0.0249261, 0.0747611, -0.361881, 0.928887)
-bones/4/rotation = Quaternion(-0.352562, 0.932761, -0.0249335, 0.0709566)
-bones/6/position = Vector3(-0.416361, 0.0759844, 1.87691)
-bones/6/rotation = Quaternion(-0.0279474, -0.0720955, 0.352331, 0.932676)
-bones/8/rotation = Quaternion(-0.0228481, 0.0696286, 0.202708, 0.976493)
-bones/10/position = Vector3(0.400013, 0.0749002, 1.8257)
-bones/10/rotation = Quaternion(0.364076, 0.9286, -0.0123485, 0.0706977)
 bones/11/rotation = Quaternion(0.172061, 0.985086, -2.02892e-15, -3.54383e-16)
-bones/12/position = Vector3(-0.416361, 0.0759844, 1.82888)
-bones/12/rotation = Quaternion(-0.0127386, 0.0719179, 0.354418, 0.932231)
 bones/14/rotation = Quaternion(-0.00260063, -0.0624857, -0.379083, 0.923247)
-bones/16/position = Vector3(0.397496, -0.0615451, 1.80649)
 bones/16/rotation = Quaternion(0.399679, 0.916164, -0.00627751, 0.0293611)
-bones/18/position = Vector3(0.00496953, 0.361736, 1.77247)
-bones/18/rotation = Quaternion(-0.00777684, -0.028707, -0.399726, 0.916152)
-bones/20/position = Vector3(0.00496953, 0.361736, 1.92528)
-bones/20/rotation = Quaternion(0.00417734, 0.01542, -0.399936, 0.916404)
-bones/22/position = Vector3(0.397496, -0.0615451, 1.90703)
-bones/22/rotation = Quaternion(0.399922, 0.916407, 0.00337199, -0.0157715)
-bones/24/rotation = Quaternion(-0.388079, 0.921197, -0.00607676, -0.0274644)
-bones/26/position = Vector3(-0.418546, -0.0615451, 1.80641)
-bones/26/rotation = Quaternion(-0.00607676, 0.0274644, 0.388079, 0.921197)
-bones/28/rotation = Quaternion(-0.388257, 0.92139, 0.0038912, 0.0167774)
-bones/30/position = Vector3(-0.418546, -0.0615451, 1.90544)
-bones/30/rotation = Quaternion(0.00363499, -0.0168853, 0.388252, 0.921391)
 
 [node name="Aleron_Der" parent="Plane/Avion" index="2" node_paths=PackedStringArray("wing")]
 wing = NodePath("../../../wings/Alerone FR")
@@ -186,6 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62898, 0.950839, 1.54922)
 script = ExtResource("3_fhl08")
 size = Vector2(4.14, 1.7)
 configResource = ExtResource("4_vtle1")
+angleOfAttack = 180.0
 relativePosition = Vector3(2.62898, 0.950839, 1.54922)
 
 [node name="Wg FR" type="Node3D" parent="wings"]
@@ -194,6 +171,7 @@ script = ExtResource("3_fhl08")
 size = Vector2(4.14, 1.7)
 configResource = ExtResource("4_vtle1")
 flapAngleModifier = -20.0
+angleOfAttack = 180.0
 relativePosition = Vector3(-2.629, 0.951, 1.5489)
 
 [node name="Alerone FL" type="Node3D" parent="wings"]
@@ -203,6 +181,7 @@ size = Vector2(5.405, 1.92)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
+angleOfAttack = 180.0
 relativePosition = Vector3(2.62898, 0.950839, 0.206304)
 
 [node name="Alerone FR" type="Node3D" parent="wings"]
@@ -212,6 +191,7 @@ size = Vector2(5.405, 1.92)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = -10.0
+angleOfAttack = 180.0
 relativePosition = Vector3(-2.629, 0.951, 0.205984)
 
 [node name="Wg BL" type="Node3D" parent="wings"]
@@ -221,6 +201,7 @@ size = Vector2(1.94, 1.17)
 configResource = ExtResource("4_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 8.0
+angleOfAttack = 180.0
 relativePosition = Vector3(0.929239, 1.099, -2.93508)
 
 [node name="Wg BR" type="Node3D" parent="wings"]
@@ -230,6 +211,7 @@ size = Vector2(1.94, 1.17)
 configResource = ExtResource("4_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 8.0
+angleOfAttack = 180.0
 relativePosition = Vector3(-1.08234, 1.099, -2.93508)
 
 [node name="Alerone BL" type="Node3D" parent="wings"]
@@ -239,6 +221,7 @@ size = Vector2(2.81, 2.17)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
+angleOfAttack = 180.0
 relativePosition = Vector3(0.929239, 1.099, -4.32136)
 
 [node name="Alerone BR" type="Node3D" parent="wings"]
@@ -248,6 +231,7 @@ size = Vector2(2.81, 2.17)
 configResource = ExtResource("5_vtle1")
 rotateWholeWing = true
 flapAngleModifier = 10.0
+angleOfAttack = 180.0
 relativePosition = Vector3(-1.08234, 1.099, -4.32136)
 
 [node name="Wg S" type="Node3D" parent="wings"]
@@ -257,6 +241,7 @@ size = Vector2(10.2, 2.43)
 configResource = ExtResource("6_od3ui")
 rotateWholeWing = true
 flapAngleModifier = 8.0
+angleOfAttack = 180.0
 relativePosition = Vector3(0.0208343, 1.86711, -4.85584)
 
 [node name="Alerone S" type="Node3D" parent="wings"]
@@ -266,20 +251,19 @@ size = Vector2(10.2, 2.43)
 configResource = ExtResource("6_od3ui")
 rotateWholeWing = true
 flapAngleModifier = 10.0
+angleOfAttack = 180.0
 relativePosition = Vector3(0.021, 1.867, -5.67053)
 
 [node name="wings manager" type="Node3D" parent="wings" node_paths=PackedStringArray("wings", "pitchWings", "rollWings", "yawWings", "rb")]
 script = ExtResource("5_fhl08")
-gravity = 10.0
 wings = [NodePath("../Wg FL"), NodePath("../Wg FR"), NodePath("../Wg BL"), NodePath("../Wg BR"), NodePath("../Alerone BL"), NodePath("../Alerone BR"), NodePath("../Alerone FL"), NodePath("../Alerone FR"), NodePath("../Wg S"), NodePath("../Alerone S")]
 pitchWings = [NodePath("../Alerone BL"), NodePath("../Alerone BR")]
 rollWings = [NodePath("../Alerone FL"), NodePath("../Alerone FR")]
 yawWings = [NodePath("../Alerone S")]
 forcesModifiers = Vector3(1, 1.8, 0.4)
-wind = Vector3(0, 0, -5)
 rb = NodePath("../..")
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("fp", "tp", "rb", "wingsManager", "thruster", "windController", "speed", "AoA", "throttle", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("fp", "tp", "rb", "wingsManager", "thruster", "windController", "speed", "AoA", "throttle", "altitude", "airDensity", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
 script = ExtResource("6_a3tn1")
 fp = NodePath("../Fp cam")
 tp = NodePath("../Camera3D")
@@ -290,6 +274,8 @@ windController = NodePath("../SoundScene/WindController")
 speed = NodePath("Panel/HBoxContainer/Speed")
 AoA = NodePath("Panel/HBoxContainer/AoA")
 throttle = NodePath("Panel/Throttle")
+altitude = NodePath("Air relatedStuff/GridContainer/Altitude")
+airDensity = NodePath("Air relatedStuff/GridContainer/Air density")
 propellor = NodePath("../Propeller")
 propAtHighSpeed = NodePath("../Propeller at high speed sprite")
 controls = NodePath("Controls")
@@ -503,9 +489,9 @@ text = "20 m"
 layout_mode = 2
 text = "Air density:"
 
-[node name="AirDensity" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+[node name="Air density" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
 layout_mode = 2
-text = "20 kg/m^3"
+text = "20 m"
 
 [node name="LookAtTarget" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91685, 2.3498)

@@ -3,22 +3,19 @@ using Godot;
 [Tool]
 public partial class WingsManager : Node3D
 {
-    [Export] public float gravity;
     [Export] public Wing[] wings = null;
     [Export] public Wing[] pitchWings;
     [Export] public Wing[] rollWings;
     [Export] public Wing[] yawWings;
 
     [Export] Vector3 forcesModifiers = Vector3.One;
-    [Export] public Vector3 wind = new(0, 0, 5);
     [Export] RigidBody3D rb;
 
-
+    public float Altitude => rb.GlobalPosition.Y;
     public override void _PhysicsProcess(double delta)
     {
-
-
-        CalculateAerodynamicForces(wind, 1.2f, out Vector3 forces, out Vector3 torque);
+        ProjectSettings.SetSetting("physics/2d/default_gravity", ConstantsManager.gravity);
+        CalculateAerodynamicForces(Air.wind, Air.GetLocalAirDensity(Altitude), out Vector3 forces, out Vector3 torque);
         if (Engine.IsEditorHint())
             return;
         rb.ApplyForce(forces * (float)delta);

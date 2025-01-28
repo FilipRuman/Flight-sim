@@ -19,13 +19,18 @@ namespace Player
 		[Export] private Label speed;
 		[Export] private Label AoA;
 		[Export] private Slider throttle;
+		[Export] private Label altitude;
+		[Export] private Label airDensity;
 
 		[Export] float FramesPerUpdate = 10;
 		int frameIndex = 0;
+
 		[ExportGroup("Prop")]
 		[Export] private Node3D propellor;
 		[Export] private Sprite3D propAtHighSpeed;
 		[Export] private float propRotationModifier = 300;
+
+
 		[ExportGroup("Controls")]
 		[Export] private Panel controls;
 		[Export] private Button controlsToggleButton;
@@ -57,6 +62,10 @@ namespace Player
 
 			/* 			throttle.Editable = false;
 			 */
+			var altitude = wingsManager.Altitude;
+			this.altitude.Text = $"{Mathf.RoundToInt(altitude)} m";
+			airDensity.Text = $"{Math.Round(Air.GetLocalAirDensity(altitude), 2)} kg/m^3";
+
 			throttle.Value = thruster.throttle;
 			AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}°";
 
