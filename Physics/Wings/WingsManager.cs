@@ -74,7 +74,6 @@ public partial class WingsManager : Node3D
 
         if (Input.IsActionPressed(rollLeft))
             roll = Input.GetActionStrength(rollLeft);
-
         if (Input.IsActionPressed(rollRight))
             roll = -Input.GetActionStrength(rollRight);
 

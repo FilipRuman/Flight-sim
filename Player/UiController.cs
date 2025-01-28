@@ -4,10 +4,7 @@ namespace Player
 	using System;
 	public partial class UiController : CanvasLayer
 	{
-		[ExportGroup("Cameras")]
-		[Export] Camera3D fp;
-		[Export] Camera3D tp;
-		private const string switchCam = "switchCam";
+
 		[ExportGroup("Ref")]
 		[Export] private RigidBody3D rb;
 		[Export] private WingsManager wingsManager;
@@ -42,13 +39,7 @@ namespace Player
 		}
 		public override void _Process(double delta)
 		{
-			if (Input.IsActionJustPressed(switchCam))
-			{
-				GD.Print("switchCam");
-				fp.Current = !fp.Current;
-				/* 				tp.Current = !tp.Current;
-				 */
-			}
+
 			frameIndex++;
 			float velocity = wingsManager.FrontalVelocity * 3.6f; /* in km/h */
 			windController.Speed = velocity;
@@ -77,6 +68,8 @@ namespace Player
 
 		private void UpdatePropeller(float velocity)
 		{
+			if (velocity < 1)
+				velocity = 0;
 			bool ShowSprite = velocity > 40;
 			propellor.Visible = !ShowSprite;
 			if (!ShowSprite)
