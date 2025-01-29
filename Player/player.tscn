@@ -315,7 +315,7 @@ propRotationModifier = 1.0
 controls = NodePath("Controls")
 controlsToggleButton = NodePath("Toggle controls Button")
 
-[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cam", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
+[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -326,7 +326,7 @@ script = ExtResource("12_b1ygp")
 playerRbController = NodePath("../..")
 rb = NodePath("../..")
 wingsManager = NodePath("../../wings/wings manager")
-cam = NodePath("../../CameraController/axis fp/Fp cam")
+cameraController = NodePath("../../CameraController")
 thruster = NodePath("../../Thruster")
 horizon = NodePath("Pitch line")
 flightPathIndicator = NodePath("Flight path")

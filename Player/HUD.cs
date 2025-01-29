@@ -6,7 +6,8 @@ public partial class HUD : Node
     [Export] PlayerRbController playerRbController;
     [Export] RigidBody3D rb;
     [Export] WingsManager wingsManager;
-    [Export] Camera3D cam;
+    Camera3D currentCam;
+    [Export] CameraController cameraController;
     [Export] private Thruster thruster;
 
     [Export] Control horizon;
@@ -23,14 +24,16 @@ public partial class HUD : Node
     [Export] private Slider throttle;
     [Export] float FramesPerUpdate = 10;
     int frameIndex = 0;
+
     public override void _Process(double delta)
     {
+        currentCam = cameraController.currentCam;
         // 
         frameIndex++;
         DrawHorizon();
-        flightPathIndicator.Position = cam.UnprojectPosition(cam.GlobalPosition + rb.LinearVelocity);
+        flightPathIndicator.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + rb.LinearVelocity);
         flightPathIndicator.RotationDegrees = -rb.RotationDegrees.Z;
-        planeNoseDirectionIndicator.Position = cam.UnprojectPosition(cam.GlobalPosition + rb.Basis.Z);
+        planeNoseDirectionIndicator.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + rb.Basis.Z);
         throttle.Value = thruster.throttle;
 
         if (frameIndex < FramesPerUpdate)
@@ -48,15 +51,15 @@ public partial class HUD : Node
         Altitude.Text = altitude.Length > 3 ? altitude.Insert(altitude.Length - 3, ".") : altitude;
         AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}∝";
         Rotation.Text = $"{Math.Round(-rb.RotationDegrees.X, 1)}°R";
-        Heading.Text = Math.Round(Mathf.RadToDeg(cam.GlobalRotation.Y) / 10).ToString();
+        Heading.Text = Math.Round(Mathf.RadToDeg(currentCam.GlobalRotation.Y) / 10).ToString();
 
 
     }
 
     public void DrawHorizon()
     {
-        horizon.Position = cam.UnprojectPosition(cam.GlobalPosition + Vector3.Forward.Rotated(Vector3.Up, cam.GlobalRotation.Y)) - horizon.Size / 2;
-        horizon.RotationDegrees = cam.GlobalRotationDegrees.Z;
+        horizon.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + Vector3.Forward.Rotated(Vector3.Up, currentCam.GlobalRotation.Y)) - horizon.Size / 2;
+        horizon.RotationDegrees = currentCam.GlobalRotationDegrees.Z;
 
 
     }

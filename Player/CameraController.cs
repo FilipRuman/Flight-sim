@@ -14,6 +14,7 @@ public partial class CameraController : Node
 
     [Export] Camera3D fp;
     [Export] Camera3D tp;
+    public Camera3D currentCam;
 
     [Export] Curve horizontalCamRotationCurve;
     [Export] Curve verticalCamRotationCurve;
@@ -37,7 +38,7 @@ public partial class CameraController : Node
             camRotation.Y = -Input.GetActionStrength(camRight);
 
         camRotation = new Vector3(verticalCamRotationCurve.SampleBaked(camRotation.X), horizontalCamRotationCurve.SampleBaked(camRotation.Y), 0);
-
+        currentCam = fp.Current ? fp : tp;
         (fp.Current ? fpRotation : tpRotation).RotationDegrees = camRotation;
 
         base._Process(delta);
