@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=4 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=31 format=4 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane.tscn" id="1_aoggf"]
+[ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_o28un"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_00tjw"]
 [ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Physics/Thruster.cs" id="2_3vl5u"]
 [ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Physics/Wings/Wing.cs" id="3_fhl08"]
@@ -14,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="10_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="11_dkpta"]
 [ext_resource type="Texture2D" uid="uid://d1oly21sre0wm" path="res://Sprites/Prop.png" id="12_5htga"]
+[ext_resource type="Script" uid="uid://b4yfgb7b6hpmc" path="res://Player/HUD.cs" id="12_b1ygp"]
+[ext_resource type="Texture2D" uid="uid://dr1h5cryjad3m" path="res://Sprites/AirPlaneNoseMarker.png" id="13_o28un"]
+[ext_resource type="Texture2D" uid="uid://bfue3afu2k8l2" path="res://Sprites/Flight path marker.png" id="14_n471f"]
 [ext_resource type="Script" uid="uid://c7f5lmhon5lsw" path="res://Player/CameraController.cs" id="15_dkpta"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
@@ -22,6 +26,19 @@ radius = 0.232468
 [sub_resource type="BoxShape3D" id="BoxShape3D_00tjw"]
 size = Vector3(4.09311, 0.156006, 1.98804)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu6f8"]
+bg_color = Color(0.333333, 1, 0, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.333333, 1, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="ImageTexture" id="ImageTexture_00tjw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3vf3"]
@@ -29,40 +46,31 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.230469, 0.230469, 0.230469, 1)
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 1, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-shadow_color = Color(0, 0, 0, 1)
-shadow_size = 1
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apopc"]
-bg_color = Color(1, 0.632813, 0, 1)
+bg_color = Color(0.333333, 1, 0, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu6f8"]
-bg_color = Color(0.207843, 0.615686, 0, 0.588235)
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.337579, 1, 0, 0.588235)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkpta"]
-bg_color = Color(0.337255, 1, 0, 0.588235)
+bg_color = Color(0.333333, 1, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -117,6 +125,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
 mass = 1500.0
 center_of_mass_mode = 1
 continuous_cd = true
+script = ExtResource("1_o28un")
 
 [node name="Plane" parent="." instance=ExtResource("1_aoggf")]
 
@@ -288,7 +297,7 @@ yawWings = [NodePath("../Alerone S")]
 forcesModifiers = Vector3(1, 1.8, 0.4)
 rb = NodePath("../..")
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "throttle", "altitude", "airDensity", "thrustOfPropeller", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
 script = ExtResource("6_a3tn1")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
@@ -296,7 +305,6 @@ thruster = NodePath("../Thruster")
 windController = NodePath("../SoundScene/WindController")
 speed = NodePath("Panel/HBoxContainer/Speed")
 AoA = NodePath("Panel/HBoxContainer/AoA")
-throttle = NodePath("Engine related stuff/Throttle")
 altitude = NodePath("Air relatedStuff/GridContainer/Altitude")
 airDensity = NodePath("Air relatedStuff/GridContainer/Air density")
 thrustOfPropeller = NodePath("Engine related stuff/GridContainer/thrust")
@@ -307,7 +315,247 @@ propRotationModifier = 1.0
 controls = NodePath("Controls")
 controlsToggleButton = NodePath("Toggle controls Button")
 
+[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cam", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_b1ygp")
+playerRbController = NodePath("../..")
+rb = NodePath("../..")
+wingsManager = NodePath("../../wings/wings manager")
+cam = NodePath("../../CameraController/axis fp/Fp cam")
+thruster = NodePath("../../Thruster")
+horizon = NodePath("Pitch line")
+flightPathIndicator = NodePath("Flight path")
+planeNoseDirectionIndicator = NodePath("Plane nose direction")
+Speed = NodePath("HUD box that moves with camera/Speed/Label")
+Altitude = NodePath("HUD box that moves with camera/Altitude/Label")
+G = NodePath("HUD box that moves with camera/GridContainer/G")
+Match = NodePath("HUD box that moves with camera/GridContainer/Match")
+AoA = NodePath("HUD box that moves with camera/GridContainer2/Alfa")
+Rotation = NodePath("HUD box that moves with camera/GridContainer2/Rotation")
+Heading = NodePath("HUD box that moves with camera/Heading")
+thrustOfPropeller = NodePath("HUD box that moves with camera/Throttle/Force")
+throttle = NodePath("HUD box that moves with camera/Throttle")
+
+[node name="HUD box that moves with camera" type="Control" parent="UIController/All hud"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -158.0
+offset_right = 287.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed" type="Panel" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+offset_right = 74.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
+
+[node name="Label" type="Label" parent="UIController/All hud/HUD box that moves with camera/Speed"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "240"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 41.0
+offset_right = 54.0
+grow_vertical = 2
+
+[node name="G" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "G 5.0"
+
+[node name="Match" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "M 5.0"
+
+[node name="GridContainer2" type="GridContainer" parent="UIController/All hud/HUD box that moves with camera"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(-3.235, 0)
+
+[node name="Alfa" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "120∝"
+horizontal_alignment = 2
+
+[node name="Rotation" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "12°R"
+horizontal_alignment = 2
+
+[node name="Altitude" type="Panel" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
+
+[node name="Label" type="Label" parent="UIController/All hud/HUD box that moves with camera/Altitude"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "240"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Heading" type="Label" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "12"
+horizontal_alignment = 1
+
+[node name="Throttle" type="VSlider" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = 44.0
+offset_right = 99.0
+offset_bottom = -73.0
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("ImageTexture_00tjw")
+theme_override_styles/slider = SubResource("StyleBoxFlat_x3vf3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_apopc")
+max_value = 1.0
+step = 0.01
+value = 0.53
+
+[node name="Force" type="Label" parent="UIController/All hud/HUD box that moves with camera/Throttle"]
+layout_mode = 2
+offset_left = -10.0
+offset_top = 196.0
+offset_right = 42.0
+offset_bottom = 226.0
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "12°R"
+horizontal_alignment = 1
+
+[node name="Plane nose direction" type="TextureRect" parent="UIController/All hud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -26.0
+offset_right = 475.0
+offset_bottom = 474.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("13_o28un")
+
+[node name="Flight path" type="TextureRect" parent="UIController/All hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 483.0
+offset_bottom = 483.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("14_n471f")
+
+[node name="Pitch line" type="Control" parent="UIController/All hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 1.0
+offset_right = 150.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 4)
+
+[node name="Fill" type="Panel" parent="UIController/All hud/Pitch line"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 120.0
+grow_vertical = 2
+pivot_offset = Vector2(150, 2.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dkpta")
+
+[node name="Fill2" type="Panel" parent="UIController/All hud/Pitch line"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 2.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dkpta")
+
 [node name="Panel" type="Panel" parent="UIController"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -495,6 +743,7 @@ action_mode = 0
 text = "Toggle controls"
 
 [node name="Engine related stuff" type="Panel" parent="UIController"]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -523,25 +772,11 @@ by propeller:"
 layout_mode = 2
 text = "20 m"
 
-[node name="Throttle" type="VSlider" parent="UIController/Engine related stuff"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = -25.0
-offset_right = 8.0
-grow_vertical = 2
-theme_override_icons/grabber = SubResource("ImageTexture_00tjw")
-theme_override_styles/slider = SubResource("StyleBoxFlat_x3vf3")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_apopc")
-max_value = 1.0
-step = 0.01
-value = 1.0
-
 [node name="Air relatedStuff" type="Panel" parent="UIController"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -55.0
+offset_top = -23.0
 offset_right = 189.0
 grow_vertical = 0
 
@@ -555,10 +790,12 @@ grow_vertical = 2
 columns = 2
 
 [node name="Label2" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+visible = false
 layout_mode = 2
 text = "Altitude:"
 
 [node name="Altitude" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+visible = false
 layout_mode = 2
 text = "20 m"
 
@@ -569,83 +806,6 @@ text = "Air density:"
 [node name="Air density" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
 layout_mode = 2
 text = "20 m"
-
-[node name="HUD" type="Control" parent="UIController"]
-visible = false
-clip_contents = true
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -287.0
-offset_top = -209.0
-offset_right = 287.0
-offset_bottom = 209.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Speed" type="Panel" parent="UIController/HUD"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -21.0
-offset_right = 66.0
-offset_bottom = 19.0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
-
-[node name="Label" type="Label" parent="UIController/HUD/Speed"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.337255, 1, 0, 0.588235)
-theme_override_font_sizes/font_size = 30
-text = "240"
-horizontal_alignment = 1
-
-[node name="Altitude" type="Panel" parent="UIController/HUD"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
-
-[node name="Label" type="Label" parent="UIController/HUD/Altitude"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.337255, 1, 0, 0.588235)
-theme_override_font_sizes/font_size = 30
-text = "240"
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="UIController/HUD"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -3.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dkpta")
 
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
 
@@ -689,6 +849,9 @@ process_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(-0.999997, -0.00150845, -0.00172923, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 4.119, -8.697)
 current = true
+
+[node name="AircraftNose" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.884157, 0.467189, 0, -0.467189, 0.884157, 0, 1.21593, 2.94357)
 
 [editable path="Plane"]
 [editable path="SoundScene"]

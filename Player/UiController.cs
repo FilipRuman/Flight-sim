@@ -15,7 +15,6 @@ namespace Player
 		[ExportGroup("UI")]
 		[Export] private Label speed;
 		[Export] private Label AoA;
-		[Export] private Slider throttle;
 		[Export] private Label altitude;
 		[Export] private Label airDensity;
 		[Export] private Label thrustOfPropeller;
@@ -58,7 +57,6 @@ namespace Player
 			this.altitude.Text = $"{Mathf.RoundToInt(altitude)} m";
 			airDensity.Text = $"{Math.Round(Air.GetLocalAirDensity(altitude), 2)} kg/m^3";
 
-			throttle.Value = thruster.throttle;
 			thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller)} N";
 
 			AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)} °";

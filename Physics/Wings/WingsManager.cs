@@ -9,7 +9,7 @@ public partial class WingsManager : Node3D
     [Export] public Wing[] yawWings;
 
     [Export] Vector3 forcesModifiers = Vector3.One;
-    [Export] RigidBody3D rb;
+    [Export] public RigidBody3D rb;
 
     public float Altitude => rb.GlobalPosition.Y;
     public float FrontalVelocity => (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z;
