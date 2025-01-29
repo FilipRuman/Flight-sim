@@ -184,7 +184,7 @@ script = ExtResource("2_3vl5u")
 rb = NodePath("..")
 engineSoundController = NodePath("../SoundScene/Engine controller")
 wingsManager = NodePath("../wings/wings manager")
-enginePower = 15000.0
+enginePower = 18000.0
 PropellerRadius = 8.0
 
 [node name="Wings" type="Node" parent="."]
