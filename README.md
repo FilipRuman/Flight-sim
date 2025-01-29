@@ -15,7 +15,10 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 ![image](https://github.com/user-attachments/assets/4150a717-f7ae-4a64-a4b1-4cc51c1720a6)
 - flaps && control surfaces animations
 - realistic air density change with altitude
-- realistic propeller thrust model 
+- realistic propeller thrust model
+- Advanced HUD(Head up display)
+
+![image](https://github.com/user-attachments/assets/8136310b-3b72-4c16-a8fb-5092547b04b1)
 - 1'st && 3'rd person camera
 - works with any 3d model
 ## Setup
