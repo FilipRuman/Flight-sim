@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://36fp5ji8owwy"]
+
+[ext_resource type="Script" uid="uid://bv8fxqvemqtej" path="res://TerrainGeneration/TerrainGenController.cs" id="1_daki1"]
+[ext_resource type="PackedScene" uid="uid://c44h3h2eg2lix" path="res://TerrainGeneration/terrain_generation.tscn" id="2_rqd88"]
+[ext_resource type="FastNoiseLite" uid="uid://by72c12n557yf" path="res://materials/TerrainNoise.tres" id="3_imxfd"]
+[ext_resource type="FastNoiseLite" uid="uid://b2w8lwf55x5hs" path="res://materials/TerrainNoise2.tres" id="4_30hhs"]
+
+[node name="TerrainGenControler" type="Node3D" node_paths=PackedStringArray("terrainLayout", "Player")]
+script = ExtResource("1_daki1")
+TerrainGenerationPrefab = ExtResource("2_rqd88")
+terrainLayout = NodePath("")
+Player = NodePath("")
+noise = ExtResource("3_imxfd")
+noise2 = ExtResource("4_30hhs")
+ViewDistance = 1334.68
+terrainSize = 300.0
+seed = 1115
+heightModifier = 338.99
+waterLevelHeight = -236.375

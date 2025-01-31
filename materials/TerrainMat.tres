@@ -1,0 +1,41 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://c4wn0ciea6d2g"]
+
+[ext_resource type="Shader" uid="uid://b5siuxrm1es3d" path="res://materials/terrain.gdshader" id="1_dxhe3"]
+[ext_resource type="FastNoiseLite" uid="uid://by72c12n557yf" path="res://materials/TerrainNoise.tres" id="2_p54fb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p54fb"]
+frequency = 0.0004
+fractal_octaves = 4
+fractal_lacunarity = 5.355
+fractal_gain = 0.82
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7o8f0"]
+seamless = true
+noise = SubResource("FastNoiseLite_p54fb")
+
+[sub_resource type="Gradient" id="Gradient_dxhe3"]
+offsets = PackedFloat32Array(0, 0.294849, 0.611012, 0.708703, 0.78508, 0.884547, 0.971581, 1)
+colors = PackedColorArray(0.3212, 0.3608, 0.44, 1, 0.129295, 0.221874, 0.118434, 1, 0.39002, 0.605397, 0.364424, 1, 0.680261, 0.614789, 0.210951, 1, 0.439216, 0.439216, 0.439216, 1, 0.190762, 0.190762, 0.190762, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p54fb"]
+gradient = SubResource("Gradient_dxhe3")
+width = 512
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_di0aw"]
+width = 1024
+height = 1024
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 1.0
+as_normal_map = true
+bump_strength = 0.6
+noise = ExtResource("2_p54fb")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dxhe3")
+shader_parameter/height = 1062.4
+shader_parameter/noiseVisibilityModifier = 8.495
+shader_parameter/colorGradient = SubResource("GradientTexture1D_p54fb")
+shader_parameter/albedoNoise = SubResource("NoiseTexture2D_7o8f0")
+shader_parameter/normalMap = SubResource("NoiseTexture2D_di0aw")
