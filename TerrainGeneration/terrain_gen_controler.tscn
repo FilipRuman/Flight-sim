@@ -5,11 +5,9 @@
 [ext_resource type="FastNoiseLite" uid="uid://by72c12n557yf" path="res://materials/TerrainNoise.tres" id="3_imxfd"]
 [ext_resource type="FastNoiseLite" uid="uid://b2w8lwf55x5hs" path="res://materials/TerrainNoise2.tres" id="4_30hhs"]
 
-[node name="TerrainGenControler" type="Node3D" node_paths=PackedStringArray("terrainLayout", "Player")]
+[node name="TerrainGenControler" type="Node3D"]
 script = ExtResource("1_daki1")
 TerrainGenerationPrefab = ExtResource("2_rqd88")
-terrainLayout = NodePath("")
-Player = NodePath("")
 noise = ExtResource("3_imxfd")
 noise2 = ExtResource("4_30hhs")
 ViewDistance = 1334.68

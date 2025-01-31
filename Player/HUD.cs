@@ -48,7 +48,7 @@ public partial class HUD : Node
 
         Speed.Text = Mathf.RoundToInt(wingsManager.FrontalVelocity * 3.6f).ToString();
         var altitude = Mathf.RoundToInt(wingsManager.Altitude).ToString();
-        Altitude.Text = altitude.Length > 3 ? altitude.Insert(altitude.Length - 3, ".") : altitude;
+        Altitude.Text = (altitude.Length > 3 && wingsManager.Altitude > 0) ? altitude.Insert(altitude.Length - 3, ".") : altitude;
         AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}∝";
         Rotation.Text = $"{Math.Round(-rb.RotationDegrees.X, 1)}°R";
         Heading.Text = Math.Round(Mathf.RadToDeg(currentCam.GlobalRotation.Y) / 10).ToString();

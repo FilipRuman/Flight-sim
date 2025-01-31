@@ -28,7 +28,9 @@ script = ExtResource("1_offtf")
 material = ExtResource("2_l1xvx")
 mesh = NodePath("StaticBody3D/terrain")
 collisionShape = NodePath("StaticBody3D/CollisionShape3D")
+resolution = 4
 water = NodePath("StaticBody3D/Water")
+noise1ValueModifier = 0.05
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

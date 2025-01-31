@@ -17,6 +17,7 @@ public partial class TerrainGenController : Node3D
     [Export] float heightModifier;
     [Export] int framesPerUpdate = 100;
     [Export] float waterLevelHeight;
+    [Export] float terrainBaseHeight = 2000;
     int frameIndex = 0;
 
 
@@ -124,7 +125,7 @@ public partial class TerrainGenController : Node3D
 
         terrain.heightModifier = heightModifier;
 
-        Vector3 position = new(positionOnAGrid.X * terrainSize, 0, positionOnAGrid.Y * terrainSize);
+        Vector3 position = new(positionOnAGrid.X * terrainSize, terrainBaseHeight, positionOnAGrid.Y * terrainSize);
         terrain.Position = position;
 
         terrain.noise = noise;

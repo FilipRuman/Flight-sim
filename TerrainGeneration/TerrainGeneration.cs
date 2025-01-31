@@ -19,11 +19,13 @@ public partial class TerrainGeneration : Node3D
 
     public FastNoiseLite noise;
     public FastNoiseLite noise2;
+    [Export] float noise1ValueModifier = .5f;
+    [Export] float noise2ValueModifier = 1.25f;
 
     private float GetHeight(Vector2 pos)
     {
-        float value = noise.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z);
-        value += noise2.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z);
+        float value = noise.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z) * noise1ValueModifier;
+        value += noise2.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z) * noise2ValueModifier;
 
         return value * heightModifier;
     }

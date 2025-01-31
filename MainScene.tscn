@@ -36,16 +36,15 @@ tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.165939, 0.227469, 0.292969, 1)
+fog_light_color = Color(0.255798, 0.372191, 0.496094, 1)
 fog_light_energy = 2.21
-fog_sun_scatter = 0.88
+fog_sun_scatter = 1.0
 fog_density = 1.0
-fog_aerial_perspective = 0.296
+fog_aerial_perspective = 0.036
 fog_height = -1024.0
-fog_height_density = 0.4476
-fog_depth_curve = 0.732046
-fog_depth_begin = 1112.1
-fog_depth_end = 1537.0
+fog_depth_curve = 1.51572
+fog_depth_begin = 1517.9
+fog_depth_end = 3263.6
 
 [node name="Scene" type="Node3D"]
 script = SubResource("CSharpScript_8s4c3")
@@ -65,12 +64,15 @@ light_bake_mode = 1
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("9_x0cd2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 76.5619, 51.2688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3000.56, 51.269)
 linear_velocity = Vector3(0, 0, 143.625)
 
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout", "Player") instance=ExtResource("3_rpqi1")]
 terrainLayout = NodePath("../terrain layout")
 Player = NodePath("../Player")
 ViewDistance = 4334.68
+heightModifier = 2038.99
+waterLevelHeight = -1301.5
 
 [node name="terrain layout" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
