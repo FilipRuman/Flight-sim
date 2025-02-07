@@ -1,0 +1,1339 @@
+[gd_scene load_steps=61 format=4 uid="uid://c88qndtf0a2uw"]
+
+[ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_fdlyg"]
+[ext_resource type="Texture2D" uid="uid://crgj684ngenp8" path="res://Player/Plane examples/f16/model/source/lowpoly2_0.png" id="2_6chqk"]
+[ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Physics/Thruster.cs" id="2_dn2v4"]
+[ext_resource type="PackedScene" uid="uid://cwugr4ppybay4" path="res://Player/Plane examples/f16/model/source/lowpoly2.fbx.fbx" id="2_du4ah"]
+[ext_resource type="Texture2D" uid="uid://cb1bu6xuss3a7" path="res://Player/Plane examples/f16/model/source/lowpoly2_2.png" id="3_18030"]
+[ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Physics/Wings/Wing.cs" id="3_du4ah"]
+[ext_resource type="Material" uid="uid://bpfidslm2wixj" path="res://Player/Plane examples/f16/model/source/glass.tres" id="3_y7itr"]
+[ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="4_06a0d"]
+[ext_resource type="Resource" uid="uid://d2xannisnmkyj" path="res://Player/Plane examples/f16/airfoil settings/forward wings.tres" id="6_dn2v4"]
+[ext_resource type="Script" uid="uid://c631vcp26dh6i" path="res://Physics/Wings/WingsManager.cs" id="7_6chqk"]
+[ext_resource type="Script" uid="uid://x2rwjvbchwku" path="res://Physics/Wings/Airfoil size/AirfoilSize.cs" id="7_y7itr"]
+[ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="8_18030"]
+[ext_resource type="Resource" uid="uid://bfrnhl651q2ow" path="res://Player/Plane examples/f16/airfoil settings/Rudder.tres" id="8_du4ah"]
+[ext_resource type="Resource" uid="uid://c6b5ncad21wth" path="res://Player/Plane examples/f16/airfoil settings/Elevators.tres" id="8_y7itr"]
+[ext_resource type="Script" uid="uid://b4yfgb7b6hpmc" path="res://Player/HUD.cs" id="9_06a0d"]
+[ext_resource type="Texture2D" uid="uid://dr1h5cryjad3m" path="res://Sprites/AirPlaneNoseMarker.png" id="10_htxkc"]
+[ext_resource type="Texture2D" uid="uid://bfue3afu2k8l2" path="res://Sprites/Flight path marker.png" id="11_1p18m"]
+[ext_resource type="Texture2D" uid="uid://casyvd7sw1beb" path="res://Sprites/keyboard_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="12_g66qy"]
+[ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="13_iwgi8"]
+[ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="14_eq14g"]
+[ext_resource type="Script" uid="uid://c7f5lmhon5lsw" path="res://Player/CameraController.cs" id="15_ym7kq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1bji"]
+resource_name = "body_texture"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.906332, 0.906332, 0.906332, 0.8)
+albedo_texture = ExtResource("2_6chqk")
+emission_enabled = true
+normal_enabled = true
+normal_scale = 0.0
+normal_texture = ExtResource("3_18030")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hr0nu"]
+_surfaces = [{
+"aabb": AABB(-0.171561, -0.0461085, -0.172429, 0.105896, 0.0115006, 0.0361099),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAMAAwABAAQAAwAEAAAABAABAAUABQABAAAAAAAEAAUA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("mq0vvrdAK70q8B2+9IKGvc4uHr2Tbi++q4CGvQvBDb2ylwu+OXuGvSJsKL09lwu+mq0vvlHcPL0o8B2+mq0vvvEXNb06kTC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3e8o8"]
+resource_name = "f16_lowpoly_polySurface32"
+_surfaces = [{
+"aabb": AABB(-0.171561, -0.0461085, -0.172429, 0.105896, 0.0115006, 0.0361099),
+"attribute_data": PackedByteArray("PLY3P1w5ID/RmD0/trdAP1zOMj88uEA/yVY9P+I5ID8n8EI/4jkgP9GYPT+2t0A/yVY9P+I5ID8nWUg/trdAP9GYPT+2t0A/LRQzP6b1Qj9czjI/PLhAPzy2Nz9cOSA//9g3P1UTHz/JVj0/4jkgP0HgMD8KUkA/P3A2P370Hz88tjc/XDkgP1zOMj88uEA/"),
+"format": 34359742487,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAAFAAYABwAFAAQACAAJAAoACwAMAA0ADgAPABAAEAARAA4A"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("mq0vvrdAK70q8B2+9IKGvc4uHr2Tbi++q4CGvQvBDb2ylwu+mq0vvvEXNb06kTC+mq0vvlHcPL0o8B2+9IKGvc4uHr2Tbi++mq0vvvEXNb06kTC+OXuGvSJsKL09lwu+9IKGvc4uHr2Tbi++OXuGvSJsKL09lwu+q4CGvQvBDb2ylwu+mq0vvrdAK70q8B2+mq0vvlHcPL0o8B2+mq0vvvEXNb06kTC+OXuGvSJsKL09lwu+mq0vvlHcPL0o8B2+mq0vvrdAK70q8B2+q4CGvQvBDb2ylwu+umx/+mMOBYDsbaH6RA0AgAlupfrW8gCAJmxu+u0OBICokC8G+39+uvOOqAYIgJ+7epH1Bf9/9LnKjrMGDIC7u8r/PYAtDQGAyv89gC0NAYDK/z2ALQ0BgAAA/38F8QCAAAD/fwXxAIAAAP9/BfEAgHlt/39TZ3L1eW3/fxRnV/V5bf9/F2dY9Xlt/39VZ3L1")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hr0nu")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ynrld"]
+_surfaces = [{
+"aabb": AABB(-0.052948, -0.00575033, -0.0180549, 0.105896, 0.0115006, 0.0361099),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwAAAAIAAwABAAQAAAADAAQABAABAAUABQABAAAABAAFAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("+99YPcRAvrqPQhA5gdBYvQn84zq90oq8+99YPSWUfLvx55O8+99YPTttvLtcTxA5+99YvWlcR7rx55M8FtVYvSttvDtN5JM8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jsfgp"]
+resource_name = "f16_lowpoly_plane_to_uv6_polySurface32"
+_surfaces = [{
+"aabb": AABB(-0.052948, -0.00575033, -0.0180549, 0.105896, 0.0115006, 0.0361099),
+"attribute_data": PackedByteArray("DWtKP35lWD8ltUQ/NuR4P1/KRD9JZlg/+n9PPwHleD8KMT8/SWZYPyW1RD825Hg/2PQ5PzbkeD9fykQ/SWZYP/E8Tz/GDns/JbVEPzbkeD/6f08/AeV4P4hGSj/wMlc/DWtKP35lWD9fykQ/SWZYP91uUT+Ugng/+n9PPwHleD8Na0o/fmVYP3ixSz+tIlg/"),
+"format": 34359742487,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAAFAAYABwAFAAQACAAJAAoACwAMAA0ADgAPABAAEAARAA4A"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("+99YPcRAvrqPQhA5gdBYvQn84zq90oq8+99YPSWUfLvx55O8FtVYvSttvDtN5JM8+99YPTttvLtcTxA5gdBYvQn84zq90oq8+99YvWlcR7rx55M8+99YPSWUfLvx55O8+99YvWlcR7rx55M8gdBYvQn84zq90oq8FtVYvSttvDtN5JM8+99YPTttvLtcTxA5+99YPcRAvrqPQhA5+99YPSWUfLvx55O8+99YvWlcR7rx55M8FtVYvSttvDtN5JM8+99YPcRAvrqPQhA5+99YPTttvLtcTxA5RJN/+vB/MMcSkqH6AIChxtiTbvrvf3XH9ZGl+gSAk8ZWby8GAQv8/wtxqAY/9/r/NHGzBnf3+P+EbvUFFQz//zQAPYD7f5fGNAA9gPt/l8Y0AD2A+3+Xxv///3//f37H////f/9/fsf///9//39+x4WS/3+Ia/aLhZL/f4pr9YuFkv9/OGskjIWS/381ayaM")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ynrld")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5jlt0"]
+_surfaces = [{
+"aabb": AABB(-0.0404544, -0.009781, -0.0590045, 0.0809088, 0.019562, 0.118009),
+"format": 34359742465,
+"index_count": 60,
+"index_data": PackedByteArray("BwABAAIAAgABAAgABwACAAgACAABAAkAAAABAAcAAAAJAAEABwAIAAoACgAAAAcACAAJAAsACgAIAAsAAAAEAAkACwAJAAQABQAAAAoABQAEAAAACgALAAMABQAGAAQACgAGAAUABAAGAAsAAwAGAAoACwAGAAMA"),
+"lods": [0.00138247, PackedByteArray("AAABAAIAAgABAAMAAwAAAAIAAAAEAAEAAwABAAQABQAEAAAABQAAAAMABAAGAAMAAwAGAAUABQAGAAQA")],
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("t6olPay5E7wKVV+8r1AlPRz3GbwK+Qi8000kvfDrBjyzrnE9vVAkvWvuBjzxpXG9OgQlPXlAILyAUk29hrMlPW7BE7yAUk29oKUAPU2o87uprnG97+oivT0+IDzDf1c9FbElvS402zu9f1c9gfskPbY4ILwfVV+8c+0ivYBAIDzxPk29hrMlvak42zvmPk29")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1pihy"]
+resource_name = "f16_lowpoly_plane_to_uv6_polySurface46"
+_surfaces = [{
+"aabb": AABB(-0.0404544, -0.009781, -0.0590045, 0.0809088, 0.019562, 0.118009),
+"attribute_data": PackedByteArray("qqI8PwiL0D33ozw/WJvDPTn6VT8AIHU8Q2w8P0xKFT5/5FU/MBYgPg+ePD8I9RQ+3Gk/P9DTHz4Pnjw/CPUUPtxpPz/Q0x8+f+RVPzAWID4Eijw/0PZdPqaYPD9csio+YatVP3qnmD7caT8/0NMfPijzVT8AG7o8bmU8P6iH0D374FU/EBkVPpS6VT8sn5Q+7Ys8PxSAVz7B31U/MC0rPgSKPD/Q9l0+lLpVPyyflD4o81U/ABu6PDn6VT8AIHU8u+RWP0A/tzz74FU/EBkVPjrVVj8YYRU+f+RVPzAWID4="),
+"format": 34359742487,
+"index_count": 60,
+"index_data": PackedByteArray("DgABAAIAAAABAA4AAAAPAAEAEAAAAA4AAAADAA8ABQADAAAABQAGAAMABwAAABAAEAAIAAcABAAIABAAEQAKABIAEQASABMAEwASAAsACwANABMAEwANAAkADAAUABUAFgAXABgAFgAYABkAGQAYABoAGQAaABsA"),
+"lods": [0.00138247, PackedByteArray("AAABAAIAAAADAAEABAAAAAIABQADAAAABQAGAAMABwAAAAQABAAIAAcACQAKAAsADAAKAAkACwANAAkA")],
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("t6olPay5E7wKVV+8r1AlPRz3GbwK+Qi8000kvfDrBjyzrnE9OgQlPXlAILyAUk29vVAkvWvuBjzxpXG9hrMlPW7BE7yAUk29oKUAPU2o87uprnG9hrMlPW7BE7yAUk29oKUAPU2o87uprnG9vVAkvWvuBjzxpXG9r1AlPRz3GbwK+Qi8OgQlPXlAILyAUk29000kvfDrBjyzrnE9oKUAPU2o87uprnG97+oivT0+IDzDf1c9gfskPbY4ILwfVV+8c+0ivYBAIDzxPk29FbElvS402zu9f1c9gfskPbY4ILwfVV+8hrMlvak42zvmPk29r1AlPRz3GbwK+Qi8FbElvS402zu9f1c97+oivT0+IDzDf1c9000kvfDrBjyzrnE9FbElvS402zu9f1c9c+0ivYBAIDzxPk29hrMlvak42zvmPk29vVAkvWvuBjzxpXG9v5gC588hTMv1m3Lctx3fzhWhBMu/J07TRuz2WYir7/mnpPzrTxd+y0bs9lmlq/f5rfM0OARXGPrVmNPncBghzISd/ehkGBrMVlsDFP8WpMv9cNsW4Q84yL9pkhWbFQvLanz1GwgGWMK/ZJ8UsRUVy8aZ4eLkGirN+OgAad2WMfRrmRXoYRgTzFNqsBWXFQjLg2q4FXAV98ruaIcVuhUPy15+TRpdBDjBFFs5OBsnxdcBFwCXa2Grimp89RvXD3JrFFs5OM3dQJIBFwCXSWpyjgEXAJdQaoOOARcAl1Jqho4=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_5jlt0")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0of4g"]
+_surfaces = [{
+"aabb": AABB(0.101525, -0.0504963, -0.358948, 0.000488281, 9.15527e-05, 0.0120213),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("MxvQPciGTr0RyLe+NuzQPTDVTr1ooLG+NuzPPTB1Tr1ooLG+Pb3QPZbDTr0RyLe+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p0t2p"]
+resource_name = "f16_lowpoly_plane_to_uv6_pPlane7"
+_surfaces = [{
+"aabb": AABB(0.101525, -0.0504963, -0.358948, 0.000488281, 9.15527e-05, 0.0120213),
+"attribute_data": PackedByteArray("EbFYP1hddz6DkVg/iLdoPj24WD+Et2g+sJhYP1hddz4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("MxvQPciGTr0RyLe+NuzQPTDVTr1ooLG+NuzPPTB1Tr1ooLG+Pb3QPZbDTr0RyLe+OJTG6zgUG8o1lMnrNRQbyjWUyes1FBvKOJTG6zgUG8o=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0of4g")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qqdoc"]
+_surfaces = [{
+"aabb": AABB(0.121851, -0.0549589, -0.358948, 0.000482962, 0.000116266, 0.0120213),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("fbv5PR25YL0RyLe+QIr6PZ8cYb1ooLG+Co35PbWiYL1ooLG+zVv6PToGYb0RyLe+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pwxf0"]
+resource_name = "f16_lowpoly_plane_to_uv6_pPlane8"
+_surfaces = [{
+"aabb": AABB(0.121851, -0.0549589, -0.358948, 0.000482962, 0.000116266, 0.0120213),
+"attribute_data": PackedByteArray("67pYP+hXTj5Dm1g/pK4/PvrBWD+krj8+VaJYP+hXTj4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("fbv5PR25YL0RyLe+QIr6PZ8cYb1ooLG+Co35PbWiYL1ooLG+zVv6PToGYb0RyLe+0Jgt59EYZ8zVmCnn1RhqzNWYKefVGGrM0Jgt59AYZ8w=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qqdoc")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mrwcy"]
+_surfaces = [{
+"aabb": AABB(0.130531, -0.0568905, -0.353771, 0.000668809, 0.000116196, 0.0119558),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AdkFPk6ZaL1zIbW+OlkGPvsFab1iAq++56kFPiSMaL1iAq++ChcGPoLmaL10IbW+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2g0mh"]
+resource_name = "f16_lowpoly_plane_to_uv6_pPlane9"
+_surfaces = [{
+"aabb": AABB(0.130531, -0.0568905, -0.353771, 0.000668809, 0.000116196, 0.0119558),
+"attribute_data": PackedByteArray("s7xYP3gOYz4smFg/dFJUPs3NWD+0UlQ+R6lYP7wNYz4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AdkFPk6ZaL1zIbW+OlkGPvsFab1iAq++56kFPiSMaL1iAq++ChcGPoLmaL10IbW+qJ2v4h8elc77ktjsIBN9yeuS5+wOE3XJq5634RwfEc8=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mrwcy")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s36kr"]
+_surfaces = [{
+"aabb": AABB(-0.0404544, -0.009781, -0.0590045, 0.0809088, 0.019562, 0.118009),
+"format": 34359742465,
+"index_count": 60,
+"index_data": PackedByteArray("AAAGAAIAAgAGAAcABwAAAAIABgAIAAcACQAGAAAACQAIAAYACgAAAAcACgAJAAAACwAKAAcABwAIAAsABAAJAAoABAAKAAsABQAIAAkABQAJAAQACwAIAAEABQADAAgACAADAAEAAwAFAAQAAwALAAEABAALAAMA"),
+"lods": [0.00527689, PackedByteArray("AAABAAIAAwACAAEABAAAAAIABAACAAMABQABAAAABQAAAAQABQADAAEAAwAFAAQA")],
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("sVAlvRz3Gbwf+Qi8vFAkPWvuBjzxpXG9zE0kPfDrBjyprnE9oqUAvU2o87uprnG9SwQlvXlAILyKUk29g7MlvW7BE7yAUk297uoiPT0+IDzDf1c9GLElPS402zu4f1c9Yu0iPYBAIDzxPk29vqolvay5E7wKVV+8iPskvbY4ILwfVV+8hbMlPak42zvmPk29")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3b7sm"]
+resource_name = "f16_lowpoly_polySurface46"
+_surfaces = [{
+"aabb": AABB(-0.0404544, -0.009781, -0.0590045, 0.0809088, 0.019562, 0.118009),
+"attribute_data": PackedByteArray("A2dVP7YlpT7t+zs/tr/DPhZJPD/wu3Y+H0pVPzq5vj6VdlI/UBnEPjVAVT/ql8k+4CtVPzQ64z440js/PC4GP5V2Uj9QGcQ+7fs7P7a/wz4fSlU/Orm+PgNnVT+2JaU+eHtVP/Tkvj6VdlI/UBnEPrFKPD+ErX4+6mNVP6JhqD5sBzw/QEG+PmbIOz/yKQQ/Ni5VP9T+3z5Y+Ts/OkvJPtGgVT8iYqg+6mNVP6JhqD4WSTw/8Lt2PrFKPD+ErX4+k1k7P6hHfj5sBzw/QEG+PtwSOz8KYL4+7fs7P7a/wz4="),
+"format": 34359742487,
+"index_count": 60,
+"index_data": PackedByteArray("AAAOAAIADwAOAAAADwAQAA4AAwAQAA8AAwAEABAAEAAEAAEAEQAGAAcAEgAGABEAEwASABEABQASABMABQATAAgACAATAAkAFAAVAAsADAAVABQACgAVAAwADQAKAAwAFgAXABgAFwAZABgAGAAZABoAGgAZABsA"),
+"lods": [0.00527689, PackedByteArray("AAABAAIAAwABAAAAAwAEAAEABQAGAAcABQAHAAgACAAHAAkACgALAAwADQAKAAwA")],
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("sVAlvRz3Gbwf+Qi8vFAkPWvuBjzxpXG9zE0kPfDrBjyprnE9g7MlvW7BE7yAUk29oqUAvU2o87uprnG9SwQlvXlAILyKUk29sVAlvRz3Gbwf+Qi8zE0kPfDrBjyprnE9oqUAvU2o87uprnG9vFAkPWvuBjzxpXG9g7MlvW7BE7yAUk29sVAlvRz3Gbwf+Qi8SwQlvXlAILyKUk29oqUAvU2o87uprnG97uoiPT0+IDzDf1c9vqolvay5E7wKVV+8Yu0iPYBAIDzxPk29GLElPS402zu4f1c9iPskvbY4ILwfVV+8hbMlPak42zvmPk29iPskvbY4ILwfVV+8vqolvay5E7wKVV+8zE0kPfDrBjyprnE97uoiPT0+IDzDf1c9GLElPS402zu4f1c9Yu0iPYBAIDzxPk29hbMlPak42zvmPk29vFAkPWvuBjzxpXG9FmR+3FAeOrFXW/zrjBehtOleBMsbJ1+sKWfT5xEZ8bN6Yv3o9Rj+sz+WkhWSFeG0n470FpoP2beggU0auQINvT+bnxSZFdy0qKQDFLsWN7S2E/hZxosUlgoXAWnrlq2LthP4WdWLBZZPDDU4UnMvlThm4eLpGtCylmda5zYZ27OTZhXo7Bj9s9SSVxYjE4K1e5W4FWoV9rQQl4cVpxXMtAUXAGnrlqyLBRcAaeCWxov86ACX1mpI8P3oAJfTak7w/egAl8xqX/D96ACX72MM9f3oAJfNYxD1/egAl8hjEPU=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_s36kr")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x05fi"]
+_surfaces = [{
+"aabb": AABB(-0.102013, -0.0504963, -0.358948, 0.000488281, 9.15527e-05, 0.0120213),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("O+zQvTDVTr1qoLG+MxvQvciGTr0RyLe+O+zPvTB1Tr1qoLG+O73QvZbDTr0RyLe+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nxmjl"]
+resource_name = "f16_lowpoly_pPlane7"
+_surfaces = [{
+"aabb": AABB(-0.102013, -0.0504963, -0.358948, 0.000488281, 9.15527e-05, 0.0120213),
+"attribute_data": PackedByteArray("X85YPz4qsz4brlg/Lq66PuumWD8+KrM+88ZYPy6uuj4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("O+zQvTDVTr1qoLG+MxvQvciGTr0RyLe+O+zPvTB1Tr1qoLG+O73QvZbDTr0RyLe+yWvJ6zUU5LXGa8brOBTitclryes1FOS1xmvG6zgU4rU=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_x05fi")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kucyq"]
+_surfaces = [{
+"aabb": AABB(-0.122334, -0.0549589, -0.358948, 0.000482999, 0.000116266, 0.0120214),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("RYr6vZ8cYb1qoLG+gLv5vR25YL0TyLe+Co35vbWiYL1ooLG+zVv6vToGYb0RyLe+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_crf4d"]
+resource_name = "f16_lowpoly_pPlane8"
+_surfaces = [{
+"aabb": AABB(-0.122334, -0.0549589, -0.358948, 0.000482999, 0.000116266, 0.0120214),
+"attribute_data": PackedByteArray("8tdYP5CsyT4OwVg/KP7OPta7WD+QrMk+uNJYPyj+zj4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("RYr6vZ8cYb1qoLG+gLv5vR25YL0TyLe+Co35vbWiYL1ooLG+zVv6vToGYb0RyLe+Kmcp59QYk7MtZy3n1RiWsypnKefUGJOzLmct59UYl7M=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kucyq")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_denmt"]
+_surfaces = [{
+"aabb": AABB(-0.1312, -0.0568905, -0.353771, 0.000668854, 0.000116196, 0.0119558),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("PlkGvvsFab1iAq++AdkFvk6ZaL1zIbW+6KkFviSMaL1iAq++CxcGvoLmaL10IbW+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0wysb"]
+resource_name = "f16_lowpoly_pPlane9"
+_surfaces = [{
+"aabb": AABB(-0.1312, -0.0568905, -0.353771, 0.000668854, 0.000116196, 0.0119558),
+"attribute_data": PackedByteArray("7M9YP1pavj6fq1g/hLDFPn2aWD9aWr4+4L5YP4SwxT4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwABAAAA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("PlkGvvsFab1iAq++AdkFvk6ZaL1zIbW+6KkFviSMaL1iAq++CxcGvoLmaL10IbW+BG3Z7AETfrZXYq/iYh1LsRNt5+zyEoa2U2G44V4ezrA=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_denmt")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d6c5f"]
+_surfaces = [{
+"aabb": AABB(-0.00274613, 0.0142003, -0.366239, 0.00549226, 0.0935341, 0.0864823),
+"format": 34359742465,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwACAAEABAABAAAAAwAFAAIAAQAFAAMABAAFAAEAAgAFAAAAAAAFAAQA"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("jFsaO4yj3D1Wr6++yRNtI9uuaDwX6qK+avgzO4moaDw4PI++avgzu0uoaDw3PI++yRNtI1mb3D2eg7u+jFsau9mj3D1Csa++")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k5hoj"]
+resource_name = "f16_lowpoly_plane_to_uv6_polySurface3"
+_surfaces = [{
+"aabb": AABB(-0.00274613, 0.0142003, -0.366239, 0.00549226, 0.0935341, 0.0864823),
+"attribute_data": PackedByteArray("x+JsPwgKET/3tXY/6XUtP0fWbD8MMTQ/td1yP8giDT9TZmE/P4UtPxXQaz/jixE/dyFrP+VXND/fNGY/5VENP8fibD8IChE/FdBrP+OLET/fNGY/5VENP0fWbD8MMTQ/FdBrP+OLET/H4mw/CAoRP3chaz/lVzQ/FdBrP+OLET9H1mw/DDE0P3vnbT98hjU/R9ZsPwwxND/3tXY/6XUtPw=="),
+"format": 34359742487,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAAFAAYABwAFAAQACAAJAAoACwAMAA0ADgAPABAAEQASABMA"),
+"material": SubResource("StandardMaterial3D_n1bji"),
+"name": "body_texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("jFsaO4yj3D1Wr6++yRNtI9uuaDwX6qK+avgzO4moaDw4PI++yRNtI1mb3D2eg7u+yRNtI9uuaDwX6qK+jFsau9mj3D1Csa++avgzu0uoaDw3PI++yRNtI1mb3D2eg7u+jFsaO4yj3D1Wr6++jFsau9mj3D1Csa++yRNtI1mb3D2eg7u+avgzO4moaDw4PI++jFsau9mj3D1Csa++jFsaO4yj3D1Wr6++avgzu0uoaDw3PI++jFsau9mj3D1Csa++avgzO4moaDw4PI++avgzu0uoaDw3PI++avgzO4moaDw4PI++yRNtI9uuaDwX6qK+W/rEbyUvlYTf+nZytDC6g+v6uXLlMKWDMPrkbr4u3YQgBXZyknj82KQFwm/xdg3ZEwW5crp49djPBeFuZ3YG2RqA+v+NzgLAGoD6/43OAsAagPr/jc4CwMR/mrNK1qSzxH+as0rWpLPEf5qzStaks/9/tLPP8cW7/3+0s8/xxbv/f7Szz/HFuwGAAAAAALPjAYAAAAAAs+MBgAAAAACz4w==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d6c5f")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
+radius = 0.232468
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00tjw"]
+size = Vector3(14.1945, 0.156006, 4.94226)
+
+[sub_resource type="Resource" id="Resource_s8pj7"]
+script = ExtResource("7_y7itr")
+span = 4.985
+a = 5.95
+b = 1.665
+bOffset = 0.0
+displaySize = false
+isControlSurface = false
+mirrorDisplay = false
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_glpll"]
+script = ExtResource("7_y7itr")
+span = 4.985
+a = 5.95
+b = 1.665
+bOffset = 0.0
+displaySize = false
+isControlSurface = false
+mirrorDisplay = true
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_6chqk"]
+script = ExtResource("7_y7itr")
+span = 3.25
+a = 1.13
+b = 0.595
+bOffset = 0.0
+displaySize = false
+isControlSurface = true
+mirrorDisplay = false
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_18030"]
+script = ExtResource("7_y7itr")
+span = 3.25
+a = 1.13
+b = 0.595
+bOffset = 0.0
+displaySize = false
+isControlSurface = true
+mirrorDisplay = true
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_06a0d"]
+script = ExtResource("7_y7itr")
+span = 2.455
+a = 3.615
+b = 1.645
+bOffset = 0.0
+displaySize = false
+isControlSurface = true
+mirrorDisplay = false
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_htxkc"]
+script = ExtResource("7_y7itr")
+span = 2.455
+a = 3.615
+b = 1.645
+bOffset = 0.0
+displaySize = false
+isControlSurface = true
+mirrorDisplay = true
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_y7itr"]
+script = ExtResource("7_y7itr")
+span = 3.7
+a = 2.825
+b = 1.07
+bOffset = -2.33
+displaySize = false
+isControlSurface = false
+mirrorDisplay = false
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="Resource" id="Resource_1p18m"]
+script = ExtResource("7_y7itr")
+span = 3.855
+a = 0.985
+b = 0.605
+bOffset = -2.015
+displaySize = false
+isControlSurface = true
+mirrorDisplay = false
+metadata/_custom_type_script = ExtResource("7_y7itr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu6f8"]
+bg_color = Color(0.333333, 1, 0, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.333333, 1, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ImageTexture" id="ImageTexture_00tjw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3vf3"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 1, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apopc"]
+bg_color = Color(0.333333, 1, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkpta"]
+bg_color = Color(0.333333, 1, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Curve" id="Curve_lfmf2"]
+_limits = [-90.0, 90.0, -1.0, 1.0]
+_data = [Vector2(-1, -86.1824), 0.0, 8.95266, 0, 0, Vector2(0.0163044, -1.14528), 0.0, 0.0, 0, 0, Vector2(1, 86.2778), 25.8445, 0.0, 0, 0]
+point_count = 3
+
+[node name="Player" type="RigidBody3D"]
+process_priority = 1
+process_physics_priority = 1
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
+mass = 2000.0
+center_of_mass_mode = 1
+continuous_cd = true
+script = ExtResource("1_fdlyg")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(-1.31134e-06, 0, -30, 0, 30, 0, 30, 0, -1.31134e-06, 0, -4.74786, 1.75127)
+
+[node name="lowpoly2_fbx" parent="Model" instance=ExtResource("2_du4ah")]
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface3" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="7"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface42" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="23"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_pasted__cockpit_crosshair" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="35"]
+visible = false
+
+[node name="cockpitglass01" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="37"]
+material_override = ExtResource("3_y7itr")
+cast_shadow = 2
+
+[node name="cockpitglass02" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="38"]
+material_override = ExtResource("3_y7itr")
+cast_shadow = 2
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface32" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="43"]
+visible = false
+
+[node name="f16_lowpoly_polySurface32" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="54"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface46" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="63"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane7" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="64"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane8" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="65"]
+visible = false
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane9" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="66"]
+visible = false
+
+[node name="f16_lowpoly_polySurface46" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="67"]
+visible = false
+
+[node name="f16_lowpoly_pPlane7" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="68"]
+visible = false
+
+[node name="f16_lowpoly_pPlane8" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="69"]
+visible = false
+
+[node name="f16_lowpoly_pPlane9" parent="Model/lowpoly2_fbx/f16_lowpoly_lowpoly_GRP" index="70"]
+visible = false
+
+[node name="Controll surface animations" type="Node3D" parent="Model"]
+
+[node name="Aileron FR" type="Node3D" parent="Model/Controll surface animations" node_paths=PackedStringArray("wing")]
+transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.126159, 0.150729, 0.1186)
+script = ExtResource("4_06a0d")
+wing = NodePath("../../../wings/Aileron FR")
+rotationVector = Vector3(0, 0, 1)
+
+[node name="f16_lowpoly_polySurface33" type="MeshInstance3D" parent="Model/Controll surface animations/Aileron FR"]
+transform = Transform3D(-1.7053e-12, 0, 30, 0, 30, 0, -30, 0, -1.7053e-12, 4.30448, 1.21125, -3.558)
+mesh = SubResource("ArrayMesh_3e8o8")
+skeleton = NodePath("")
+
+[node name="Aileron FL" type="Node3D" parent="Model/Controll surface animations" node_paths=PackedStringArray("wing")]
+transform = Transform3D(0.0333333, 0, 0, 0, 0.0333333, 0, 0, 0, 0.0333333, -0.126163, 0.150745, -0.118613)
+script = ExtResource("4_06a0d")
+wing = NodePath("../../../wings/Aileron FL")
+rotationVector = Vector3(0, 0, 1)
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface34" type="MeshInstance3D" parent="Model/Controll surface animations/Aileron FL"]
+transform = Transform3D(-3.41061e-13, 0, 30, 0, 30, 0, -30, 0, -3.41061e-13, -0.326603, -4.76837e-07, 0)
+mesh = SubResource("ArrayMesh_jsfgp")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface47" type="MeshInstance3D" parent="Model/Controll surface animations" node_paths=PackedStringArray("wing")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.275886, 0.143579, -0.0904362)
+mesh = SubResource("ArrayMesh_1pihy")
+skeleton = NodePath("")
+script = ExtResource("4_06a0d")
+wing = NodePath("../../../wings/Elevator BL")
+rotationVector = Vector3(1, 0, 0)
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane10" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_plane_to_uv6_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, -0.0904362, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_p0t2p")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane11" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_plane_to_uv6_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, -0.0904362, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_pwxf0")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_plane_to_uv6_pPlane12" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_plane_to_uv6_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, -0.0904362, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_2g0mh")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_polySurface47" type="MeshInstance3D" parent="Model/Controll surface animations" node_paths=PackedStringArray("wing")]
+transform = Transform3D(-7.10543e-15, 0, 1, 0, 1, 0, -1, 0, -7.10543e-15, -0.275886, 0.143579, 0.0905093)
+mesh = SubResource("ArrayMesh_3b7sm")
+skeleton = NodePath("")
+script = ExtResource("4_06a0d")
+wing = NodePath("../../../wings/Elevator BR")
+rotationVector = Vector3(1, 0, 0)
+
+[node name="f16_lowpoly_pPlane10" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.0905093, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_nxmjl")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_pPlane11" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.0905093, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_crf4d")
+skeleton = NodePath("")
+
+[node name="f16_lowpoly_pPlane12" type="MeshInstance3D" parent="Model/Controll surface animations/f16_lowpoly_polySurface47"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0.0905093, 0.0475247, 0.29321)
+mesh = SubResource("ArrayMesh_0wysb")
+skeleton = NodePath("")
+
+[node name="Rudder" type="Node3D" parent="Model/Controll surface animations" node_paths=PackedStringArray("wing")]
+transform = Transform3D(-1.45704e-09, 0, 0.0333333, 0, 0.0333333, 0, -0.0333333, 0, -1.45704e-09, -0.264468, 0.259227, 1.15603e-08)
+script = ExtResource("4_06a0d")
+wing = NodePath("../../../wings/Rudder S")
+yaw = true
+rotationVector = Vector3(0, 0.1, 0)
+
+[node name="f16_lowpoly_plane_to_uv6_polySurface8" type="MeshInstance3D" parent="Model/Controll surface animations/Rudder"]
+transform = Transform3D(30, 0, -1.31134e-06, 0, 30, 0, 1.31134e-06, 0, 30, -2.27177e-08, -2.04369, 8.45376)
+mesh = SubResource("ArrayMesh_k5hoj")
+skeleton = NodePath("")
+
+[node name="Wheal Colider F" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.94786, 5.14827)
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Wheal Colider BR" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.236, -2.64586, -1.29873)
+visible = false
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Wheal Colider BL" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.23634, -2.64586, -1.2987)
+visible = false
+shape = SubResource("SphereShape3D_hdd2g")
+
+[node name="Wing Colider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00416565, -0.198802, -0.83347)
+shape = SubResource("BoxShape3D_00tjw")
+
+[node name="Thruster" type="Node3D" parent="." node_paths=PackedStringArray("rb", "engineSoundController", "wingsManager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.067646, -2.74961)
+script = ExtResource("2_dn2v4")
+rb = NodePath("..")
+engineSoundController = NodePath("../SoundScene/Engine controller")
+wingsManager = NodePath("../wings/wings manager")
+enginePower = 200000.0
+PropellerRadius = 16.0
+
+[node name="wings" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
+
+[node name="Wg FL" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.678, 4.51, -4.64)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("6_dn2v4")
+airfoilSize = SubResource("Resource_s8pj7")
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Wg FR" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67783, 4.51039, -4.64018)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("6_dn2v4")
+airfoilSize = SubResource("Resource_glpll")
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Aileron FL" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86665, 4.68092, -4.67445)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("6_dn2v4")
+airfoilSize = SubResource("Resource_6chqk")
+rotateWholeWing = true
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Aileron FR" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.867, 4.681, -4.674)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("6_dn2v4")
+airfoilSize = SubResource("Resource_18030")
+rotateWholeWing = true
+flapAngleModifier = -30.0
+angleOfAttack = 180.0
+
+[node name="Elevator BL" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53374, 4.50897, -10.0944)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("8_y7itr")
+airfoilSize = SubResource("Resource_06a0d")
+rotateWholeWing = true
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Elevator BR" type="Node3D" parent="wings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.534, 4.509, -10.094)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("8_y7itr")
+airfoilSize = SubResource("Resource_htxkc")
+rotateWholeWing = true
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Wg S" type="Node3D" parent="wings"]
+transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.47009, -7.48922)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("8_du4ah")
+airfoilSize = SubResource("Resource_y7itr")
+rotateWholeWing = true
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="Rudder S" type="Node3D" parent="wings"]
+transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.35281, -8.47891)
+script = ExtResource("3_du4ah")
+configResource = ExtResource("8_du4ah")
+airfoilSize = SubResource("Resource_1p18m")
+rotateWholeWing = true
+flapAngleModifier = 30.0
+angleOfAttack = 180.0
+
+[node name="wings manager" type="Node3D" parent="wings" node_paths=PackedStringArray("wings", "pitchWings", "rollWings", "yawWings", "rb")]
+script = ExtResource("7_6chqk")
+wings = [NodePath("../Wg FL"), NodePath("../Wg FR"), NodePath("../Elevator BL"), NodePath("../Elevator BR"), NodePath("../Aileron FL"), NodePath("../Aileron FR"), NodePath("../Wg S"), NodePath("../Rudder S")]
+pitchWings = [NodePath("../Elevator BL"), NodePath("../Elevator BR")]
+rollWings = [NodePath("../Aileron FL"), NodePath("../Aileron FR")]
+yawWings = [NodePath("../Rudder S")]
+forcesModifiers = Vector3(10, 25, 30)
+rb = NodePath("../..")
+trimStepSize = 0.015
+
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "propellor", "controls", "controlsToggleButton")]
+script = ExtResource("8_18030")
+rb = NodePath("..")
+wingsManager = NodePath("../wings/wings manager")
+thruster = NodePath("../Thruster")
+windController = NodePath("../SoundScene/WindController")
+speed = NodePath("Panel/HBoxContainer/Speed")
+AoA = NodePath("Panel/HBoxContainer/AoA")
+altitude = NodePath("Air relatedStuff/GridContainer/Altitude")
+airDensity = NodePath("Air relatedStuff/GridContainer/Air density")
+thrustOfPropeller = NodePath("Engine related stuff/GridContainer/thrust")
+FramesPerUpdate = 1.0
+propellor = NodePath("../Thruster")
+propRotationModifier = 1.0
+controls = NodePath("Controls")
+controlsToggleButton = NodePath("Toggle controls Button")
+
+[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_06a0d")
+playerRbController = NodePath("../..")
+rb = NodePath("../..")
+wingsManager = NodePath("../../wings/wings manager")
+cameraController = NodePath("../../CameraController")
+thruster = NodePath("../../Thruster")
+horizon = NodePath("Pitch line")
+flightPathIndicator = NodePath("Flight path")
+planeNoseDirectionIndicator = NodePath("Plane nose direction")
+Speed = NodePath("HUD box that moves with camera/Speed/Label")
+Altitude = NodePath("HUD box that moves with camera/Altitude/Label")
+G = NodePath("HUD box that moves with camera/GridContainer/G")
+Match = NodePath("HUD box that moves with camera/GridContainer/Match")
+AoA = NodePath("HUD box that moves with camera/GridContainer2/Alfa")
+Rotation = NodePath("HUD box that moves with camera/GridContainer2/Rotation")
+Heading = NodePath("HUD box that moves with camera/Heading")
+thrustOfPropeller = NodePath("HUD box that moves with camera/Throttle/Force")
+throttle = NodePath("HUD box that moves with camera/Throttle")
+
+[node name="HUD box that moves with camera" type="Control" parent="UIController/All hud"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -158.0
+offset_right = 287.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speed" type="Panel" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+offset_right = 74.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
+
+[node name="Label" type="Label" parent="UIController/All hud/HUD box that moves with camera/Speed"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "240"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 41.0
+offset_right = 54.0
+grow_vertical = 2
+
+[node name="G" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "G 5.0"
+
+[node name="Match" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "M 5.0"
+
+[node name="GridContainer2" type="GridContainer" parent="UIController/All hud/HUD box that moves with camera"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(-3.235, 0)
+
+[node name="Alfa" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "120∝"
+horizontal_alignment = 2
+
+[node name="Rotation" type="Label" parent="UIController/All hud/HUD box that moves with camera/GridContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "12°R"
+horizontal_alignment = 2
+
+[node name="Altitude" type="Panel" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gu6f8")
+
+[node name="Label" type="Label" parent="UIController/All hud/HUD box that moves with camera/Altitude"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "240"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Heading" type="Label" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "12"
+horizontal_alignment = 1
+
+[node name="Throttle" type="VSlider" parent="UIController/All hud/HUD box that moves with camera"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 66.0
+offset_top = 44.0
+offset_right = 99.0
+offset_bottom = -73.0
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("ImageTexture_00tjw")
+theme_override_styles/slider = SubResource("StyleBoxFlat_x3vf3")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_apopc")
+max_value = 1.0
+step = 0.01
+value = 0.53
+
+[node name="Force" type="Label" parent="UIController/All hud/HUD box that moves with camera/Throttle"]
+layout_mode = 2
+offset_left = -10.0
+offset_top = 196.0
+offset_right = 42.0
+offset_bottom = 226.0
+theme_override_colors/font_color = Color(0.333333, 1, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "12°R"
+horizontal_alignment = 1
+
+[node name="Plane nose direction" type="TextureRect" parent="UIController/All hud"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -26.0
+offset_right = 475.0
+offset_bottom = 474.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("10_htxkc")
+
+[node name="Flight path" type="TextureRect" parent="UIController/All hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 483.0
+offset_bottom = 483.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("11_1p18m")
+
+[node name="Pitch line" type="Control" parent="UIController/All hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 1.0
+offset_right = 150.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 4)
+
+[node name="Fill" type="Panel" parent="UIController/All hud/Pitch line"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 120.0
+grow_vertical = 2
+pivot_offset = Vector2(150, 2.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dkpta")
+
+[node name="Fill2" type="Panel" parent="UIController/All hud/Pitch line"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 2.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_dkpta")
+
+[node name="Panel" type="Panel" parent="UIController"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -88.0
+offset_right = 159.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIController/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="AoA" type="Label" parent="UIController/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 35
+text = "120°"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AoA" type="Label" parent="UIController/Panel/HBoxContainer/AoA"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -37.0
+offset_right = 70.0
+offset_bottom = 12.0
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 20
+text = "AoA"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Speed" type="Label" parent="UIController/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 35
+text = "120°"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AoA2" type="Label" parent="UIController/Panel/HBoxContainer/Speed"]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -37.0
+offset_right = 84.0
+offset_bottom = 12.0
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 20
+text = "Air speed"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Controls" type="Panel" parent="UIController"]
+offset_top = 27.0
+offset_right = 210.0
+offset_bottom = 258.0
+
+[node name="TextureRect" type="TextureRect" parent="UIController/Controls"]
+layout_mode = 2
+offset_left = 78.0
+offset_right = 104.0
+offset_bottom = 26.0
+texture = ExtResource("12_g66qy")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="UIController/Controls"]
+layout_mode = 2
+offset_left = 149.0
+offset_top = -1.0
+offset_right = 177.0
+offset_bottom = 26.0
+texture = ExtResource("13_iwgi8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="roll" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "roll:"
+
+[node name="Label3" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "e/q"
+
+[node name="Label4" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "left stick"
+
+[node name="pitch" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "pitch:"
+
+[node name="Label6" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "s/w"
+
+[node name="Label7" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "left stick"
+
+[node name="yaw" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "yaw:"
+
+[node name="Label8" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "a/d"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "shoulders"
+horizontal_alignment = 1
+
+[node name="Throttle" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Throttle:"
+
+[node name="Label16" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Scroll"
+horizontal_alignment = 1
+
+[node name="Label17" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Triggers"
+horizontal_alignment = 1
+
+[node name="VerticalTrim" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Vertical
+Trim:"
+
+[node name="Label12" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "1/2"
+horizontal_alignment = 1
+
+[node name="Label13" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "D-pad:
+Up/down"
+horizontal_alignment = 1
+
+[node name="Change camera" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Change 
+camera:"
+
+[node name="Label14" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "R"
+horizontal_alignment = 1
+
+[node name="Label15" type="Label" parent="UIController/Controls/GridContainer"]
+layout_mode = 2
+text = "Y Or △"
+horizontal_alignment = 1
+
+[node name="Toggle controls Button" type="Button" parent="UIController"]
+offset_right = 82.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 10
+toggle_mode = true
+action_mode = 0
+text = "Toggle controls"
+
+[node name="Engine related stuff" type="Panel" parent="UIController"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -218.0
+offset_top = -112.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Engine related stuff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="UIController/Engine related stuff/GridContainer"]
+layout_mode = 2
+text = "Thrust generated
+by propeller:"
+
+[node name="thrust" type="Label" parent="UIController/Engine related stuff/GridContainer"]
+layout_mode = 2
+text = "20 m"
+
+[node name="Air relatedStuff" type="Panel" parent="UIController"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 189.0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Air relatedStuff"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+visible = false
+layout_mode = 2
+text = "Altitude:"
+
+[node name="Altitude" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+visible = false
+layout_mode = 2
+text = "20 m"
+
+[node name="Label" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "Air density:"
+
+[node name="Air density" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "20 m"
+
+[node name="SoundScene" parent="." instance=ExtResource("14_eq14g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
+
+[node name="Engine synth" parent="SoundScene" index="0"]
+disable = true
+
+[node name="WindController" parent="SoundScene" index="4"]
+MaxSpeed = 2000.0
+volumeMinMax = Vector2(-30, 15)
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("fpRotation", "tpRotation", "fp", "tp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
+script = ExtResource("15_ym7kq")
+fpRotation = NodePath("axis fp")
+tpRotation = NodePath("axis tp")
+fp = NodePath("axis fp/Fp cam")
+tp = NodePath("axis tp/Camera3D")
+horizontalCamRotationCurve = SubResource("Curve_lfmf2")
+verticalCamRotationCurve = SubResource("Curve_lfmf2")
+
+[node name="axis fp" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.83401, 5.51969)
+
+[node name="Fp cam" type="Camera3D" parent="CameraController/axis fp"]
+transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 0, 0)
+
+[node name="axis tp" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.48033, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/axis tp"]
+process_priority = 1
+physics_interpolation_mode = 1
+transform = Transform3D(-0.999997, -0.00150845, -0.00172922, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 8.01905, -22.8827)
+current = true
+
+[editable path="Model/lowpoly2_fbx"]
+[editable path="SoundScene"]

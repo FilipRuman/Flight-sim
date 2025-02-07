@@ -7,7 +7,7 @@ public partial class TerrainGenController : Node3D
     [Export] bool forceRegenerate = new();
     [Export] PackedScene TerrainGenerationPrefab;
     [Export] Node3D terrainLayout;
-    [Export] Node3D Player;
+    [Export] public Node3D Player;
     [Export] FastNoiseLite noise;
     [Export] FastNoiseLite noise2;
     [Export] float ViewDistance;
@@ -44,6 +44,8 @@ public partial class TerrainGenController : Node3D
         if (frameIndex < framesPerUpdate) return;
         frameIndex = 0;
         if (terrainLayout == null) return;
+        if (Player == null) return;
+
         noise.Seed = seed;
         noise2.Seed = seed;
         WhatTerrainDoYouNeedToLoad(out int maxX, out int minX, out int maxY, out int minY);
@@ -102,6 +104,7 @@ public partial class TerrainGenController : Node3D
 
     void WhatTerrainDoYouNeedToLoad(out int maxX, out int minX, out int maxY, out int minY)
     {
+
         var playerPos = Player.GlobalPosition;
 
         maxX = Mathf.CeilToInt((playerPos.X + ViewDistance) / terrainSize);

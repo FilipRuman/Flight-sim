@@ -44,7 +44,7 @@ public partial class HUD : Node
         G.Text = $"G {Math.Round(playerRbController.CurrentGForce, 1)}";
         Match.Text = $"M {Math.Round(Air.GetMatchNumber(wingsManager.FrontalVelocity, wingsManager.Altitude), 2)}";
         frameIndex = 0;
-        thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller / 1000)} MN";
+        thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller / 1000)} kN";
 
         Speed.Text = Mathf.RoundToInt(wingsManager.FrontalVelocity * 3.6f).ToString();
         var altitude = Mathf.RoundToInt(wingsManager.Altitude).ToString();

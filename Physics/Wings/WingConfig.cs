@@ -5,8 +5,6 @@ namespace Player.wings
     [GlobalClass, Tool]
     public partial class WingConfig : Resource
     {
-        [Export] public Color debugColor;
-        [Export] public bool displaySize;
         [Export] public Vector3 forcesModifiers;
 
         // Reference: https://eaglepubs.erau.edu/introductiontoaerospaceflightvehicles/chapter/airfoil-characteristics/

@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bijbbsx1cx5cx"]
+[gd_scene load_steps=11 format=3 uid="uid://bijbbsx1cx5cx"]
 
 [ext_resource type="Texture2D" uid="uid://cm417hk7yxump" path="res://3'rd party/SkySeries Freebie/FreebieHdri/DayInTheClouds4k.hdr" id="1_torvr"]
+[ext_resource type="Script" uid="uid://csw3e6fsbf1up" path="res://Player/model selection/ModelSelector.cs" id="3_rf2cd"]
 [ext_resource type="PackedScene" uid="uid://36fp5ji8owwy" path="res://TerrainGeneration/terrain_gen_controler.tscn" id="3_rpqi1"]
-[ext_resource type="PackedScene" uid="uid://gebnblpa811q" path="res://Player/player.tscn" id="9_x0cd2"]
+[ext_resource type="Script" uid="uid://b330pe2co3o25" path="res://Player/model selection/ModelSelectionButton.cs" id="4_a814b"]
+[ext_resource type="PackedScene" uid="uid://c88qndtf0a2uw" path="res://Player/Plane examples/f16/f16.tscn" id="5_5crlr"]
+[ext_resource type="PackedScene" uid="uid://gebnblpa811q" path="res://Player/Plane examples/propeller plane small/Propeller plane small.tscn" id="6_hbc2u"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_8s4c3"]
 script/source = "using Godot;
@@ -47,6 +50,7 @@ fog_depth_begin = 1517.9
 fog_depth_end = 3263.6
 
 [node name="Scene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56702, -1.25647, -1.11266)
 script = SubResource("CSharpScript_8s4c3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -63,16 +67,53 @@ light_specular = 0.0
 light_bake_mode = 1
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("9_x0cd2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3000.56, 51.269)
-linear_velocity = Vector3(0, 0, 143.625)
-
-[node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout", "Player") instance=ExtResource("3_rpqi1")]
+[node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]
 terrainLayout = NodePath("../terrain layout")
-Player = NodePath("../Player")
 ViewDistance = 4334.68
 heightModifier = 2038.99
 waterLevelHeight = -1301.5
 
 [node name="terrain layout" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
+
+[node name="model selector" type="Node3D" parent="." node_paths=PackedStringArray("spawnPoint", "terrainGenController")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4000, 0)
+script = ExtResource("3_rf2cd")
+spawnPoint = NodePath("../Player spawn point")
+terrainGenController = NodePath("../TerrainGenControler")
+
+[node name="Camera3D" type="Camera3D" parent="model selector"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="model selector/Camera3D"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="model selector/Camera3D/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.845, 1.845)
+alignment = 1
+
+[node name="Button" type="Button" parent="model selector/Camera3D/CanvasLayer/HBoxContainer" node_paths=PackedStringArray("modelSelector")]
+layout_mode = 2
+text = "F16"
+script = ExtResource("4_a814b")
+modelSelector = NodePath("../../../..")
+model = ExtResource("5_5crlr")
+
+[node name="Button2" type="Button" parent="model selector/Camera3D/CanvasLayer/HBoxContainer" node_paths=PackedStringArray("modelSelector")]
+layout_mode = 2
+text = "Propeller plane
+"
+script = ExtResource("4_a814b")
+modelSelector = NodePath("../../../..")
+model = ExtResource("6_hbc2u")
+
+[node name="Player spawn point" type="Node3D" parent="."]

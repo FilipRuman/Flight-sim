@@ -23,6 +23,7 @@ namespace Player
 		int frameIndex = 0;
 
 		[ExportGroup("Prop")]
+		[Export] bool displayPropeller;
 		[Export] private Node3D propellor;
 		[Export] private Sprite3D propAtHighSpeed;
 		[Export] private float propRotationModifier = 300;
@@ -66,6 +67,8 @@ namespace Player
 
 		private void UpdatePropeller(float velocity)
 		{
+			if (!displayPropeller)
+				return;
 			if (velocity < 1)
 				velocity = 0;
 			bool ShowSprite = velocity > 40;

@@ -8,16 +8,27 @@ using Player.wings;
 public partial class Wing : Node3D
 {
 	[Export] public bool displayDebug;
-	[Export] public Vector2 size;
 	//TODO could be pre calculated
 	[Export] public Resource configResource;
+	[Export] public AirfoilSize airfoilSize;
+
+
 	public Vector3 airVelocity;
 	public Vector3 liftDirection;
 
-	private const float wingDisplayHeight = .1f;
 	private const float displayArrowsSizeModifier = .1f;
+
+	public override void _Ready()
+	{
+		airfoilSize.CalculateArea();
+		base._Ready();
+	}
 	public override void _Process(double delta)
 	{
+		if (airfoilSize == null)
+			throw new();
+
+		airfoilSize.DisplaySize(GlobalPosition, GlobalBasis);
 		if (!displayDebug)
 			return;
 
@@ -25,8 +36,7 @@ public partial class Wing : Node3D
 			return;
 		DebugDraw3D.Config.LineHitColor = new(252, 85, 7, .4f);
 		DebugDraw3D.DebugEnabled = true;
-		if (config.displaySize)
-			DebugDraw3D.DrawBox(GlobalPosition, Quaternion.FromEuler(GlobalRotation)/* + Quaternion */, new(size.X, wingDisplayHeight, size.Y), config.debugColor, is_box_centered: true);
+
 		DebugDraw3D.DrawArrow(GlobalPosition, GlobalPosition + airVelocity * displayArrowsSizeModifier, color: Colors.BlanchedAlmond, arrow_size: .1f);
 		DebugDraw3D.DrawArrow(GlobalPosition, GlobalPosition + SurfaceDirectionVector, color: Colors.Black, arrow_size: .1f);
 		DebugDraw3D.DrawArrow(GlobalPosition, GlobalPosition + liftDirection, color: Colors.DarkBlue, arrow_size: .1f);
@@ -44,12 +54,9 @@ public partial class Wing : Node3D
 	[Export] public bool rotateWholeWing;
 	[Export] public float flapAngle;
 	[Export] public float flapAngleModifier = 20;
-
 	[Export] public float angleOfAttack;
-	[Export] public Vector3 relativePosition;
 	public void CalculateForces(Vector3 airVelocity, float airDensity, Vector3 relativePosition, Vector3 forcesModifiers, out Vector3 forces, out Vector3 torque)
 	{
-		this.relativePosition = relativePosition;
 
 		if (configResource is not WingConfig config)
 			throw new();
@@ -59,7 +66,6 @@ public partial class Wing : Node3D
 
 		liftDirection = GlobalBasis.Y;
 
-		float area = size.X * size.Y;
 		float dynamicPressure = 0.5f * airDensity * airVelocity.LengthSquared();
 
 		var localAirVelocity = GlobalTransform.Basis.Inverse() * airVelocity;
@@ -68,11 +74,11 @@ public partial class Wing : Node3D
 			angleOfAttack = Mathf.RadToDeg(Mathf.Atan2(localAirVelocity.Y, -localAirVelocity.Z));
 		else angleOfAttack = 0;
 		CalculateCoefficients(angleOfAttack, flapAngle, out float liftC, out float dragC, out float torqueC);
-		Vector3 lift = liftDirection * liftC * dynamicPressure * area * forcesModifiers.Y;
-		Vector3 drag = dragDirection * dragC * dynamicPressure * area * forcesModifiers.Z;
+		Vector3 lift = liftDirection * liftC * dynamicPressure * airfoilSize.area * forcesModifiers.Y;
+		Vector3 drag = dragDirection * dragC * dynamicPressure * airfoilSize.area * forcesModifiers.Z;
 
 		forces = lift + drag;
-		torque = Vector3.Zero/* -Basis.Z * torqueC * dynamicPressure * area * size.Y */;
+		torque = -Basis.Z * torqueC * dynamicPressure * airfoilSize.area * airfoilSize.standardMeanChord;
 
 		torque += relativePosition.Cross(forces) / 5 * forcesModifiers.X;
 

@@ -132,6 +132,7 @@ camRight={
 [physics]
 
 common/physics_ticks_per_second=300
+common/max_physics_steps_per_frame=20
 3d/physics_engine="Jolt Physics"
 2d/default_gravity=9.80665
 

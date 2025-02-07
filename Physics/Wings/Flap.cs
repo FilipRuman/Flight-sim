@@ -5,16 +5,24 @@ public partial class Flap : Node3D
 {
 	[Export] Wing wing;
 	[Export] bool yaw;
+	[Export] Vector3 rotationVector;
+	Vector3 startRotation;
+	public override void _Ready()
+	{
+		startRotation = RotationDegrees;
+
+		base._Ready();
+	}
 	public override void _Process(double delta)
 	{
 		if (wing.rotateWholeWing)
 		{
 			if (yaw)
-				RotationDegrees = Vector3.Up * wing.RotationDegrees.Y;
+				RotationDegrees = startRotation + rotationVector * wing.RotationDegrees.Y;
 			else
-				RotationDegrees = Vector3.Right * wing.RotationDegrees.X;
+				RotationDegrees = startRotation + rotationVector * wing.RotationDegrees.X;
 		}
 		else
-			RotationDegrees = Vector3.Right * wing.flapAngle;
+			RotationDegrees = startRotation + rotationVector * wing.flapAngle;
 	}
 }

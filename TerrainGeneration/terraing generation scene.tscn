@@ -30,8 +30,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 388.034)
 
 [node name="Layout" type="Node3D" parent="."]
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.79855, 0, 0, 0, 4.35028, 0, 0, 0, 4.00002, 0, -253.024, 785.285)
+mesh = SubResource("BoxMesh_m7jmp")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.123604, 0.957586, -0.260292, -0.306487, -0.21264, -0.92782, -0.943815, 0.194459, 0.267205, 0, 0, 0)
+transform = Transform3D(0.123604, 0.957586, -0.260292, -0.306487, -0.21264, -0.92782, -0.943815, 0.194458, 0.267205, 0, 0, 0)
 light_energy = 1.84
 light_indirect_energy = 2.555
 light_volumetric_fog_energy = 4.987
@@ -42,7 +46,3 @@ directional_shadow_split_3 = 0.422
 directional_shadow_fade_start = 0.133
 directional_shadow_max_distance = 451.6
 directional_shadow_pancake_size = 0.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.79855, 0, 0, 0, 4.35028, 0, 0, 0, 4.00002, 0, -253.024, 785.285)
-mesh = SubResource("BoxMesh_m7jmp")

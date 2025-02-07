@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="WingConfig" load_steps=5 format=3 uid="uid://d2xannisnmkyj"]
+
+[ext_resource type="Script" uid="uid://ce4psv8t6403s" path="res://Physics/Wings/WingConfig.cs" id="1_oi504"]
+
+[sub_resource type="Curve" id="Curve_cl1yy"]
+_limits = [0.0, 0.2, -90.0, 90.0]
+bake_resolution = 1000
+_data = [Vector2(-57.6, 0.2), 0.0, -0.000738948, 0, 0, Vector2(-39.6, 0.11), -0.000222715, -0.000222715, 0, 0, Vector2(-11, 0.05016), -0.000854705, -0.000854705, 0, 0, Vector2(-3.6, 0.0285), -6.60419e-05, -6.60419e-05, 0, 0, Vector2(9, 0.0285), 0.0, 0.0, 0, 0, Vector2(14.4, 0.04218), 0.0, 0.0, 0, 0, Vector2(41.4, 0.104), 0.000781581, 0.000781581, 0, 0, Vector2(61.2, 0.2), 0.00142697, 0.0, 0, 0]
+point_count = 8
+metadata/_snap_count = 100
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_si4k6"]
+_limits = [-3.0, 4.0, -40.0, 40.0]
+bake_resolution = 1000
+_data = [Vector2(-40, 0.5), 0.0, 0.0, 0, 0, Vector2(-32, -3), -0.0935634, -0.0935634, 0, 0, Vector2(-2.4, 0.04), 0.187389, 0.187389, 0, 0, Vector2(37.6, 4), 0.130374, 0.130374, 0, 0, Vector2(40, -0.69), 0.0581543, 0.0, 0, 0]
+point_count = 5
+metadata/_snap_count = 100
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_ylufn"]
+_limits = [-0.4, 0.6, -90.0, 90.0]
+bake_resolution = 1000
+_data = [Vector2(-28.8, 0.26), 0.0, 0.0, 0, 0, Vector2(-11, -0.18), -0.000854705, -0.000854705, 0, 0, Vector2(14.4, 0.22), 0.0, 0.0, 0, 0, Vector2(32.4, -0.04), -0.0135409, -0.0135409, 0, 0]
+point_count = 4
+metadata/_snap_count = 100
+metadata/_snap_enabled = true
+
+[resource]
+script = ExtResource("1_oi504")
+forcesModifiers = Vector3(1, 1, 1)
+liftBasedOnAoA = SubResource("Curve_si4k6")
+dragBasedOnAoA = SubResource("Curve_cl1yy")
+torqueBasedOnAoA = SubResource("Curve_ylufn")
+flapSizePercentage = 0.2
+flapModifierBasedOnAxis = Vector3(1.5, 1, 1.25)
+flapsValueModifierBasedOnAoA = SubResource("Curve_si4k6")
+flapsModifierBasedOnFlapAngle = SubResource("Curve_si4k6")

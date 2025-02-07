@@ -33,7 +33,7 @@ public partial class WingsManager : Node3D
         torque = new();
         foreach (var surface in wings)
         {
-            Vector3 relativePosition = surface.GlobalPosition - GlobalPosition + rb.CenterOfMass;
+            Vector3 relativePosition = surface.GlobalPosition - rb.GlobalPosition + rb.CenterOfMass;
             surface.CalculateForces(wind - rb.LinearVelocity - rb.AngularVelocity.Cross(relativePosition), airDensity, relativePosition, forcesModifiers, out Vector3 _forces, out Vector3 _torque);
             forces += _forces;
             torque += _torque;
@@ -54,6 +54,8 @@ public partial class WingsManager : Node3D
 
     public override void _Process(double delta)
     {
+        // DebugDraw3D.DrawSphere(, 1, Colors.DarkSeaGreen);
+
         if (Engine.IsEditorHint())
             return;
         float pitch = 0;
