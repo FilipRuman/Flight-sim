@@ -28,7 +28,7 @@ metadata/_snap_enabled = true
 
 [resource]
 script = ExtResource("1_081t8")
-forcesModifiers = Vector3(3, 3, 3)
+forcesModifiers = Vector3(4, 4, 4)
 liftBasedOnAoA = SubResource("Curve_si4k6")
 dragBasedOnAoA = SubResource("Curve_cl1yy")
 torqueBasedOnAoA = SubResource("Curve_ylufn")
