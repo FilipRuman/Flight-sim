@@ -46,8 +46,8 @@ fog_density = 1.0
 fog_aerial_perspective = 0.036
 fog_height = -1024.0
 fog_depth_curve = 1.51572
-fog_depth_begin = 1517.9
-fog_depth_end = 3263.6
+fog_depth_begin = 7000.0
+fog_depth_end = 8000.0
 
 [node name="Scene" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56702, -1.25647, -1.11266)
@@ -69,7 +69,7 @@ shadow_enabled = true
 
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]
 terrainLayout = NodePath("../terrain layout")
-ViewDistance = 4334.68
+ViewDistance = 8334.68
 heightModifier = 2038.99
 waterLevelHeight = -1301.5
 

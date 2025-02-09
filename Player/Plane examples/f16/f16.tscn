@@ -1358,6 +1358,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.83401, 5.51969)
 
 [node name="Fp cam" type="Camera3D" parent="CameraController/axis fp"]
 transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 0, 0)
+far = 12000.0
 
 [node name="axis tp" type="Node3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.48033, 0)
@@ -1367,6 +1368,7 @@ process_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(-0.999997, -0.00150845, -0.00172922, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 8.01905, -22.8827)
 current = true
+far = 12000.0
 
 [node name="GEffectControler" type="Node3D" parent="." node_paths=PackedStringArray("rbController")]
 script = ExtResource("23_06a0d")

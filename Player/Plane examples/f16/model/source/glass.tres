@@ -2,4 +2,7 @@
 
 [resource]
 transparency = 1
+cull_mode = 2
 albedo_color = Color(0.237625, 0.323074, 0.339844, 0.537255)
+metallic = 0.06
+roughness = 0.32
