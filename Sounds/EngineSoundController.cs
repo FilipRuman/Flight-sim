@@ -7,6 +7,9 @@ public partial class EngineSoundController : Node
     [Export] public float Throttle;
     [Export] public Vector2 pitchMinMax;
     [Export] public Vector2 volumeMinMax;
+
+    [Export] public GEffectController gEffectController;
+    [Export] public Curve HighGEffectSoundVolume;
     public override void _Process(double delta)
     {
         if (!player.Playing && Throttle != 0)
@@ -16,8 +19,11 @@ public partial class EngineSoundController : Node
         }
         if (player.Playing && Throttle == 0)
             player.StreamPaused = true;
-        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, Throttle);
+        var HighGEffect = gEffectController.PlayerGEffect;
+
+        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, Throttle * HighGEffectSoundVolume.SampleBaked(HighGEffect));
         player.PitchScale = Mathf.Lerp(pitchMinMax.X, pitchMinMax.Y, Throttle);
+
 
         base._Process(delta);
     }

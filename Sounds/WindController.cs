@@ -16,7 +16,7 @@ public partial class WindController : Node
     {
         var G = rbController.currentGForce;
         var HighGEffect = gEffectController.PlayerGEffect;
-        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, MathF.Min(Speed * GSoundVolume.SampleBaked(G) / MaxSpeed, 1));
+        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, MathF.Min(Speed * GSoundVolume.SampleBaked(G) * HighGEffectSoundVolume.SampleBaked(HighGEffect) / MaxSpeed, 1));
         player.PitchScale = HighGEffectSoundVolume.SampleBaked(HighGEffect);
         base._Process(delta);
     }

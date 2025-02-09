@@ -1,6 +1,6 @@
-[gd_scene load_steps=43 format=4 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=49 format=4 uid="uid://gebnblpa811q"]
 
-[ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane examples/propeller plane small/Plane.tscn" id="1_aoggf"]
+[ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane examples/propeller plane small/model/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_o28un"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_00tjw"]
 [ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Physics/Thruster.cs" id="2_3vl5u"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://dr1h5cryjad3m" path="res://Sprites/AirPlaneNoseMarker.png" id="13_o28un"]
 [ext_resource type="Texture2D" uid="uid://bfue3afu2k8l2" path="res://Sprites/Flight path marker.png" id="14_n471f"]
 [ext_resource type="Script" uid="uid://c7f5lmhon5lsw" path="res://Player/CameraController.cs" id="15_dkpta"]
+[ext_resource type="Gradient" uid="uid://cuigwm4st4ef2" path="res://Player/gEffectGradient.tres" id="18_dbufn"]
+[ext_resource type="Script" uid="uid://cxprkvy6m2jhs" path="res://Player/GEffectController.cs" id="23_nx2ig"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hdd2g"]
 radius = 0.232468
@@ -188,6 +190,24 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nx2ig"]
+gradient = ExtResource("18_dbufn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_h4s6s"]
+_limits = [0.0394548, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -0.278732, 0, 0, Vector2(1, 0.0394548), -3.14594, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_nx2ig"]
+_limits = [1.0, 1.5304, -5.0, 20.0]
+bake_resolution = 1000
+_data = [Vector2(-5, 1.312), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0439692, 0.0439692, 0, 0, Vector2(20, 1.5304), 0.0313025, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_qvbjc"]
 _surfaces = [{
 "aabb": AABB(-0.827343, -0.760304, -0.233523, 1.65469, 1.52061, 0.467045),
@@ -228,6 +248,11 @@ shadow_mesh = SubResource("ArrayMesh_qvbjc")
 _limits = [-90.0, 90.0, -1.0, 1.0]
 _data = [Vector2(-1, -86.1824), 0.0, 8.95266, 0, 0, Vector2(0.0163044, -1.14528), 0.0, 0.0, 0, 0, Vector2(1, 86.2778), 25.8445, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Curve" id="Curve_rwacd"]
+_limits = [-5.0, 3.80484, -8.32117, 16.8613]
+_data = [Vector2(-8.32117, 3.80484), 0.0, -0.673601, 0, 0, Vector2(0.318075, -1.8003), 0.0, 0.0, 0, 0, Vector2(8.13016, -0.0302582), 0.18342, 0.18342, 0, 0, Vector2(16.8613, 2.77231), 0.802463, 0.0, 0, 0]
+point_count = 4
 
 [node name="Player" type="RigidBody3D"]
 process_priority = 1
@@ -911,11 +936,24 @@ text = "Air density:"
 layout_mode = 2
 text = "20 m"
 
+[node name="G effect" type="TextureRect" parent="UIController"]
+offset_right = 1923.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_nx2ig")
+
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 
-[node name="WindController" parent="SoundScene" index="4"]
+[node name="Engine controller" parent="SoundScene" index="3" node_paths=PackedStringArray("gEffectController")]
+gEffectController = NodePath("../../GEffectControler")
+HighGEffectSoundVolume = SubResource("Curve_h4s6s")
+
+[node name="WindController" parent="SoundScene" index="4" node_paths=PackedStringArray("rbController", "gEffectController")]
 volumeMinMax = Vector2(-30, 15)
+rbController = NodePath("../..")
+GSoundVolume = SubResource("Curve_nx2ig")
+gEffectController = NodePath("../../GEffectControler")
+HighGEffectSoundVolume = SubResource("Curve_h4s6s")
 
 [node name="Propeller at high speed sprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23312, 3.64688)
@@ -955,6 +993,12 @@ process_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(-0.999997, -0.00150845, -0.00172923, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 4.119, -8.697)
 current = true
+
+[node name="GEffectControler" type="Node3D" parent="." node_paths=PackedStringArray("rbController")]
+script = ExtResource("23_nx2ig")
+gradient = ExtResource("18_dbufn")
+rbController = NodePath("..")
+GEffectChangeBasedOnG = SubResource("Curve_rwacd")
 
 [editable path="Model"]
 [editable path="SoundScene"]
