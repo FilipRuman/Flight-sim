@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://c88qndtf0a2uw"]
+[gd_scene load_steps=67 format=4 uid="uid://c88qndtf0a2uw"]
 
 [ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_fdlyg"]
 [ext_resource type="Texture2D" uid="uid://crgj684ngenp8" path="res://Player/Plane examples/f16/model/source/lowpoly2_0.png" id="2_6chqk"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="13_iwgi8"]
 [ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="14_eq14g"]
 [ext_resource type="Script" uid="uid://c7f5lmhon5lsw" path="res://Player/CameraController.cs" id="15_ym7kq"]
+[ext_resource type="Gradient" uid="uid://cuigwm4st4ef2" path="res://Player/gEffectGradient.tres" id="20_06a0d"]
+[ext_resource type="Script" uid="uid://cxprkvy6m2jhs" path="res://Player/GEffectController.cs" id="23_06a0d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1bji"]
 resource_name = "body_texture"
@@ -532,16 +534,38 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_18030"]
+gradient = ExtResource("20_06a0d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_06a0d"]
+_limits = [1.0, 2.04, -5.0, 20.0]
+bake_resolution = 1000
+_data = [Vector2(-5, 1.96), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.125694, 0.125694, 0, 0, Vector2(20, 2.04), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+metadata/_snap_count = 100
+
+[sub_resource type="Curve" id="Curve_1p18m"]
+_data = [Vector2(0, 1), 0.0, -0.278732, 0, 0, Vector2(1, 0), -3.14594, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_lfmf2"]
 _limits = [-90.0, 90.0, -1.0, 1.0]
 _data = [Vector2(-1, -86.1824), 0.0, 8.95266, 0, 0, Vector2(0.0163044, -1.14528), 0.0, 0.0, 0, 0, Vector2(1, 86.2778), 25.8445, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="Curve" id="Curve_htxkc"]
+_limits = [-5.0, 3.80484, -8.32117, 16.8613]
+_data = [Vector2(-8.32117, 3.80484), 0.0, -0.673601, 0, 0, Vector2(0.318075, -1.8003), 0.0, 0.0, 0, 0, Vector2(8.13016, -0.0302582), 0.18342, 0.18342, 0, 0, Vector2(16.8613, 2.77231), 0.802463, 0.0, 0, 0]
+point_count = 4
+
 [node name="Player" type="RigidBody3D"]
 process_priority = 1
 process_physics_priority = 1
 physics_interpolation_mode = 1
-transform = Transform3D(1, 0, 0, 0, 0.553392, -0.832921, 0, 0.832921, 0.553392, 0, 0, 0.162489)
+transform = Transform3D(1, 0, 0, 0, -0.172393, -0.985028, 0, 0.985028, -0.172393, 0, 0, 0.162489)
 mass = 2000.0
 center_of_mass_mode = 1
 continuous_cd = true
@@ -717,7 +741,7 @@ script = ExtResource("3_du4ah")
 configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_s8pj7")
 flapAngleModifier = 30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Wg FR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67783, 4.51039, -4.64018)
@@ -725,7 +749,7 @@ script = ExtResource("3_du4ah")
 configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_glpll")
 flapAngleModifier = 30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Aileron FL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86665, 4.68092, -4.67445)
@@ -734,7 +758,7 @@ configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_6chqk")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Aileron FR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.867, 4.681, -4.674)
@@ -743,7 +767,7 @@ configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_18030")
 rotateWholeWing = true
 flapAngleModifier = -30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Elevator BL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53374, 4.50897, -10.0944)
@@ -752,7 +776,7 @@ configResource = ExtResource("8_y7itr")
 airfoilSize = SubResource("Resource_06a0d")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Elevator BR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.534, 4.509, -10.094)
@@ -761,7 +785,7 @@ configResource = ExtResource("8_y7itr")
 airfoilSize = SubResource("Resource_htxkc")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 123.6
+angleOfAttack = 80.073
 
 [node name="Wg S" type="Node3D" parent="wings"]
 transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.47009, -7.48922)
@@ -770,7 +794,7 @@ configResource = ExtResource("8_du4ah")
 airfoilSize = SubResource("Resource_y7itr")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = -180.0
+angleOfAttack = -1.40252e-05
 
 [node name="Rudder S" type="Node3D" parent="wings"]
 transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.35281, -8.47891)
@@ -779,7 +803,7 @@ configResource = ExtResource("8_du4ah")
 airfoilSize = SubResource("Resource_1p18m")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = -180.0
+angleOfAttack = -1.40252e-05
 
 [node name="wings manager" type="Node3D" parent="wings" node_paths=PackedStringArray("wings", "pitchWings", "rollWings", "yawWings", "rb")]
 script = ExtResource("7_6chqk")
@@ -1300,15 +1324,24 @@ text = "Air density:"
 layout_mode = 2
 text = "20 m"
 
+[node name="G effect" type="TextureRect" parent="UIController"]
+offset_right = 1923.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_18030")
+
 [node name="SoundScene" parent="." instance=ExtResource("14_eq14g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
 disable = true
 
-[node name="WindController" parent="SoundScene" index="4"]
-MaxSpeed = 2000.0
+[node name="WindController" parent="SoundScene" index="4" node_paths=PackedStringArray("rbController", "gEffectController")]
+MaxSpeed = 2500.0
 volumeMinMax = Vector2(-30, 15)
+rbController = NodePath("../..")
+GSoundVolume = SubResource("Curve_06a0d")
+gEffectController = NodePath("../../GEffectControler")
+HighGEffectSoundVolume = SubResource("Curve_1p18m")
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("fpRotation", "tpRotation", "fp", "tp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
@@ -1334,6 +1367,12 @@ process_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(-0.999997, -0.00150845, -0.00172922, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 8.01905, -22.8827)
 current = true
+
+[node name="GEffectControler" type="Node3D" parent="." node_paths=PackedStringArray("rbController")]
+script = ExtResource("23_06a0d")
+gradient = ExtResource("20_06a0d")
+rbController = NodePath("..")
+GEffectChangeBasedOnG = SubResource("Curve_htxkc")
 
 [editable path="Model/lowpoly2_fbx"]
 [editable path="SoundScene"]

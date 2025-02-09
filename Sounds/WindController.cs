@@ -7,11 +7,17 @@ public partial class WindController : Node
     [Export] public float MaxSpeed;
     [Export] public float Speed;
     [Export] public Vector2 volumeMinMax;
+
+    [Export] public PlayerRbController rbController;
+    [Export] public Curve GSoundVolume;
+    [Export] public GEffectController gEffectController;
+    [Export] public Curve HighGEffectSoundVolume;
     public override void _Process(double delta)
     {
-
-        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, Speed / MaxSpeed);
-
+        var G = rbController.currentGForce;
+        var HighGEffect = gEffectController.PlayerGEffect;
+        player.VolumeDb = Mathf.Lerp(volumeMinMax.X, volumeMinMax.Y, MathF.Min(Speed * GSoundVolume.SampleBaked(G) / MaxSpeed, 1));
+        player.PitchScale = HighGEffectSoundVolume.SampleBaked(HighGEffect);
         base._Process(delta);
     }
 

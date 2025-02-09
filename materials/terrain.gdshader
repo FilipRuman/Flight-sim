@@ -11,6 +11,6 @@ void fragment() {
 	vec3 modelVertex =(inverse(MODEL_MATRIX) * wordVertex).xyz;
 	float gradientUv = (modelVertex.y / height)+ 0.5;
 	ALBEDO = ( texture(colorGradient  ,vec2(gradientUv)) - (texture(albedoNoise  ,UV) /noiseVisibilityModifier) ).rgb;
-	
+
 	NORMAL_MAP = texture(normalMap,UV).xyz;
 }

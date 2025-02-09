@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerRbController : RigidBody3D
 {
-    [Export] public float CurrentGForce = 0;
+    [Export] public float currentGForce = 0;
     // Gravity constant
     private const float GRAVITY = 9.81f;
     private Vector3 previousVelocity = Vector3.Zero;
@@ -17,7 +17,7 @@ public partial class PlayerRbController : RigidBody3D
         previousVelocity = currentVelocity;
 
         // Calculate the G-force
-        CurrentGForce = acceleration.Length() / GRAVITY;
+        currentGForce = acceleration.Length() / GRAVITY;
     }
 
 
