@@ -23,6 +23,7 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - procedural terrain generation form [my other project](https://github.com/LeaveMyAlpaca/proceduralMapGen) 
 - works with any 3d model
 - High G-force effects simulation
+- 2 plane examples - f16 && propeller plane
 - More accurate engine simulation TODO
 - Destruction system TODO
 - Fuel usage && weight simulation TODO
