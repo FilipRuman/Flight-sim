@@ -46,14 +46,20 @@ public partial class HUD : Node
         frameIndex = 0;
         thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller / 1000)} kN";
 
-        Speed.Text = Mathf.RoundToInt(wingsManager.FrontalVelocity * 3.6f).ToString();
+        Speed.Text = AddDots(Mathf.RoundToInt(wingsManager.FrontalVelocity * 3.6f).ToString()); ;
         var altitude = Mathf.RoundToInt(wingsManager.Altitude).ToString();
-        Altitude.Text = (altitude.Length > 3 && wingsManager.Altitude > 0) ? altitude.Insert(altitude.Length - 3, ".") : altitude;
+        Altitude.Text = AddDots(altitude);
         AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)}∝";
         Rotation.Text = $"{Math.Round(-rb.RotationDegrees.X, 1)}°R";
         Heading.Text = Math.Round(Mathf.RadToDeg(currentCam.GlobalRotation.Y) / 10).ToString();
 
 
+    }
+    static string AddDots(string input)
+    {
+        bool endsWithSymbol = input[^1] is '+' or '-';
+        int indexToAddDotOn = 3 + (endsWithSymbol ? 1 : 0);
+        return (input.Length > indexToAddDotOn) ? input.Insert(input.Length - indexToAddDotOn, ".") : input;
     }
 
     public void DrawHorizon()
