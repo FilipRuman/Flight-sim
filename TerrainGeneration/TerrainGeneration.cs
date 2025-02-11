@@ -42,7 +42,7 @@ public partial class TerrainGeneration : Node3D
     }
     public void UpdateMesh()
     {
-        var all = System.Diagnostics.Stopwatch.StartNew();
+        // var all = System.Diagnostics.Stopwatch.StartNew();
 
 
         var arrayMesh = new ArrayMesh();
@@ -72,7 +72,7 @@ public partial class TerrainGeneration : Node3D
 
 
 
-        var noise = System.Diagnostics.Stopwatch.StartNew();
+        // var noise = System.Diagnostics.Stopwatch.StartNew();
 
         for (int i = 0; i < vertexArray.Length; i++)
         {
@@ -91,9 +91,9 @@ public partial class TerrainGeneration : Node3D
 
         }
 
-        GD.Print($"Time- noise: {noise.Elapsed}");
+        // GD.Print($"Time- noise: {noise.Elapsed}");
 
-        noise.Stop();
+        // noise.Stop();
         planeArrays[(int)Mesh.ArrayType.Vertex] = vertexArray;
         planeArrays[(int)Mesh.ArrayType.Normal] = normalArray;
         planeArrays[(int)Mesh.ArrayType.Tangent] = tangentArray;
@@ -106,9 +106,9 @@ public partial class TerrainGeneration : Node3D
         mesh.Mesh = arrayMesh;
         collisionShape.Shape = arrayMesh.CreateTrimeshShape();
         mesh.SetSurfaceOverrideMaterial(0, material);
-        GD.Print($"Time- all: {all.Elapsed}");
+        // GD.Print($"Time- all: {all.Elapsed}");
 
-        all.Stop();
+        // all.Stop();
     }
 
 }

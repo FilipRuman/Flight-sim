@@ -24,7 +24,7 @@ public partial class TerrainGenController : Node3D
 
     int lastMaxX, lastMinX, lastMaxY, lastMinY;
 
-
+    bool spawningInProgress = false;
 
     bool LoadNewTerrain(int maxX, int minX, int maxY, int minY)
     {
@@ -40,6 +40,8 @@ public partial class TerrainGenController : Node3D
     }
     public override void _Process(double delta)
     {
+        if (spawningInProgress)
+            SpreadSpawningTerrain(terrainDisplays.Count == 0);
         frameIndex++;
         if (frameIndex < framesPerUpdate) return;
         frameIndex = 0;
@@ -48,7 +50,7 @@ public partial class TerrainGenController : Node3D
 
         noise.Seed = seed;
         noise2.Seed = seed;
-        WhatTerrainDoYouNeedToLoad(out int maxX, out int minX, out int maxY, out int minY);
+        WhatTerrainDoYouNeedToLoad(out maxX, out minX, out maxY, out minY);
 
         if (!LoadNewTerrain(maxX, minX, maxY, minY) && !forceRegenerate) return;
         if (forceRegenerate)
@@ -57,18 +59,9 @@ public partial class TerrainGenController : Node3D
         forceRegenerate = false;
 
         RemoveNotNeededTerrain(maxX, minX, maxY, minY);
-        for (int x = minX; x < maxX; x++)
-        {
-            for (int y = minY; y < maxY; y++)
-            {
-                Vector2I key = new(x, y);
-                if (terrainDisplays.ContainsKey(key))
-                    continue;
-                SpawnTerrain(key);
-            }
-        }
 
 
+        spawningInProgress = true;
         base._Process(delta);
     }
 
@@ -80,7 +73,31 @@ public partial class TerrainGenController : Node3D
         }
         terrainDisplays.Clear();
     }
+    int minX;
+    int maxX;
+    int minY;
+    int maxY;
+    const int terrainsPerFrame = 2;
+    void SpreadSpawningTerrain(bool spawnAll)
+    {
+        int spawnedTerrains = 0;
+        for (int x = minX; x < maxX; x++)
+        {
+            for (int y = minY; y < maxY; y++)
+            {
+                Vector2I key = new(x, y);
+                if (terrainDisplays.ContainsKey(key))
+                    continue;
 
+                SpawnTerrain(key);
+                spawnedTerrains++;
+
+                if (terrainsPerFrame == spawnedTerrains && !spawnAll)
+                    return;
+            }
+        }
+        spawningInProgress = false;
+    }
 
     void RemoveNotNeededTerrain(int maxX, int minX, int maxY, int minY)
     {
