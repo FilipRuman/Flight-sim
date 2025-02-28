@@ -153,7 +153,7 @@ public partial class TerrainGenController : Node3D
         var updMesh = System.Diagnostics.Stopwatch.StartNew();
 
         terrain.UpdateMesh();
-        GD.Print($"Time- updMesh: {updMesh.Elapsed}");
+        // GD.Print($"Time- updMesh: {updMesh.Elapsed}");
         updMesh.Stop();
 
     }
