@@ -77,7 +77,7 @@ public partial class TerrainGenController : Node3D
     int maxX;
     int minY;
     int maxY;
-    const int terrainsPerFrame = 2;
+    [Export] int terrainsPerFrame = 2;
     void SpreadSpawningTerrain(bool spawnAll)
     {
         int spawnedTerrains = 0;
