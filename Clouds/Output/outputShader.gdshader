@@ -7,7 +7,7 @@ uniform sampler2D textureToOutput;
 uniform sampler2D cloudsDepth;
 
 uniform float test = 0;
-const float DepthIgnoreDistance =  3500.;
+const float DepthIgnoreDistance =  5000.;
 void fragment() {
   float depth = texture(depth_texture, SCREEN_UV).x;
   vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
