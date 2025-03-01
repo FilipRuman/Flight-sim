@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://chkkgejdiovvn"]
+
+[ext_resource type="Script" uid="uid://c4ldwegyu3qye" path="res://Player/PlayerCam.cs" id="1_2ldxe"]
+[ext_resource type="Script" uid="uid://dsh2tjd3truas" path="res://Clouds/RayTracingHandler.cs" id="2_2qyv0"]
+[ext_resource type="Material" uid="uid://b0e57yv3p553u" path="res://Clouds/Output/OutputMaterial.tres" id="3_aws76"]
+[ext_resource type="RDShaderFile" uid="uid://b18jx5y0125bo" path="res://Clouds/clodus ray tracing.glsl" id="4_e3xgy"]
+[ext_resource type="ImageTexture3D" uid="uid://bg64wm06td4cy" path="res://Clouds/Noise/textures/composed noise inverted.tres" id="5_wnems"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ete7q"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="PlayerCam" type="Node3D" node_paths=PackedStringArray("cam", "rayTracingHandler")]
+script = ExtResource("1_2ldxe")
+cam = NodePath("cam")
+rayTracingHandler = NodePath("cam/clouds handler")
+
+[node name="cam" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+far = 12000.0
+
+[node name="clouds handler" type="Node3D" parent="cam" node_paths=PackedStringArray("cam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 45.4541)
+script = ExtResource("2_2qyv0")
+cam = NodePath("..")
+output = ExtResource("3_aws76")
+shaderFile = ExtResource("4_e3xgy")
+noiseTexture = ExtResource("5_wnems")
+rayMarchStepSize = 0.1
+alphaModifier = 0.03
+detailNoiseModifier = -0.015
+alphaTotalModifier = 22.77
+lightAbsorptionThroughCloud = 1.19
+lightMarchStepsCount = 2
+darknessThreshold = 0.1
+lightAbsorptionTowardSun = 0.065
+colorNoiseAlphaModifier = 0.1
+colorNoiseScale = 2.795
+brightnessModifier = 1.245
+lightColor = Color(1, 1, 1, 0)
+cloudColor = Color(1, 1, 1, 0)
+chunkSize = Vector3(2773.72, 600, 3524.57)
+cloudsOffset = Vector3(100, 0, 0)
+windSpeed = Vector3(10, 5, 2)
+
+[node name="output" type="MeshInstance3D" parent="cam"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_ete7q")
+surface_material_override/0 = ExtResource("3_aws76")

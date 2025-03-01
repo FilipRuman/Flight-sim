@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cegc6vjdepu15"
+path="res://.godot/imported/worleyNoiseGenerator.glsl-7f06640a91e44fb29d012f8ebb0ea581.res"
+
+[deps]
+
+source_file="res://Clouds/Noise/worleyNoiseGenerator.glsl"
+dest_files=["res://.godot/imported/worleyNoiseGenerator.glsl-7f06640a91e44fb29d012f8ebb0ea581.res"]
+
+[params]
+

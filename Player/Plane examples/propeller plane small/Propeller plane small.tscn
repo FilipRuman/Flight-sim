@@ -970,11 +970,9 @@ mesh = SubResource("ArrayMesh_5htga")
 skin = SubResource("Skin_p5o4e")
 skeleton = NodePath("")
 
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("fpRotation", "tpRotation", "fp", "tp")]
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("fp", "tp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 script = ExtResource("15_dkpta")
-fpRotation = NodePath("axis fp")
-tpRotation = NodePath("axis tp")
 fp = NodePath("axis fp/Fp cam")
 tp = NodePath("axis tp/Camera3D")
 horizontalCamRotationCurve = SubResource("Curve_lfmf2")

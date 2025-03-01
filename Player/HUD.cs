@@ -27,8 +27,8 @@ public partial class HUD : Node
 
     public override void _Process(double delta)
     {
-        currentCam = cameraController.currentCam;
-        // 
+        currentCam = PlayerCam.Ref.cam;
+
         frameIndex++;
         DrawHorizon();
         flightPathIndicator.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + rb.LinearVelocity);
