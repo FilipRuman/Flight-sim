@@ -8,8 +8,6 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 
 ![image](https://github.com/user-attachments/assets/3080abc0-f63c-44f7-873d-7b3a9ce20204)
 - Customizable engine && wind sound synthesis
-
-- Volumetric clouds compute shader 
   
 ![image](https://github.com/user-attachments/assets/f3e7f2fc-a572-4e58-b178-3107691e39ad)
 - Detailed aerodynamic forces debuging
@@ -26,9 +24,11 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - works with any 3d model
 - High G-force effects simulation
 - 2 plane examples - f16 && propeller plane
-- More accurate engine simulation TODO
-- Destruction system TODO
-- Fuel usage && weight simulation TODO
+- Volumetric clouds compute shader 
+### plans
+- More accurate engine simulation 
+- Destruction system 
+- Fuel usage && weight simulation 
 ## Setup
 ### Just trying out
 - download and run exe form releas page
