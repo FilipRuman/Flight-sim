@@ -271,7 +271,7 @@ void main() {
 
 	// base pixel color for image
 vec4 pixel = vec4(0, 0, 0, 0);
-float depth = 0;
+vec2 depth = vec2(0);
 
 ivec2 imageSize = imageSize(rendered_image);
 
@@ -286,7 +286,7 @@ if(intersection.hit) {
 vec3 origin = ray.origin + ray.direction * intersection.entryDistance;
 float dist = intersection.exitDistance - intersection.entryDistance;
 vec3 direction = ray.direction;
-depth = intersection.entryDistance;
+depth = vec2(intersection.entryDistance, intersection.exitDistance);
 vec3 lightEnergy;
 float transmittance;
 vec3 colorSamplePoint;
@@ -323,6 +323,6 @@ pixel.xyz += SampleNoiseForColor(colorSamplePoint);
 // if(cloudSettings.detailNoiseModifier != 0.01) pixel = vec4(1, 0, 1, 1);
 // if(cloudChunkSize.val != vec3(480.0, 170.0, 480.0)) pixel = vec4(0, 1, 1, 1); */
 
-imageStore(depthTexture, ivec2(gl_GlobalInvocationID.xy), vec4(depth));
+imageStore(depthTexture, ivec2(gl_GlobalInvocationID.xy), vec4(depth, 0, 0));
 imageStore(rendered_image, ivec2(gl_GlobalInvocationID.xy), pixel);
 }

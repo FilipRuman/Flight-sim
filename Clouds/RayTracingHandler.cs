@@ -194,11 +194,11 @@ public partial class RayTracingHandler : Node
         {
             Width = (uint)imageSize.X,
             Height = (uint)imageSize.Y,
-            Format = RenderingDevice.DataFormat.R32Sfloat,
+            Format = RenderingDevice.DataFormat.R32G32Sfloat,
             UsageBits = RenderingDevice.TextureUsageBits.CanUpdateBit | RenderingDevice.TextureUsageBits.StorageBit | RenderingDevice.TextureUsageBits.CanCopyFromBit
         };
         RDTextureView depthView = new();
-        Image depthImage = Image.CreateEmpty(imageSize.X, imageSize.Y, false, Image.Format.Rf);
+        Image depthImage = Image.CreateEmpty(imageSize.X, imageSize.Y, false, Image.Format.Rgf);
         depthTexture = rd.TextureCreate(depthFmt, depthView, [depthImage.GetData()]);
         depthTextureUniform = new()
         {
@@ -470,7 +470,7 @@ public partial class RayTracingHandler : Node
 
 
         byte[] depthByteData = rd.TextureGetData(depthTexture, 0);
-        var depthImage = Image.CreateFromData(imageSize.X, imageSize.Y, false, Image.Format.Rf, depthByteData);
+        var depthImage = Image.CreateFromData(imageSize.X, imageSize.Y, false, Image.Format.Rgf, depthByteData);
         var depthImageTexture = ImageTexture.CreateFromImage(depthImage);
         output.SetShaderParameter("cloudsDepth", depthImageTexture);
     }

@@ -157,9 +157,8 @@ model = ExtResource("6_hbc2u")
 [node name="Cloud box" type="Node3D" parent="."]
 transform = Transform3D(12242.5, 0, 0, 0, 693.295, 0, 0, 0, 12800, 0, 9000, 0)
 script = ExtResource("3_hbc2u")
-boxMin = Vector3(-6121.27, -9346.65, -6400)
-boxMax = Vector3(6121.27, -8653.35, 6400)
-DrawDebug = true
+boxMin = Vector3(-6121.25, -9346.65, -6400)
+boxMax = Vector3(6121.25, -8653.35, 6400)
 
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
 
