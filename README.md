@@ -8,6 +8,8 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 
 ![image](https://github.com/user-attachments/assets/3080abc0-f63c-44f7-873d-7b3a9ce20204)
 - Customizable engine && wind sound synthesis
+
+- Volumetric clouds compute shader 
   
 ![image](https://github.com/user-attachments/assets/f3e7f2fc-a572-4e58-b178-3107691e39ad)
 - Detailed aerodynamic forces debuging
