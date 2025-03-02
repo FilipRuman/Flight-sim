@@ -24,9 +24,11 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - works with any 3d model
 - High G-force effects simulation
 - 2 plane examples - f16 && propeller plane
-- More accurate engine simulation TODO
-- Destruction system TODO
-- Fuel usage && weight simulation TODO
+- Volumetric clouds compute shader 
+### plans
+- More accurate engine simulation 
+- Destruction system 
+- Fuel usage && weight simulation 
 ## Setup
 ### Just trying out
 - download and run exe form releas page
