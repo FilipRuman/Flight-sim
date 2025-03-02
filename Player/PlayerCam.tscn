@@ -40,7 +40,6 @@ brightnessModifier = 1.245
 lightColor = Color(1, 1, 1, 0)
 cloudColor = Color(1, 1, 1, 0)
 chunkSize = Vector3(2773.72, 600, 3524.57)
-cloudsOffset = Vector3(100, 0, 0)
 windSpeed = Vector3(10, 5, 2)
 
 [node name="output" type="MeshInstance3D" parent="cam"]

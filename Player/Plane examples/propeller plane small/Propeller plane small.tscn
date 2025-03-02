@@ -937,8 +937,11 @@ layout_mode = 2
 text = "20 m"
 
 [node name="G effect" type="TextureRect" parent="UIController"]
-offset_right = 1923.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("GradientTexture2D_nx2ig")
 
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
@@ -970,29 +973,27 @@ mesh = SubResource("ArrayMesh_5htga")
 skin = SubResource("Skin_p5o4e")
 skeleton = NodePath("")
 
-[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("fp", "tp")]
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("thirdPersonPoint", "firstPersonPoint", "thirdPersonRotation", "firstPersonRotation")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 script = ExtResource("15_dkpta")
-fp = NodePath("axis fp/Fp cam")
-tp = NodePath("axis tp/Camera3D")
+thirdPersonPoint = NodePath("axis tp/tp")
+firstPersonPoint = NodePath("axis fp/fp")
+thirdPersonRotation = NodePath("axis tp")
+firstPersonRotation = NodePath("axis fp")
 horizontalCamRotationCurve = SubResource("Curve_lfmf2")
 verticalCamRotationCurve = SubResource("Curve_lfmf2")
 
 [node name="axis fp" type="Node3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.821, 0.632)
+transform = Transform3D(1, 0, 0, 0, 0.972861, 0.231391, 0, -0.231391, 0.972861, 0, 1.82424, 0.874568)
 
-[node name="Fp cam" type="Camera3D" parent="CameraController/axis fp"]
-transform = Transform3D(-0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, -0.999391, 0, 0, 0)
-far = 12000.0
+[node name="fp" type="Node3D" parent="CameraController/axis fp"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="axis tp" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45561, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController/axis tp"]
-process_priority = 1
-physics_interpolation_mode = 1
-transform = Transform3D(-0.999997, -0.00150845, -0.00172923, -0.00172918, 0.990746, 0.135715, 0.0015085, 0.135718, -0.990746, -0.001, 4.119, -8.697)
-current = true
-far = 12000.0
+[node name="tp" type="Node3D" parent="CameraController/axis tp"]
+transform = Transform3D(-1, 0, -8.74228e-08, -1.17376e-08, 0.990946, 0.134263, 8.66313e-08, 0.134263, -0.990946, -1.56018e-07, 1.99781, -9.79439)
 
 [node name="GEffectControler" type="Node3D" parent="." node_paths=PackedStringArray("rbController")]
 script = ExtResource("23_nx2ig")

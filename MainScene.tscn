@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bijbbsx1cx5cx"]
+[gd_scene load_steps=17 format=3 uid="uid://bijbbsx1cx5cx"]
 
 [ext_resource type="Script" uid="uid://dcoas381nsb2u" path="res://LightRef.cs" id="2_5crlr"]
 [ext_resource type="Script" uid="uid://dvng2yn1127pt" path="res://Clouds/RayTarget.cs" id="3_hbc2u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b330pe2co3o25" path="res://Player/model selection/ModelSelectionButton.cs" id="4_a814b"]
 [ext_resource type="PackedScene" uid="uid://c88qndtf0a2uw" path="res://Player/Plane examples/f16/f16.tscn" id="5_5crlr"]
 [ext_resource type="PackedScene" uid="uid://gebnblpa811q" path="res://Player/Plane examples/propeller plane small/Propeller plane small.tscn" id="6_hbc2u"]
+[ext_resource type="Script" uid="uid://bhg2tqctm0nlh" path="res://CloudsPositionHandler.cs" id="9_8xkvn"]
 [ext_resource type="PackedScene" uid="uid://chkkgejdiovvn" path="res://Player/PlayerCam.tscn" id="9_torvr"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_8s4c3"]
@@ -155,16 +156,16 @@ model = ExtResource("6_hbc2u")
 [node name="Player spawn point" type="Node3D" parent="."]
 
 [node name="Cloud box" type="Node3D" parent="."]
-transform = Transform3D(12242.5, 0, 0, 0, 693.295, 0, 0, 0, 12800, 0, 9000, 0)
+transform = Transform3D(90000, 0, 0, 0, 1439.49, 0, 0, 0, 90000, 0, 9000, 0)
 script = ExtResource("3_hbc2u")
-boxMin = Vector3(-6121.25, -9346.65, -6400)
-boxMax = Vector3(6121.25, -8653.35, 6400)
+boxMin = Vector3(-45000, -9719.75, -45000)
+boxMax = Vector3(45000, -8280.25, 45000)
 
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
 
 [node name="clouds handler" parent="PlayerCam/cam" index="0"]
-rayMarchStepSize = 2.765
-maxRaySampleCount = 685
+rayMarchStepSize = 6.38
+maxRaySampleCount = 500
 detailNoiseModifier = -0.37
 alphaTotalModifier = 187.275
 darknessThreshold = 0.325
@@ -172,6 +173,13 @@ lightAbsorptionTowardSun = 0.88
 alphaMax = 1.0
 colorNoiseAlphaModifier = 0.25
 colorNoiseScale = 2.815
-chunkSize = Vector3(10445.7, 2137.92, 10190.5)
+chunkSize = Vector3(15445.7, 3514.15, 15206.8)
+
+[node name="Clouds position handler" type="Node3D" parent="PlayerCam/cam" index="2" node_paths=PackedStringArray("cloudsHandler", "playerCam", "cloudsBox")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("9_8xkvn")
+cloudsHandler = NodePath("../clouds handler")
+playerCam = NodePath("..")
+cloudsBox = NodePath("../../../Cloud box")
 
 [editable path="PlayerCam"]

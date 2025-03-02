@@ -34,10 +34,9 @@ public partial class RayTracingHandler : Node
     [Export] Vector2 colorBrightnessMinMax = new(.1f, .95f);
 
     [Export] Vector3 chunkSize;
-    [Export] Vector3 cloudsOffset;
     [Export] Vector3 windSpeed;
-
-    [Export] Vector3 windOffset;
+    Vector3 windOffset;
+    public Vector3 cloudsOffset;
 
 
     Godot.Collections.Array<Image> noiseData;

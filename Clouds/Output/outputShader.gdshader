@@ -35,8 +35,6 @@ if(color.w > 0.0001){
 		}
 	}
 	// depth debug
-	
-	
 }else
 	ALPHA = 0.;
 }
