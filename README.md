@@ -33,7 +33,7 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 ### Just trying out
 - download and run exe form releas page
 ### Edit project
-- download <a href="https://godotengine.org/download/archive/4.4-beta3/">godot 4.4</a>  in .Net version
+- download <a href="https://godotengine.org/download/archive/4.4-stable/">godot 4.4</a>  in .Net version
 - setup your godot <a href="https://www.youtube.com/watch?v=Yi1iIM-B7XQ">like in this video </a>
 - clone this github repo
 - open cloned directory with godot 4.4
