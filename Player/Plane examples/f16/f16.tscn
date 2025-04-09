@@ -1214,7 +1214,7 @@ text = "Throttle:"
 
 [node name="Label16" type="Label" parent="UIController/Controls/GridContainer"]
 layout_mode = 2
-text = "Scroll"
+text = "1/2"
 horizontal_alignment = 1
 
 [node name="Label17" type="Label" parent="UIController/Controls/GridContainer"]
@@ -1229,7 +1229,7 @@ Trim:"
 
 [node name="Label12" type="Label" parent="UIController/Controls/GridContainer"]
 layout_mode = 2
-text = "1/2"
+text = "3/4"
 horizontal_alignment = 1
 
 [node name="Label13" type="Label" parent="UIController/Controls/GridContainer"]
