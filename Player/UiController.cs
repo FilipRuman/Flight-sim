@@ -19,6 +19,7 @@ namespace Player
         [Export] private Label altitude;
         [Export] private Label airDensity;
         [Export] private Label thrustOfPropeller;
+        [Export] private Label fps;
 
         [Export] float FramesPerUpdate = 10;
         int frameIndex = 0;
@@ -40,6 +41,7 @@ namespace Player
         }
         public override void _Process(double delta)
         {
+            fps.Text = $"fps: {Mathf.RoundToInt(Engine.GetFramesPerSecond())}";
 
             frameIndex++;
             float velocity = wingsManager.FrontalVelocity * 3.6f; /* in km/h */
@@ -53,7 +55,7 @@ namespace Player
                 return;
             frameIndex = 0;
 
-            /* 			throttle.Editable = false;
+            /*throttle.Editable = false;
 			 */
             var altitude = wingsManager.Altitude;
             this.altitude.Text = $"{Mathf.RoundToInt(altitude)} m";

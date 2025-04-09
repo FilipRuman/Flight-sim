@@ -817,7 +817,7 @@ forcesModifiers = Vector3(10, 25, 30)
 rb = NodePath("../..")
 trimStepSize = 0.015
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "propellor", "controls", "controlsToggleButton")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "controls", "controlsToggleButton")]
 script = ExtResource("8_18030")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
@@ -828,6 +828,7 @@ AoA = NodePath("Panel/HBoxContainer/AoA")
 altitude = NodePath("Air relatedStuff/GridContainer/Altitude")
 airDensity = NodePath("Air relatedStuff/GridContainer/Air density")
 thrustOfPropeller = NodePath("Engine related stuff/GridContainer/thrust")
+fps = NodePath("Air relatedStuff/GridContainer/Fps")
 FramesPerUpdate = 1.0
 propellor = NodePath("../Thruster")
 propRotationModifier = 1.0
@@ -1295,7 +1296,7 @@ text = "20 m"
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
+offset_top = -65.0
 offset_right = 189.0
 grow_vertical = 0
 
@@ -1323,6 +1324,10 @@ layout_mode = 2
 text = "Air density:"
 
 [node name="Air density" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
+layout_mode = 2
+text = "20 m"
+
+[node name="Fps" type="Label" parent="UIController/Air relatedStuff/GridContainer"]
 layout_mode = 2
 text = "20 m"
 
