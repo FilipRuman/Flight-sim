@@ -14,6 +14,7 @@ public partial class TerrainGenController : Node3D
     [Export] float terrainSize;
     Dictionary<Vector2I, TerrainGeneration> terrainDisplays = new();
     [Export] int seed;
+    [Export] float terrainScale;
     [Export] float heightModifier;
     [Export] int framesPerUpdate = 100;
     [Export] float waterLevelHeight;
@@ -124,13 +125,14 @@ public partial class TerrainGenController : Node3D
 
         var playerPos = Player.GlobalPosition;
 
-        maxX = Mathf.CeilToInt((playerPos.X + ViewDistance) / terrainSize);
-        minX = Mathf.CeilToInt((playerPos.X - ViewDistance) / terrainSize);
+        maxX = Mathf.CeilToInt((playerPos.X + ViewDistance) / RealTerrainSize);
+        minX = Mathf.CeilToInt((playerPos.X - ViewDistance) / RealTerrainSize);
 
-        maxY = Mathf.CeilToInt((playerPos.Z + ViewDistance) / terrainSize);
-        minY = Mathf.CeilToInt((playerPos.Z - ViewDistance) / terrainSize);
+        maxY = Mathf.CeilToInt((playerPos.Z + ViewDistance) / RealTerrainSize);
+        minY = Mathf.CeilToInt((playerPos.Z - ViewDistance) / RealTerrainSize);
     }
 
+    float RealTerrainSize => terrainSize * terrainScale;
     void SpawnTerrain(Vector2I positionOnAGrid)
     {
         var node = TerrainGenerationPrefab.Instantiate(PackedScene.GenEditState.Main);
@@ -145,7 +147,8 @@ public partial class TerrainGenController : Node3D
 
         terrain.heightModifier = heightModifier;
 
-        Vector3 position = new(positionOnAGrid.X * terrainSize, terrainBaseHeight, positionOnAGrid.Y * terrainSize);
+        terrain.Scale = new Vector3(terrainScale, terrainScale, terrainScale);
+        Vector3 position = new(positionOnAGrid.X * RealTerrainSize, terrainBaseHeight, positionOnAGrid.Y * RealTerrainSize);
         terrain.Position = position;
 
         terrain.noise = noise;

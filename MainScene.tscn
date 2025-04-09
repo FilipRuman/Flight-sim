@@ -105,7 +105,8 @@ script = ExtResource("2_5crlr")
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]
 terrainLayout = NodePath("../terrain layout")
 ViewDistance = 8334.68
-heightModifier = 2038.99
+terrainScale = 5.0
+heightModifier = 500.0
 framesPerUpdate = 25
 waterLevelHeight = -1301.5
 terrainsPerFrame = 8
@@ -156,10 +157,10 @@ model = ExtResource("6_hbc2u")
 [node name="Player spawn point" type="Node3D" parent="."]
 
 [node name="Cloud box" type="Node3D" parent="."]
-transform = Transform3D(10000, 0, 0, 0, 1439.49, 0, 0, 0, 10000, 0, 9000, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9000, 0)
 script = ExtResource("3_hbc2u")
-boxMin = Vector3(-5000, -9719.75, -5000)
-boxMax = Vector3(5000, -8280.25, 5000)
+boxMin = Vector3(-0.5, -9000.5, -0.5)
+boxMax = Vector3(0.5, -8999.5, 0.5)
 
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
 

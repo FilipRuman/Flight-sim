@@ -24,6 +24,9 @@ public partial class TerrainGeneration : Node3D
 
     private float GetHeight(Vector2 pos)
     {
+        pos.X *= Scale.X;
+        pos.Y *= Scale.Y;
+
         float value = noise.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z) * noise1ValueModifier;
         value += noise2.GetNoise2D(pos.X + GlobalPosition.X, pos.Y + GlobalPosition.Z) * noise2ValueModifier;
 
