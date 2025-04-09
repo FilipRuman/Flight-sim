@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Godot;
 [Tool]
-public partial class WingsManager : Node3D
-{
+public partial class WingsManager : Node3D {
+
     [Export] public Wing[] wings = null;
     [Export] public Wing[] pitchWings;
     [Export] public Wing[] rollWings;
@@ -17,8 +17,7 @@ public partial class WingsManager : Node3D
 
 
 
-    public override void _PhysicsProcess(double delta)
-    {
+    public override void _PhysicsProcess(double delta) {
         ProjectSettings.SetSetting("physics/2d/default_gravity", ConstantsManager.gravity);
         CalculateAerodynamicForces(Air.wind, Air.GetLocalAirDensity(Altitude), out Vector3 forces, out Vector3 torque);
         if (Engine.IsEditorHint())
@@ -27,12 +26,10 @@ public partial class WingsManager : Node3D
         rb.ApplyTorque(torque * (float)delta);
     }
 
-    private void CalculateAerodynamicForces(Vector3 wind, float airDensity, out Vector3 forces, out Vector3 torque)
-    {
+    private void CalculateAerodynamicForces(Vector3 wind, float airDensity, out Vector3 forces, out Vector3 torque) {
         forces = new();
         torque = new();
-        foreach (var surface in wings)
-        {
+        foreach (var surface in wings) {
             Vector3 relativePosition = surface.GlobalPosition - rb.GlobalPosition + rb.CenterOfMass;
             surface.CalculateForces(wind - rb.LinearVelocity - rb.AngularVelocity.Cross(relativePosition), airDensity, relativePosition, forcesModifiers, out Vector3 _forces, out Vector3 _torque);
             forces += _forces;
@@ -52,8 +49,7 @@ public partial class WingsManager : Node3D
     private float trimVertical;
     [Export] private float trimStepSize = .1f;
 
-    public override void _Process(double delta)
-    {
+    public override void _Process(double delta) {
         // DebugDraw3D.DrawSphere(, 1, Colors.DarkSeaGreen);
 
         if (Engine.IsEditorHint())
@@ -86,20 +82,17 @@ public partial class WingsManager : Node3D
 
             yaw = Input.GetActionStrength(yawRight);
 
-        foreach (var wing in pitchWings)
-        {
+        foreach (var wing in pitchWings) {
             float flapAngleModifier = wing.flapAngleModifier;
 
             float angle = Mathf.Clamp((pitch + trimVertical) * flapAngleModifier, -flapAngleModifier, flapAngleModifier);
             SetControlSurface(wing, angle, yaw: false);
         }
-        foreach (var wing in rollWings)
-        {
+        foreach (var wing in rollWings) {
             float angle = roll * wing.flapAngleModifier;
             SetControlSurface(wing, angle, yaw: false);
         }
-        foreach (var wing in yawWings)
-        {
+        foreach (var wing in yawWings) {
             float angle = yaw * wing.flapAngleModifier;
             SetControlSurface(wing, angle, yaw: true);
         }
@@ -107,14 +100,10 @@ public partial class WingsManager : Node3D
         base._Process(delta);
     }
 
-    private static void SetControlSurface(Wing wing, float angle, bool yaw)
-    {
-        if (!wing.rotateWholeWing)
-        {
+    private static void SetControlSurface(Wing wing, float angle, bool yaw) {
+        if (!wing.rotateWholeWing) {
             wing.flapAngle = angle;
-        }
-        else
-        {
+        } else {
             wing.flapAngle = 0;
             if (yaw)
                 wing.RotationDegrees = new(wing.RotationDegrees.X, angle, wing.RotationDegrees.Z);

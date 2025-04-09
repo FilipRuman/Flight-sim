@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public static class ConstantsManager
-{
+public static class ConstantsManager {
     //   i use this script to save constants that are widely used like gravity
     // ones that are specific to 1 script go to the script that uses it 
 

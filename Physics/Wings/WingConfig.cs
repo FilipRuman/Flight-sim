@@ -1,10 +1,9 @@
-namespace Player.wings
-{
+namespace Player.wings {
+
 
     using Godot;
     [GlobalClass, Tool]
-    public partial class WingConfig : Resource
-    {
+    public partial class WingConfig : Resource {
         [Export] public Vector3 forcesModifiers;
 
         // Reference: https://eaglepubs.erau.edu/introductiontoaerospaceflightvehicles/chapter/airfoil-characteristics/

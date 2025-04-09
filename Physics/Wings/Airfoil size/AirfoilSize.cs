@@ -1,7 +1,7 @@
 using Godot;
 [Tool, GlobalClass]
-public partial class AirfoilSize : Resource
-{
+public partial class AirfoilSize : Resource {
+
     [Export] float span;
     /// <summary>
     ///  also a wing chord 
@@ -20,14 +20,12 @@ public partial class AirfoilSize : Resource
 
     [Export] bool mirrorDisplay;
 
-    public void CalculateArea()
-    {
+    public void CalculateArea() {
         area = (a + b) * span / 2;
 
         standardMeanChord = area / span;
     }
-    public void DisplaySize(Vector3 position, Basis basis)
-    {
+    public void DisplaySize(Vector3 position, Basis basis) {
         if (!displaySize)
             return;
         Color color = isControlSurface ? controlSurfaceColor : staticWingColor;
