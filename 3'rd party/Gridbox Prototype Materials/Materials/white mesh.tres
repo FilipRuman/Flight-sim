@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bf180qu5fr105"]
-
-[ext_resource type="Texture2D" uid="uid://c6t5g7waqcrnc" path="res://3'rd party/Gridbox Prototype Materials/Textures/Prototype Grid/prototype_512x512_grey4.png" id="1_tvkpx"]
-
-[resource]
-albedo_texture = ExtResource("1_tvkpx")
-uv1_triplanar = true
-uv1_world_triplanar = true
