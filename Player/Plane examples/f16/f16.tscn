@@ -571,6 +571,7 @@ transform = Transform3D(1, 0, 0, 0, -0.172393, -0.985028, 0, 0.985028, -0.172393
 mass = 5000.0
 center_of_mass_mode = 1
 continuous_cd = true
+linear_velocity = Vector3(0, 0, 100)
 script = ExtResource("1_fdlyg")
 wingsManager = NodePath("wings/wings manager")
 
@@ -744,7 +745,7 @@ script = ExtResource("3_du4ah")
 configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_s8pj7")
 flapAngleModifier = 30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Wg FR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67783, 4.51039, -4.64018)
@@ -752,7 +753,7 @@ script = ExtResource("3_du4ah")
 configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_glpll")
 flapAngleModifier = 30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Aileron FL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86665, 4.68092, -4.67445)
@@ -761,7 +762,7 @@ configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_6chqk")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Aileron FR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.867, 4.681, -4.674)
@@ -770,7 +771,7 @@ configResource = ExtResource("6_dn2v4")
 airfoilSize = SubResource("Resource_18030")
 rotateWholeWing = true
 flapAngleModifier = -30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Elevator BL" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53374, 4.50897, -10.0944)
@@ -779,7 +780,7 @@ configResource = ExtResource("8_y7itr")
 airfoilSize = SubResource("Resource_06a0d")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Elevator BR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.534, 4.509, -10.094)
@@ -788,7 +789,7 @@ configResource = ExtResource("8_y7itr")
 airfoilSize = SubResource("Resource_htxkc")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = 80.073
+angleOfAttack = -99.927
 
 [node name="Wg S" type="Node3D" parent="wings"]
 transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.47009, -7.48922)
@@ -797,7 +798,7 @@ configResource = ExtResource("8_du4ah")
 airfoilSize = SubResource("Resource_y7itr")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = -1.40252e-05
+angleOfAttack = 180.0
 
 [node name="Rudder S" type="Node3D" parent="wings"]
 transform = Transform3D(-4.28408e-08, -1, 0, 1, -4.28408e-08, 0, 0, 0, 1, 0, 5.35281, -8.47891)
@@ -806,7 +807,7 @@ configResource = ExtResource("8_du4ah")
 airfoilSize = SubResource("Resource_1p18m")
 rotateWholeWing = true
 flapAngleModifier = 30.0
-angleOfAttack = -1.40252e-05
+angleOfAttack = 180.0
 
 [node name="wings manager" type="Node3D" parent="wings" node_paths=PackedStringArray("wings", "pitchWings", "rollWings", "yawWings", "rb")]
 script = ExtResource("7_6chqk")

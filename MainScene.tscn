@@ -10,49 +10,56 @@
 [ext_resource type="Script" uid="uid://bhg2tqctm0nlh" path="res://CloudsPositionHandler.cs" id="9_8xkvn"]
 [ext_resource type="PackedScene" uid="uid://chkkgejdiovvn" path="res://Player/PlayerCam.tscn" id="9_torvr"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hbc2u"]
-frequency = 0.0137
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_torvr"]
+frequency = 0.0489
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_torvr"]
-seamless = true
-seamless_blend_skirt = 0.108
-noise = SubResource("FastNoiseLite_hbc2u")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8xkvn"]
+noise = SubResource("FastNoiseLite_torvr")
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8xkvn"]
-sky_top_color = Color(1, 0, 0, 1)
-sky_horizon_color = Color(1, 0, 0, 1)
-sky_curve = -2.63902
-sky_energy_multiplier = 1.72
-sky_cover = SubResource("NoiseTexture2D_torvr")
-sky_cover_modulate = Color(0.371094, 0.371094, 0.371094, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.524017, 0.554086, 0.601563, 1)
-ground_curve = 0.570523
-energy_multiplier = 7.88
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p5x2j"]
+sky_top_color = Color(0.18981, 0.358289, 1, 1)
+sky_horizon_color = Color(0.172862, 3.85046e-07, 0.85199, 1)
+sky_curve = 0.0699777
+sky_cover = SubResource("NoiseTexture2D_8xkvn")
 
 [sub_resource type="Sky" id="Sky_emooe"]
-sky_material = SubResource("ProceduralSkyMaterial_8xkvn")
-radiance_size = 2
+sky_material = SubResource("ProceduralSkyMaterial_p5x2j")
+radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_su0ec"]
 background_mode = 2
+background_energy_multiplier = 1.36
 sky = SubResource("Sky_emooe")
-ambient_light_color = Color(0.328125, 0.328125, 0.328125, 1)
+ambient_light_color = Color(0.641934, 0.641934, 0.641934, 1)
 tonemap_mode = 2
 tonemap_exposure = 0.78
 tonemap_white = 2.05
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
+glow_bloom = 0.1
+glow_blend_mode = 1
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.152588, 0.267887, 0.390625, 1)
+fog_light_color = Color(0.530111, 0.68649, 0.8584, 1)
 fog_light_energy = 2.21
-fog_sun_scatter = 1.0
+fog_sun_scatter = 3.5
 fog_density = 1.0
-fog_aerial_perspective = 0.036
+fog_aerial_perspective = 0.302
+fog_sky_affect = 0.765
 fog_height = -1024.0
 fog_depth_curve = 1.51572
 fog_depth_begin = 7000.0
 fog_depth_end = 8000.0
+volumetric_fog_density = 0.009
+volumetric_fog_albedo = Color(0.99938, 0.943509, 0.687168, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = 0.41
+volumetric_fog_length = 0.01
+volumetric_fog_sky_affect = 0.29
+adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hbc2u"]
 exposure_multiplier = 0.704
@@ -71,11 +78,10 @@ environment = SubResource("Environment_su0ec")
 camera_attributes = SubResource("CameraAttributesPractical_hbc2u")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.856267, 0.0959031, 0.507552, -8.59027e-08, -0.982613, 0.185667, 0.516533, 0.15898, 0.841379, 0, 0, 0)
-light_color = Color(0.741385, 0.741385, 0.741385, 1)
-light_energy = 0.228
+transform = Transform3D(-0.856267, 0.0959029, 0.507552, 0.0783717, -0.947115, 0.311176, 0.510553, 0.306228, 0.803467, 0, 0, 0)
+light_energy = 0.738
 light_indirect_energy = 4.752
-light_volumetric_fog_energy = 22.295
+light_volumetric_fog_energy = 7.977
 light_angular_distance = 84.1
 light_specular = 0.0
 light_bake_mode = 1
@@ -143,6 +149,9 @@ boxMin = Vector3(-0.5, -9000.5, -0.5)
 boxMax = Vector3(0.5, -8999.5, 0.5)
 
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
+
+[node name="cam" parent="PlayerCam" index="0"]
+visible = false
 
 [node name="clouds handler" parent="PlayerCam/cam" index="0"]
 pause = true
