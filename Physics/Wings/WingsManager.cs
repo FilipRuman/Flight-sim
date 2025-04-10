@@ -10,12 +10,18 @@ public partial class WingsManager : Node3D {
 
     [Export] Vector3 forcesModifiers = Vector3.One;
     [Export] public RigidBody3D rb;
+    [Export] public float speedModifier;
 
     public float Altitude => rb.GlobalPosition.Y;
-    public float FrontalVelocity => (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z;
+    public float FrontalVelocity => (rb.GlobalBasis.Inverse() * rb.LinearVelocity).Z * speedModifier;
 
 
-
+    [Export] private float massOfPlane;
+    public override void _Ready() {
+        rb.Mass = massOfPlane * speedModifier;
+        rb.GravityScale = 1f / speedModifier;
+        base._Ready();
+    }
 
     public override void _PhysicsProcess(double delta) {
         ProjectSettings.SetSetting("physics/2d/default_gravity", ConstantsManager.gravity);

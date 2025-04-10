@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bijbbsx1cx5cx"]
+[gd_scene load_steps=16 format=3 uid="uid://bijbbsx1cx5cx"]
 
 [ext_resource type="Script" uid="uid://dcoas381nsb2u" path="res://LightRef.cs" id="2_5crlr"]
 [ext_resource type="Script" uid="uid://dvng2yn1127pt" path="res://Clouds/RayTarget.cs" id="3_hbc2u"]
@@ -9,25 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://gebnblpa811q" path="res://Player/Plane examples/propeller plane small/Propeller plane small.tscn" id="6_hbc2u"]
 [ext_resource type="Script" uid="uid://bhg2tqctm0nlh" path="res://CloudsPositionHandler.cs" id="9_8xkvn"]
 [ext_resource type="PackedScene" uid="uid://chkkgejdiovvn" path="res://Player/PlayerCam.tscn" id="9_torvr"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_8s4c3"]
-script/source = "using Godot;
-using System;
-
-public partial class TEstScene : Node3D
-{
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-
-
-	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-}
-"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hbc2u"]
 frequency = 0.0137
@@ -84,7 +65,6 @@ dof_blur_near_transition = 11.9
 dof_blur_amount = 0.08
 
 [node name="Scene" type="Node3D"]
-script = SubResource("CSharpScript_8s4c3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_su0ec")
