@@ -84,7 +84,7 @@ script = ExtResource("2_5crlr")
 
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]
 terrainLayout = NodePath("../terrain layout")
-ViewDistance = 8334.68
+ViewDistance = 8000.0
 terrainScale = 5.0
 heightModifier = 500.0
 framesPerUpdate = 25
@@ -145,6 +145,7 @@ boxMax = Vector3(0.5, -8999.5, 0.5)
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
 
 [node name="clouds handler" parent="PlayerCam/cam" index="0"]
+pause = true
 rayMarchStepSize = 6.38
 maxRaySampleCount = 500
 detailNoiseModifier = -0.37
