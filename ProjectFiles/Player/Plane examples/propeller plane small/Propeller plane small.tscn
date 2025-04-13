@@ -254,7 +254,7 @@ _limits = [-5.0, 3.80484, -8.32117, 16.8613]
 _data = [Vector2(-8.32117, 3.80484), 0.0, -0.673601, 0, 0, Vector2(0.318075, -1.8003), 0.0, 0.0, 0, 0, Vector2(8.13016, -0.0302582), 0.18342, 0.18342, 0, 0, Vector2(16.8613, 2.77231), 0.802463, 0.0, 0, 0]
 point_count = 4
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("wingsManager")]
 process_priority = 1
 process_physics_priority = 1
 physics_interpolation_mode = 1
@@ -265,6 +265,7 @@ center_of_mass_mode = 1
 continuous_cd = true
 linear_velocity = Vector3(0, 0, 100)
 script = ExtResource("1_o28un")
+wingsManager = NodePath("wings/wings manager")
 
 [node name="Model" parent="." instance=ExtResource("1_aoggf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
@@ -424,7 +425,9 @@ rollWings = [NodePath("../Alerone FL"), NodePath("../Alerone FR")]
 yawWings = [NodePath("../Rudder S")]
 forcesModifiers = Vector3(20, 36, 8)
 rb = NodePath("../..")
-trimStepSize = 0.01
+speedModifier = 1.0
+massOfPlane = 900.0
+trimStepSize = 0.005
 
 [node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
 script = ExtResource("6_a3tn1")
