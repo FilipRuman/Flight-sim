@@ -569,6 +569,7 @@ process_physics_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, -0.172393, -0.985028, 0, 0.985028, -0.172393, 0, 0, 0.162489)
 mass = 5000.0
+gravity_scale = 0.2
 center_of_mass_mode = 1
 continuous_cd = true
 linear_velocity = Vector3(0, 0, 100)

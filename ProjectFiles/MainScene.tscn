@@ -143,20 +143,19 @@ model = ExtResource("6_hbc2u")
 [node name="Player spawn point" type="Node3D" parent="."]
 
 [node name="Cloud box" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9000, 0)
+transform = Transform3D(1e+06, 0, 0, 0, 2000, 0, 0, 0, 1e+06, 0, 9000, 0)
 script = ExtResource("3_hbc2u")
-boxMin = Vector3(-0.5, -9000.5, -0.5)
-boxMax = Vector3(0.5, -8999.5, 0.5)
+boxMin = Vector3(-500000, -10000, -500000)
+boxMax = Vector3(500000, -8000, 500000)
 
 [node name="PlayerCam" parent="." instance=ExtResource("9_torvr")]
 
-[node name="cam" parent="PlayerCam" index="0"]
-visible = false
-
 [node name="clouds handler" parent="PlayerCam/cam" index="0"]
+visible = false
 pause = true
-rayMarchStepSize = 6.38
-maxRaySampleCount = 500
+gpuWaitFrames = 2
+rayMarchStepSize = 12.38
+maxRaySampleCount = 300
 detailNoiseModifier = -0.37
 alphaTotalModifier = 187.275
 darknessThreshold = 0.325
@@ -166,8 +165,12 @@ colorNoiseAlphaModifier = 0.25
 colorNoiseScale = 2.815
 chunkSize = Vector3(15445.7, 3514.15, 15206.8)
 
+[node name="output" parent="PlayerCam/cam" index="1"]
+visible = false
+
 [node name="Clouds position handler" type="Node3D" parent="PlayerCam/cam" index="2" node_paths=PackedStringArray("cloudsHandler", "playerCam", "cloudsBox")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
 script = ExtResource("9_8xkvn")
 cloudsHandler = NodePath("../clouds handler")
 playerCam = NodePath("..")

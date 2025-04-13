@@ -1,9 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-public partial class RayTracingHandler : Node
-{
+public partial class RayTracingHandler : Node {
     [Export] bool pause;
+    [Export] private uint gpuWaitFrames = 3;
+
     [Export] Camera3D cam;
     [Export] ShaderMaterial output;
     [Export] RDShaderFile shaderFile;
@@ -35,6 +36,8 @@ public partial class RayTracingHandler : Node
 
     [Export] Vector3 chunkSize;
     [Export] Vector3 windSpeed;
+
+    private uint gpuWaitTimer = 0;
     Vector3 windOffset;
     public Vector3 cloudsOffset;
 
@@ -58,29 +61,34 @@ public partial class RayTracingHandler : Node
 
 
 
-    public override void _Ready()
-    {
+    public override void _Ready() {
         rayTarget = RayTarget.Ref;
         light = LightRef.light;
         StartSetup();
-        Render();
+        SubmitData();
         base._Ready();
     }
 
-    public override void _Process(double delta)
-    {
+    public override void _Process(double delta) {
         if (pause)
             return;
 
+        gpuWaitTimer++;
+        if (gpuWaitTimer < gpuWaitFrames)
+            return;
+        RetrieveAndApplyData();
+
+        gpuWaitTimer = 0;
         windOffset += windSpeed * (float)delta;
+
         UpdateBuffers();
-        Render();
+        SubmitData();
+
         base._Process(delta);
     }
 
 
-    void StartSetup()
-    {
+    void StartSetup() {
         noiseSize = new(noiseTexture.GetWidth(), noiseTexture.GetHeight(), noiseTexture.GetDepth());
         imageSize.X = ProjectSettings.GetSetting("display/window/size/viewport_width").As<int>();
         imageSize.Y = ProjectSettings.GetSetting("display/window/size/viewport_height").As<int>();
@@ -117,10 +125,8 @@ public partial class RayTracingHandler : Node
         uniform_set = rd.UniformSetCreate(bindings, shader, 0);
     }
 
-    private void InitNotChangingStartBuffers(out RDUniform outputTextureUniform, out RDUniform noiseTextureUniform, out RDUniform noiseSizeUniform, out RDUniform depthTextureUniform)
-    {
-        RDTextureFormat outputFmt = new()
-        {
+    private void InitNotChangingStartBuffers(out RDUniform outputTextureUniform, out RDUniform noiseTextureUniform, out RDUniform noiseSizeUniform, out RDUniform depthTextureUniform) {
+        RDTextureFormat outputFmt = new() {
             Width = (uint)imageSize.X,
             Height = (uint)imageSize.Y,
             Format = RenderingDevice.DataFormat.R32G32B32A32Sfloat,
@@ -129,8 +135,7 @@ public partial class RayTracingHandler : Node
         RDTextureView outputView = new();
         Image output_image = Image.CreateEmpty(imageSize.X, imageSize.Y, false, Image.Format.Rgbaf);
         outputTexture = rd.TextureCreate(outputFmt, outputView, [output_image.GetData()]);
-        outputTextureUniform = new()
-        {
+        outputTextureUniform = new() {
             UniformType = RenderingDevice.UniformType.Image,
             Binding = 2
         };
@@ -145,13 +150,11 @@ public partial class RayTracingHandler : Node
         var sampler = rd.SamplerCreate(samplerState);
 
         Godot.Collections.Array<Image> images = noiseTexture.GetData();
-        foreach (var item in images)
-        {
+        foreach (var item in images) {
             item.Convert(Image.Format.Rgf);
         }
 
-        RDTextureFormat noiseFmt = new()
-        {
+        RDTextureFormat noiseFmt = new() {
             Samples = RenderingDevice.TextureSamples.Samples1,
             Width = (uint)noiseSize.X,
             Height = (uint)noiseSize.Y,
@@ -163,8 +166,7 @@ public partial class RayTracingHandler : Node
         RDTextureView noiseView = new();
 
         var tex = rd.TextureCreate(noiseFmt, noiseView, [ArrayOfImagesAsBytes(images).ToArray()]);
-        noiseTextureUniform = new()
-        {
+        noiseTextureUniform = new() {
             UniformType = RenderingDevice.UniformType.SamplerWithTexture,
             Binding = 6
         };
@@ -177,8 +179,7 @@ public partial class RayTracingHandler : Node
                     .. Vec3AsBytes((Vector3)noiseSize),
         ];
         var noiseSizeBuffer = rd.StorageBufferCreate((uint)noiseSizeBytes.Length, noiseSizeBytes);
-        noiseSizeUniform = new()
-        {
+        noiseSizeUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -189,8 +190,7 @@ public partial class RayTracingHandler : Node
         // ?
 
 
-        RDTextureFormat depthFmt = new()
-        {
+        RDTextureFormat depthFmt = new() {
             Width = (uint)imageSize.X,
             Height = (uint)imageSize.Y,
             Format = RenderingDevice.DataFormat.R32G32Sfloat,
@@ -199,8 +199,7 @@ public partial class RayTracingHandler : Node
         RDTextureView depthView = new();
         Image depthImage = Image.CreateEmpty(imageSize.X, imageSize.Y, false, Image.Format.Rgf);
         depthTexture = rd.TextureCreate(depthFmt, depthView, [depthImage.GetData()]);
-        depthTextureUniform = new()
-        {
+        depthTextureUniform = new() {
             UniformType = RenderingDevice.UniformType.Image,
             Binding = 14
         };
@@ -211,8 +210,7 @@ public partial class RayTracingHandler : Node
     }
 
 
-    void InitBuffers(out RDUniform camMatrixUniform, out RDUniform boundsMinUniform, out RDUniform boundsMaxUniform, out RDUniform lightDirectionUniform, out RDUniform timeUniform, out RDUniform cloudSettingsUniform, out RDUniform cloudOffsetUniform, out RDUniform cloudChuckUniform, out RDUniform colorBrightUniform, out RDUniform cloudColorUniform, out RDUniform lightColorUniform)
-    {
+    void InitBuffers(out RDUniform camMatrixUniform, out RDUniform boundsMinUniform, out RDUniform boundsMaxUniform, out RDUniform lightDirectionUniform, out RDUniform timeUniform, out RDUniform cloudSettingsUniform, out RDUniform cloudOffsetUniform, out RDUniform cloudChuckUniform, out RDUniform colorBrightUniform, out RDUniform cloudColorUniform, out RDUniform lightColorUniform) {
         //  flip z rotation
         cam.GlobalRotation *= new Vector3(1, 1, -1);
         var camTransform = cam.GlobalTransform;
@@ -224,8 +222,7 @@ public partial class RayTracingHandler : Node
             .. BitConverter.GetBytes(.05f),
         ];
         var camMatrixBuffer = rd.StorageBufferCreate((uint)camMatrixBytes.Count, camMatrixBytes.ToArray());
-        camMatrixUniform = new()
-        {
+        camMatrixUniform = new() {
             UniformType = RenderingDevice.UniformType.StorageBuffer,
             Binding = 0
         };
@@ -242,8 +239,7 @@ public partial class RayTracingHandler : Node
                     ..BitConverter.GetBytes( light.LightEnergy)
            ];
         var lightDirectionBuffer = rd.StorageBufferCreate((uint)lightDirectionBytes.Count, lightDirectionBytes.ToArray());
-        lightDirectionUniform = new()
-        {
+        lightDirectionUniform = new() {
             UniformType = RenderingDevice.UniformType.StorageBuffer,
             Binding = 1
         };
@@ -256,8 +252,7 @@ public partial class RayTracingHandler : Node
         // TODO
         List<byte> timeBytes = [.. BitConverter.GetBytes(0)];
         var timeBuffer = rd.StorageBufferCreate((uint)timeBytes.Count, timeBytes.ToArray());
-        timeUniform = new()
-        {
+        timeUniform = new() {
             UniformType = RenderingDevice.UniformType.StorageBuffer,
             Binding = 3
         };
@@ -272,8 +267,7 @@ public partial class RayTracingHandler : Node
                     .. Vec3AsBytes(rayTarget.boxMax),
         ];
         var boundsMaxBuffer = rd.StorageBufferCreate((uint)boundsMaxBytes.Count, boundsMaxBytes.ToArray());
-        boundsMaxUniform = new()
-        {
+        boundsMaxUniform = new() {
             UniformType = RenderingDevice.UniformType.StorageBuffer,
             Binding = 4
         };
@@ -288,8 +282,7 @@ public partial class RayTracingHandler : Node
                    .. Vec3AsBytes(rayTarget.boxMin),
         ];
         var boundsMinBuffer = rd.StorageBufferCreate((uint)boundsMinBytes.Count, boundsMinBytes.ToArray());
-        boundsMinUniform = new()
-        {
+        boundsMinUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -319,8 +312,7 @@ public partial class RayTracingHandler : Node
                           .. BitConverter.GetBytes(maxRaySampleCount)
         ];
         var cloudSettingsBuffer = rd.StorageBufferCreate((uint)cloudSettingsBytes.Count, cloudSettingsBytes.ToArray());
-        cloudSettingsUniform = new()
-        {
+        cloudSettingsUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -338,8 +330,7 @@ public partial class RayTracingHandler : Node
 
         ];
         var cloudOffsetBuffer = rd.StorageBufferCreate((uint)cloudOffsetBytes.Count, cloudOffsetBytes.ToArray());
-        cloudOffsetUniform = new()
-        {
+        cloudOffsetUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -357,8 +348,7 @@ public partial class RayTracingHandler : Node
 
       ];
         var cloudChuckBuffer = rd.StorageBufferCreate((uint)cloudChuckBytes.Count, cloudChuckBytes.ToArray());
-        cloudChuckUniform = new()
-        {
+        cloudChuckUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -375,8 +365,7 @@ public partial class RayTracingHandler : Node
 
       ];
         var colorBrightBuffer = rd.StorageBufferCreate((uint)colorBrightnessBytes.Count, colorBrightnessBytes.ToArray());
-        colorBrightUniform = new()
-        {
+        colorBrightUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -396,8 +385,7 @@ public partial class RayTracingHandler : Node
 
       ];
         var cloudColorBuffer = rd.StorageBufferCreate((uint)cloudColorBytes.Count, cloudColorBytes.ToArray());
-        cloudColorUniform = new()
-        {
+        cloudColorUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -414,8 +402,7 @@ public partial class RayTracingHandler : Node
 
       ];
         var lightColorBuffer = rd.StorageBufferCreate((uint)lightColorBytes.Count, lightColorBytes.ToArray());
-        lightColorUniform = new()
-        {
+        lightColorUniform = new() {
 
             UniformType = RenderingDevice.UniformType.StorageBuffer,
 
@@ -429,8 +416,7 @@ public partial class RayTracingHandler : Node
 
 
 
-    void UpdateBuffers()
-    {
+    void UpdateBuffers() {
         var initialRotation = cam.RotationDegrees;
         cam.RotationDegrees = new(-initialRotation.X, initialRotation.Y, initialRotation.Z);
 
@@ -452,15 +438,15 @@ public partial class RayTracingHandler : Node
         uniform_set = rd.UniformSetCreate(bindings, shader, 0);
     }
 
-    void Render()
-    {
+    void SubmitData() {
         var computeList = rd.ComputeListBegin();
         rd.ComputeListBindComputePipeline(computeList, pipeline);
         rd.ComputeListBindUniformSet(computeList, uniform_set, 0);
         rd.ComputeListDispatch(computeList, (uint)imageSize.X / 8, (uint)imageSize.Y / 8, 1);
         rd.ComputeListEnd();
         rd.Submit();
-        //! Maybe change later, to wait for a bit?
+    }
+    private void RetrieveAndApplyData() {
         rd.Sync();
         byte[] outputByteData = rd.TextureGetData(outputTexture, 0);
         var outputImage = Image.CreateFromData(imageSize.X, imageSize.Y, false, Image.Format.Rgbaf, outputByteData);
@@ -475,9 +461,7 @@ public partial class RayTracingHandler : Node
     }
 
 
-
-    static List<byte> TransformAsBytes(Transform3D transform)
-    {
+    static List<byte> TransformAsBytes(Transform3D transform) {
         var basis = transform.Basis;
         var origin = transform.Origin;
         origin.Y *= -1;
@@ -491,17 +475,14 @@ public partial class RayTracingHandler : Node
         return bytes;
     }
 
-    private static List<byte> ArrayOfImagesAsBytes(Godot.Collections.Array<Image> images)
-    {
+    private static List<byte> ArrayOfImagesAsBytes(Godot.Collections.Array<Image> images) {
         List<byte> output = [];
-        foreach (var item in images)
-        {
+        foreach (var item in images) {
             output.AddRange(item.GetData());
         }
         return output;
     }
-    private static List<byte> Vec3AsBytes(Vector3 vec)
-    {
+    private static List<byte> Vec3AsBytes(Vector3 vec) {
         return [.. BitConverter.GetBytes(vec.X), .. BitConverter.GetBytes(vec.Y), .. BitConverter.GetBytes(vec.Z)];
     }
 }
