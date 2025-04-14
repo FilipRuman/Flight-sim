@@ -195,11 +195,6 @@ gradient = ExtResource("18_dbufn")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Curve" id="Curve_h4s6s"]
-_limits = [0.0394548, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, -0.278732, 0, 0, Vector2(1, 0.0394548), -3.14594, 0.0, 0, 0]
-point_count = 2
-
 [sub_resource type="Curve" id="Curve_nx2ig"]
 _limits = [1.0, 1.5304, -5.0, 20.0]
 bake_resolution = 1000
@@ -207,6 +202,11 @@ _data = [Vector2(-5, 1.312), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0439692, 0.0439692
 point_count = 3
 metadata/_snap_enabled = true
 metadata/_snap_count = 100
+
+[sub_resource type="Curve" id="Curve_h4s6s"]
+_limits = [0.0394548, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -0.278732, 0, 0, Vector2(1, 0.0394548), -3.14594, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qvbjc"]
 _surfaces = [{
@@ -259,8 +259,7 @@ process_priority = 1
 process_physics_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
-mass = 1500.0
-gravity_scale = inf
+mass = 900.0
 center_of_mass_mode = 1
 continuous_cd = true
 linear_velocity = Vector3(0, 0, 100)
@@ -956,9 +955,11 @@ texture = SubResource("GradientTexture2D_nx2ig")
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 
-[node name="Engine controller" parent="SoundScene" index="3" node_paths=PackedStringArray("gEffectController")]
-gEffectController = NodePath("../../GEffectControler")
-HighGEffectSoundVolume = SubResource("Curve_h4s6s")
+[node name="Engine synth" parent="SoundScene" index="0"]
+script = null
+
+[node name="Engine controller" parent="SoundScene" index="3"]
+script = null
 
 [node name="WindController" parent="SoundScene" index="4" node_paths=PackedStringArray("rbController", "gEffectController")]
 volumeMinMax = Vector2(-30, 15)

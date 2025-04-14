@@ -24,7 +24,7 @@ public partial class Thruster : Node3D {
 
     private void ChangeThrottle(float amount, double delta) {
         throttle = (float)Mathf.Clamp(throttle + amount * delta * throttleChangeSpeedModifier, 0, 1);
-        engineSoundController.Throttle = throttle;
+        // engineSoundController.Throttle = throttle;
     }
     [Export] public float enginePower = 100 /* W */;
     [Export] public float propellerEfficiency = 0.85f;

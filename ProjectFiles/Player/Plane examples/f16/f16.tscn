@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://c88qndtf0a2uw"]
+[gd_scene load_steps=67 format=4 uid="uid://c88qndtf0a2uw"]
 
 [ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_fdlyg"]
 [ext_resource type="Texture2D" uid="uid://crgj684ngenp8" path="res://Player/Plane examples/f16/model/source/lowpoly2_0.png" id="2_6chqk"]
@@ -538,8 +538,6 @@ corner_radius_bottom_left = 3
 gradient = ExtResource("20_06a0d")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Curve" id="Curve_g66qy"]
 
 [sub_resource type="Curve" id="Curve_06a0d"]
 _limits = [1.0, 2.04, -5.0, 20.0]
@@ -1340,11 +1338,10 @@ texture = SubResource("GradientTexture2D_18030")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
-disable = true
+script = null
 
-[node name="Engine controller" parent="SoundScene" index="3" node_paths=PackedStringArray("gEffectController")]
-gEffectController = NodePath("../../GEffectControler")
-HighGEffectSoundVolume = SubResource("Curve_g66qy")
+[node name="Engine controller" parent="SoundScene" index="3"]
+script = null
 
 [node name="WindController" parent="SoundScene" index="4" node_paths=PackedStringArray("rbController", "gEffectController")]
 MaxSpeed = 2500.0
