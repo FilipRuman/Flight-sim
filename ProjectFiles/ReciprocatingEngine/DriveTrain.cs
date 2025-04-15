@@ -36,8 +36,10 @@ public partial class DriveTrain : Node {
     public float propellerRPM => crankshaft.RevolutionsPerSecond * 60 * gearRatio;
     // Maybe later add drivetrainUI 
     public override void _Process(double delta) {
-        if (Input.IsActionJustPressed(starterInputAction))
+        if (Input.IsActionJustPressed(starterInputAction)) {
             starterButtonPressed = !starterButtonPressed;
+            engine.holdIdle = true;
+        }
         starterCheckbox.ButtonPressed = starterButtonPressed;
         hud.throttleToDisplay = engine.throttle;
         hud.thrustToDisplay = currentThrust;
@@ -52,6 +54,7 @@ public partial class DriveTrain : Node {
     public float currentThrust;
     [Export] float dragModifier;
     [Export] bool enable;
+    [Export] float engineShutdownDrag = 200;
     private void HandlePhysics(float delta) {
         if (!enable)
             return;
@@ -68,7 +71,8 @@ public partial class DriveTrain : Node {
 
         currentThrust = thrust;
 
-        float drivetrainTorque = engine.currentTorque - propellerDrag * dragModifier * gearRatio;
+        float shutdownDrag = engine.holdIdle ? 0 : engineShutdownDrag;
+        float drivetrainTorque = engine.currentTorque - (propellerDrag + shutdownDrag) * dragModifier * gearRatio;
         float deltaAngularMomentum = drivetrainTorque;
         float deltaAngularVelocity = deltaAngularMomentum / momentOfInertia;
 

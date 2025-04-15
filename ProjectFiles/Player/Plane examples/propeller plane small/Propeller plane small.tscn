@@ -393,7 +393,9 @@ cylinders = [NodePath("Cylinders/Cylinder 1"), NodePath("Cylinders/Cylinder 2"),
 crankshaft = NodePath("crankshaft")
 heatHandler = NodePath("Heat handler")
 rpmLimit = 3000.0
-mechanicalDragModifier = 10.0
+idleRPMTarget = 500
+idleThrottlePercentage = 1.0
+mechanicalDragModifier = 30.0
 pressureChangeFrictionModifier = 0.0
 boreDm = 0.855
 displacementDm3 = 0.793401
@@ -408,7 +410,7 @@ rodLengthCm = 1513.9
 crankPinLengthCm = 12.765
 crankshaftLength = 56.035
 
-[node name="Engine ui" type="Node" parent="Drivetrain/Engine controller" node_paths=PackedStringArray("soundController", "throttleSlider", "totalTorque", "rpm", "horsePower", "temperature")]
+[node name="Engine ui" type="Node" parent="Drivetrain/Engine controller" node_paths=PackedStringArray("soundController", "throttleSlider", "totalTorque", "rpm", "horsePower", "temperature", "holdIdle")]
 script = ExtResource("8_psr18")
 soundController = NodePath("../../../SoundScene/Engine controller")
 throttleSlider = NodePath("../../../UIController/All hud/HUD box that moves with camera/Throttle")
@@ -416,6 +418,7 @@ totalTorque = NodePath("../../../UIController/Engine UI/GridContainer/Torque")
 rpm = NodePath("../../../UIController/Engine UI/GridContainer/RPM")
 horsePower = NodePath("../../../UIController/Engine UI/GridContainer/Horse power")
 temperature = NodePath("../../../UIController/Engine UI/GridContainer/Temperature")
+holdIdle = NodePath("../../../UIController/Engine UI/GridContainer/idle")
 throttleActionName = "throttleUp"
 
 [node name="Stats smoothing" type="Node" parent="Drivetrain/Engine controller"]
@@ -1141,6 +1144,11 @@ text = "Horse power: 0"
 [node name="starter" type="CheckBox" parent="UIController/Engine UI/GridContainer"]
 layout_mode = 2
 text = "starter"
+
+[node name="idle" type="CheckBox" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "idle
+"
 
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)

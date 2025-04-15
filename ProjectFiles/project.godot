@@ -8,10 +8,6 @@
 
 config_version=5
 
-[Flight-sim]
-
-config/ninetailsrabbit.terrainy/update_notification_enabled=true
-
 [application]
 
 config/name="Flight-sim"
@@ -153,6 +149,11 @@ starter={
 throttle={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
+]
+}
+"hold idle"={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 
