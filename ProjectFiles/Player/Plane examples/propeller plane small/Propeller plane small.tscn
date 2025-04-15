@@ -1,21 +1,29 @@
-[gd_scene load_steps=49 format=4 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=61 format=4 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane examples/propeller plane small/model/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_o28un"]
 [ext_resource type="Script" uid="uid://b3jksv2hjrpmt" path="res://Physics/Wings/Flap.cs" id="2_00tjw"]
-[ext_resource type="Script" uid="uid://dq7babpg5mojc" path="res://Physics/Thruster.cs" id="2_3vl5u"]
 [ext_resource type="Script" uid="uid://canvmt0a7oco6" path="res://Physics/Wings/Wing.cs" id="3_fhl08"]
+[ext_resource type="Script" uid="uid://bmuussxvuy4nl" path="res://ReciprocatingEngine/DriveTrain.cs" id="4_7l70o"]
 [ext_resource type="Material" uid="uid://b8vf83sfrwui0" path="res://Player/Plane examples/propeller plane small/model/Materials/Helice.tres" id="4_apopc"]
 [ext_resource type="Resource" uid="uid://cj1j11x4ioxe5" path="res://Player/Plane examples/propeller plane small/airfoil settings/default Wing configuration.tres" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://whwibi2wewqp" path="res://ReciprocatingEngine/Propeller.cs" id="5_auc7s"]
 [ext_resource type="Script" uid="uid://c631vcp26dh6i" path="res://Physics/Wings/WingsManager.cs" id="5_fhl08"]
 [ext_resource type="Resource" uid="uid://dexuxy72bwww5" path="res://Player/Plane examples/propeller plane small/airfoil settings/Alerone.tres" id="5_vtle1"]
 [ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="6_a3tn1"]
 [ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Player/Plane examples/propeller plane small/airfoil settings/Stab.tres" id="6_od3ui"]
+[ext_resource type="Script" uid="uid://ccblf4w2x8ob8" path="res://ReciprocatingEngine/Data/Engine/EngineController.cs" id="6_psr18"]
+[ext_resource type="Script" uid="uid://b7ba3uaxjle7" path="res://ReciprocatingEngine/Data/Engine/Crankshaft.cs" id="7_1cmca"]
 [ext_resource type="Script" uid="uid://x2rwjvbchwku" path="res://Physics/Wings/Airfoil size/AirfoilSize.cs" id="8_mny0o"]
+[ext_resource type="Script" uid="uid://c0x5rause6t86" path="res://ReciprocatingEngine/Data/Engine/EngineUI.cs" id="8_psr18"]
+[ext_resource type="Script" uid="uid://dxb56a7ylbrri" path="res://ReciprocatingEngine/Data/Engine/EngineStatsSmoothing.cs" id="9_1cmca"]
 [ext_resource type="Resource" uid="uid://dx5k5j3vnhn6c" path="res://Player/Plane examples/propeller plane small/airfoil settings/Elevator.tres" id="9_b2c42"]
+[ext_resource type="Script" uid="uid://0ahy3760o3gk" path="res://ReciprocatingEngine/Data/Engine/Cylinder/AirFlow.cs" id="10_1cmca"]
 [ext_resource type="Texture2D" uid="uid://casyvd7sw1beb" path="res://Sprites/keyboard_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="10_gu6f8"]
 [ext_resource type="PackedScene" uid="uid://c5edjmxfbmmdx" path="res://Sounds/SoundScene.tscn" id="10_x3vf3"]
+[ext_resource type="Script" uid="uid://br8ltumy454oj" path="res://ReciprocatingEngine/Data/Engine/Cylinder/Cylinder.cs" id="11_8wpmy"]
 [ext_resource type="Texture2D" uid="uid://c6sxp3l1nt8vm" path="res://Sprites/stadia_controller_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" id="11_dkpta"]
+[ext_resource type="Script" uid="uid://bdyfbuaytxbci" path="res://ReciprocatingEngine/Data/Engine/EngineHeatHandler.cs" id="11_uhtmu"]
 [ext_resource type="Texture2D" uid="uid://d1oly21sre0wm" path="res://Sprites/Prop.png" id="12_5htga"]
 [ext_resource type="Script" uid="uid://b4yfgb7b6hpmc" path="res://Player/HUD.cs" id="12_b1ygp"]
 [ext_resource type="Texture2D" uid="uid://dr1h5cryjad3m" path="res://Sprites/AirPlaneNoseMarker.png" id="13_o28un"]
@@ -29,6 +37,27 @@ radius = 0.232468
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_00tjw"]
 size = Vector3(4.09311, 0.156006, 1.98804)
+
+[sub_resource type="Curve" id="Curve_ts4k8"]
+_limits = [0.0, 0.8, 0.0, 1.0]
+_data = [Vector2(0, 0.203), 0.0, -0.117647, 0, 1, Vector2(0.051, 0.197), -0.117647, -0.117647, 1, 1, Vector2(0.102, 0.191), -0.117647, -0.115385, 1, 1, Vector2(0.154, 0.185), -0.115385, -0.117647, 1, 1, Vector2(0.205, 0.179), -0.117647, -0.117647, 1, 1, Vector2(0.256, 0.173), -0.117647, -0.115385, 1, 1, Vector2(0.308, 0.167), -0.115385, -0.117647, 1, 1, Vector2(0.359, 0.161), -0.117647, -0.117647, 1, 1, Vector2(0.41, 0.155), -0.117647, -0.132075, 1, 1, Vector2(0.463, 0.148), -0.132075, -0.117647, 1, 1, Vector2(0.514, 0.142), -0.117647, -0.117647, 1, 1, Vector2(0.565, 0.136), -0.117647, -0.117647, 1, 1, Vector2(0.616, 0.13), -0.117647, -0.115385, 1, 1, Vector2(0.668, 0.124), -0.115385, -0.117647, 1, 1, Vector2(0.719, 0.118), -0.117647, -0.117647, 1, 1, Vector2(0.77, 0.112), -0.117647, -0.117647, 1, 1, Vector2(0.821, 0.106), -0.117647, -0.134615, 1, 1, Vector2(0.873, 0.099), -0.134615, -0.117647, 1, 1, Vector2(0.924, 0.093), -0.117647, -0.414635, 1, 1, Vector2(0.965, 0.076), -0.414635, -0.28323, 1, 1, Vector2(1, 0.0660869), -0.28323, 0.0, 1, 0]
+point_count = 21
+
+[sub_resource type="Curve" id="Curve_5cyn4"]
+_limits = [0.01, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -32.1207, 0, 0, Vector2(0.439206, 8.71748), 0.0, 0.0, 0, 0, Vector2(1, 6.36179), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_count = 2
+
+[sub_resource type="Curve" id="Curve_uhtmu"]
+_limits = [-1.0, 1.5, -5.0, 25.0]
+_data = [Vector2(-5, -0.081584), -0.00429473, 0.0086789, 0, 0, Vector2(15.5459, 0.259542), 0.0, 0.0, 0, 0, Vector2(22.1712, 1.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_adap6"]
+_limits = [-1.0, 1.5, -5.0, 25.0]
+_data = [Vector2(-5, -0.081584), 0.0, 0.0, 0, 0, Vector2(17.0347, 1.5), -0.0185977, -0.0185977, 0, 0, Vector2(25, -0.190124), 0.104147, 0.104147, 0, 0]
+point_count = 3
 
 [sub_resource type="Resource" id="Resource_8wpmy"]
 script = ExtResource("8_mny0o")
@@ -324,14 +353,118 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.0300107, 2.44941)
 visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Thruster" type="Node3D" parent="." node_paths=PackedStringArray("rb", "engineSoundController", "wingsManager")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
-script = ExtResource("2_3vl5u")
+[node name="Drivetrain" type="Node" parent="." node_paths=PackedStringArray("rb", "uiController", "hud", "wingsManager", "propeller", "crankshaft", "engine", "starterCheckbox", "angleOfAttackOfTip")]
+script = ExtResource("4_7l70o")
 rb = NodePath("..")
-engineSoundController = NodePath("../SoundScene/Engine controller")
+uiController = NodePath("../UIController")
+hud = NodePath("../UIController/All hud")
 wingsManager = NodePath("../wings/wings manager")
-enginePower = 22000.0
-PropellerRadius = 8.0
+propeller = NodePath("Propeller")
+crankshaft = NodePath("Engine controller/crankshaft")
+engine = NodePath("Engine controller")
+momentOfInertia = 18000.0
+gearRatio = 1.0
+starterSpeed = 200.0
+starterCheckbox = NodePath("../UIController/Engine UI/GridContainer/starter")
+angleOfAttackOfTip = NodePath("../UIController/Engine UI/GridContainer/Angle of attack")
+enginePhysicsUpdatesPerSecond = 2000.0
+starterInputAction = "starter"
+dragModifier = 1.0
+enable = true
+
+[node name="Propeller" type="Node" parent="Drivetrain"]
+script = ExtResource("5_auc7s")
+hubRadius = 0.1
+bladeElements = 20
+blades = 2
+bladeLength = 1.0
+chordBasedOnDistanceFromBeginningOfBlade = SubResource("Curve_ts4k8")
+bladeAngleBasedOnDistanceFromBeginningOfBladeRad = SubResource("Curve_5cyn4")
+dragBasedOnAoA = SubResource("Curve_uhtmu")
+liftBasedOnAoA = SubResource("Curve_adap6")
+
+[node name="Engine controller" type="Node" parent="Drivetrain" node_paths=PackedStringArray("ui", "statsSmoothing", "airFlow", "cylinders", "crankshaft", "heatHandler")]
+script = ExtResource("6_psr18")
+ui = NodePath("Engine ui")
+statsSmoothing = NodePath("Stats smoothing")
+airFlow = NodePath("Airflow")
+cylinders = [NodePath("Cylinders/Cylinder 1"), NodePath("Cylinders/Cylinder 2"), NodePath("Cylinders/Cylinder 3"), NodePath("Cylinders/Cylinder 4")]
+crankshaft = NodePath("crankshaft")
+heatHandler = NodePath("Heat handler")
+rpmLimit = 3000.0
+mechanicalDragModifier = 10.0
+pressureChangeFrictionModifier = 0.0
+boreDm = 0.855
+displacementDm3 = 0.793401
+strokeLengthDm = 1.28188
+additionalUpwardHeightDm = 0.1
+pistonHeightCm = 0.1
+
+[node name="crankshaft" type="Node" parent="Drivetrain/Engine controller" node_paths=PackedStringArray("engine")]
+script = ExtResource("7_1cmca")
+engine = NodePath("..")
+rodLengthCm = 1513.9
+crankPinLengthCm = 12.765
+crankshaftLength = 56.035
+
+[node name="Engine ui" type="Node" parent="Drivetrain/Engine controller" node_paths=PackedStringArray("soundController", "throttleSlider", "totalTorque", "rpm", "horsePower", "temperature")]
+script = ExtResource("8_psr18")
+soundController = NodePath("../../../SoundScene/Engine controller")
+throttleSlider = NodePath("../../../UIController/All hud/HUD box that moves with camera/Throttle")
+totalTorque = NodePath("../../../UIController/Engine UI/GridContainer/Torque")
+rpm = NodePath("../../../UIController/Engine UI/GridContainer/RPM")
+horsePower = NodePath("../../../UIController/Engine UI/GridContainer/Horse power")
+temperature = NodePath("../../../UIController/Engine UI/GridContainer/Temperature")
+throttleActionName = "throttleUp"
+
+[node name="Stats smoothing" type="Node" parent="Drivetrain/Engine controller"]
+script = ExtResource("9_1cmca")
+averageSmoothingFrames = 10
+
+[node name="Airflow" type="Node" parent="Drivetrain/Engine controller"]
+script = ExtResource("10_1cmca")
+MaxValveLiftCm = 90.0
+throttleDiameterCm = 90.0
+intakeVelocityModifier = 0.56
+flowEfficiency = 0.8
+exhaustVelocityModifier = 0.6
+exhaustAreaCm = 1600.0
+
+[node name="Heat handler" type="Node" parent="Drivetrain/Engine controller"]
+script = ExtResource("11_uhtmu")
+emissivityOfTheGas = 0.039
+cylinderWallThicknessCm = 10.0
+coolingAreaModifier = 6.0
+heatingAreaModifier = 10.0
+gasVelocityModifier = 0.001
+
+[node name="Cylinders" type="Node3D" parent="Drivetrain/Engine controller"]
+visible = false
+
+[node name="Cylinder 1" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+currentStrokeType = 1
+
+[node name="Cylinder 2" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+cylinderIndex = 1
+angleOffset = 540.0
+
+[node name="Cylinder 3" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+cylinderIndex = 2
+angleOffset = 180.0
+currentStrokeType = 2
+
+[node name="Cylinder 4" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+cylinderIndex = 3
+angleOffset = 360.0
+currentStrokeType = 3
 
 [node name="Wings" type="Node" parent="."]
 
@@ -428,11 +561,10 @@ speedModifier = 1.0
 massOfPlane = 900.0
 trimStepSize = 0.005
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
 script = ExtResource("6_a3tn1")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
-thruster = NodePath("../Thruster")
 windController = NodePath("../SoundScene/WindController")
 speed = NodePath("Panel/HBoxContainer/Speed")
 AoA = NodePath("Panel/HBoxContainer/AoA")
@@ -448,7 +580,7 @@ propRotationModifier = 1.0
 controls = NodePath("Controls")
 controlsToggleButton = NodePath("Toggle controls Button")
 
-[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
+[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -460,7 +592,6 @@ playerRbController = NodePath("../..")
 rb = NodePath("../..")
 wingsManager = NodePath("../../wings/wings manager")
 cameraController = NodePath("../../CameraController")
-thruster = NodePath("../../Thruster")
 horizon = NodePath("Pitch line")
 flightPathIndicator = NodePath("Flight path")
 planeNoseDirectionIndicator = NodePath("Plane nose direction")
@@ -606,7 +737,6 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_x3vf3")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_apopc")
 max_value = 1.0
 step = 0.01
-value = 0.53
 
 [node name="Force" type="Label" parent="UIController/All hud/HUD box that moves with camera/Throttle"]
 layout_mode = 2
@@ -952,14 +1082,65 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_nx2ig")
 
+[node name="Engine UI" type="Panel" parent="UIController"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -292.0
+offset_bottom = 153.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="UIController/Engine UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RPM" type="Label" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "RPM: 0"
+
+[node name="Torque" type="Label" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "Torque: -2147483648"
+
+[node name="Temperature" type="Label" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "Temperature of 1'st cylinder's wall: 30C"
+
+[node name="Horse power" type="Label" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "Horse power: 0"
+
+[node name="Angle of attack" type="Label" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "Horse power: 0"
+
+[node name="starter" type="CheckBox" parent="UIController/Engine UI/GridContainer"]
+layout_mode = 2
+text = "starter"
+
 [node name="SoundScene" parent="." instance=ExtResource("10_x3vf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
-script = null
+Duration = 10.0
+NoiseVolume = 0.1
+DistortionAmount = 1.5
+FeedbackAmount = 0.3
+
+[node name="AudioStreamPlayer" parent="SoundScene/Engine synth" index="0"]
+volume_db = 1.0
+stream_paused = false
 
 [node name="Engine controller" parent="SoundScene" index="3"]
-script = null
+volumeMinMax = Vector2(1, 11)
 
 [node name="WindController" parent="SoundScene" index="4" node_paths=PackedStringArray("rbController", "gEffectController")]
 volumeMinMax = Vector2(-30, 15)

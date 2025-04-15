@@ -3,10 +3,14 @@ using System;
 
 public partial class DriveTrain : Node {
     [Export] RigidBody3D rb;
+    [Export] Player.UiController uiController;
+    [Export] HUD hud;
+
     [Export] WingsManager wingsManager;
     [Export] Propeller propeller;
     [Export] Crankshaft crankshaft;
     [Export] public EngineController engine;
+
     [Export] public float momentOfInertia;
 
     [Export] float gearRatio;
@@ -15,17 +19,36 @@ public partial class DriveTrain : Node {
 
     public bool starterButtonPressed;
 
+    [Export] CheckBox starterCheckbox;
+    [Export] Label angleOfAttackOfTip;
+
     [Export] private float enginePhysicsUpdatesPerSecond;
     private TickSystem enginePhysicsTickSystem = new();
-
+    [Export] private string starterInputAction;
     public override void _Ready() {
         enginePhysicsTickSystem.updatesPerSecond = enginePhysicsUpdatesPerSecond;
         enginePhysicsTickSystem.toCall.Clear();
         enginePhysicsTickSystem.toCall.Add(HandlePhysics);
+
         base._Ready();
     }
 
+    // Maybe later add drivetrainUI 
+    public override void _Process(double delta) {
+        if (Input.IsActionJustPressed(starterInputAction))
+            starterButtonPressed = !starterButtonPressed;
+        starterCheckbox.ButtonPressed = starterButtonPressed;
+        hud.throttleToDisplay = engine.throttle;
+        hud.thrustToDisplay = currentThrust;
+        uiController.thrustToDisplay = currentThrust;
+        base._Process(delta);
+    }
+    public float currentThrust;
+    [Export] float dragModifier;
+    [Export] bool enable;
     private void HandlePhysics(float delta) {
+        if (!enable)
+            return;
         engine.HandlePhysics(delta);
         engine.PhysicsProcessDataForLaterUI();
 
@@ -33,22 +56,24 @@ public partial class DriveTrain : Node {
         engine.ambientAirTemperature = airTemperature;
         engine.ambientAirDensity = airDensity;
 
-        propeller.HandlePhysics(wingsManager.FrontalVelocity, airDensity, currentAngularVelocity * gearRatio, out float thrust, out float propellerDrag);
+        propeller.HandlePhysics(delta, wingsManager.FrontalVelocity, airDensity, currentAngularVelocity * gearRatio, out float thrust, out float propellerDrag, out string aoaDebug);
+        angleOfAttackOfTip.Text = "angles of attack of propeller elements: \n" + aoaDebug;
         ApplyThrust(thrust);
 
-        float drivetrainTorque = engine.currentTorque - propellerDrag * gearRatio;
-        float deltaAngularMomentum = drivetrainTorque * delta;
+        currentThrust = thrust;
+
+        float drivetrainTorque = engine.currentTorque - propellerDrag * dragModifier * gearRatio;
+        float deltaAngularMomentum = drivetrainTorque;
         float deltaAngularVelocity = deltaAngularMomentum / momentOfInertia;
 
         currentAngularVelocity += deltaAngularVelocity;
+        currentAngularVelocity = Mathf.Max(currentAngularVelocity, 0);
+
 
         if (starterButtonPressed)
             currentAngularVelocity = starterSpeed;
 
         crankshaft.UpdateCrankshaftStatsBasedOnDrivetrain(currentAngularVelocity, delta);
-
-
-
     }
     private void ApplyThrust(float thrust) {
         if (float.IsNaN(thrust))

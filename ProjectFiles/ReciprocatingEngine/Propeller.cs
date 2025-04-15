@@ -7,26 +7,32 @@ public partial class Propeller : Node {
     [Export] private uint blades;
     [Export] private float bladeLength = 2;/* m */
 
-    [Export] Curve chordBasedOnDistanceFormCenter;
-    [Export] Curve bladeAngleBasedOnDistanceFromCenter;
+    [Export] Curve chordBasedOnDistanceFromBeginningOfBlade;
+    [Export] Curve bladeAngleBasedOnDistanceFromBeginningOfBladeRad;
     [Export] Curve dragBasedOnAoA;
     [Export] Curve liftBasedOnAoA;
-    public void HandlePhysics(float planeForwardVelocity, float airDensity, float angularVelocityOfPropellerRad, out float outputThrust, out float dragTorque) {
+    public void HandlePhysics(float delta, float planeForwardVelocity, float airDensity, float angularVelocityOfPropellerRad, out float outputThrust, out float dragTorque, out string angleOfAttackDebug) {
         outputThrust = 0;
         dragTorque = 0;
         float bladeElementDistanceRatio = bladeLength / bladeElements;
+        angleOfAttackDebug = "";
         for (int element = 0; element < bladeElements; element++) {
-            float distanceFromCenter = hubRadius + (element + .5f) * bladeElementDistanceRatio;
-            float chord = chordBasedOnDistanceFormCenter.SampleBaked(distanceFromCenter);
-            float bladeAngle = bladeAngleBasedOnDistanceFromCenter.SampleBaked(distanceFromCenter);
+
+
+            float distanceFromBeginningOfBlade = (element + .5f) * bladeElementDistanceRatio;
+            float distanceFromCenter = hubRadius + distanceFromBeginningOfBlade;
+
+            float positionPercentage = (float)element / bladeElements;
+            float chord = chordBasedOnDistanceFromBeginningOfBlade.SampleBaked(positionPercentage);
+            float bladeAngle = Mathf.DegToRad(bladeAngleBasedOnDistanceFromBeginningOfBladeRad.SampleBaked(positionPercentage));
 
             float elementVelocity = distanceFromCenter * angularVelocityOfPropellerRad;
 
             float totalVelocity = Mathf.Sqrt(planeForwardVelocity * planeForwardVelocity + elementVelocity * elementVelocity);
 
-            float inflowAngle = Mathf.Atan2(elementVelocity, planeForwardVelocity);
-            float angleOfAttack = bladeAngle * inflowAngle;
-
+            float inflowAngle = Mathf.Atan2(planeForwardVelocity, elementVelocity);
+            float angleOfAttack = Mathf.RadToDeg(bladeAngle * inflowAngle);
+            angleOfAttackDebug += $"{angleOfAttack}      {bladeAngle} \n";
             float liftCoefficient = liftBasedOnAoA.SampleBaked(angleOfAttack);
             float dragCoefficient = dragBasedOnAoA.SampleBaked(angleOfAttack);
 
@@ -36,14 +42,14 @@ public partial class Propeller : Node {
 
 
             float thrust = lift * Mathf.Cos(inflowAngle) - drag * Mathf.Sin(inflowAngle);
-            float torque = (lift * Mathf.Sin(inflowAngle) - drag * Mathf.Cos(inflowAngle)) * distanceFromCenter;
+            float torque = (lift * Mathf.Sin(inflowAngle) + drag * Mathf.Cos(inflowAngle)) * distanceFromCenter;
 
             dragTorque += torque;
             outputThrust += thrust;
         }
 
-        dragTorque *= blades;
-        outputThrust *= blades;
+        dragTorque *= blades * delta;
+        outputThrust *= blades * delta;
     }
 
 }

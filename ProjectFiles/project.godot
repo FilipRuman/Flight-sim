@@ -40,6 +40,21 @@ project/assembly_name="Flight-sim"
 
 enabled=PackedStringArray("res://addons/ninetailsrabbit.terrainy/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Clouds/": "blue",
+"res://Physics/": "purple",
+"res://Player/": "red",
+"res://ReciprocatingEngine/": "orange",
+"res://ReciprocatingEngine/Data/Engine/": "orange",
+"res://Sounds/": "yellow",
+"res://Sprites/": "green",
+"res://TerrainGeneration/": "pink",
+"res://addons/": "gray",
+"res://materials/": "teal"
+}
+
 [input]
 
 throttleUp={
@@ -128,6 +143,16 @@ camLeft={
 camRight={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
+]
+}
+starter={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+throttle={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
 

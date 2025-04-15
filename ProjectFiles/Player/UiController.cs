@@ -1,15 +1,10 @@
-namespace Player
-{
+namespace Player {
     using Godot;
     using System;
-    public partial class UiController : CanvasLayer
-    {
-
-
+    public partial class UiController : CanvasLayer {
         [ExportGroup("Ref")]
         [Export] private RigidBody3D rb;
         [Export] private WingsManager wingsManager;
-        [Export] private Thruster thruster;
         [Export] WindController windController;
 
 
@@ -18,7 +13,7 @@ namespace Player
         [Export] private Label AoA;
         [Export] private Label altitude;
         [Export] private Label airDensity;
-        [Export] private Label thrustOfPropeller;
+        [Export] public Label thrustOfPropeller;
         [Export] private Label fps;
 
         [Export] float FramesPerUpdate = 10;
@@ -34,13 +29,15 @@ namespace Player
         [ExportGroup("Controls")]
         [Export] private Panel controls;
         [Export] private Button controlsToggleButton;
-        public override void _Ready()
-        {
+        public override void _Ready() {
             controlsToggleButton.Pressed += () => controls.Visible = !controls.Visible;
             base._Ready();
         }
-        public override void _Process(double delta)
-        {
+
+
+        public float thrustToDisplay;
+        public float propellerRpm;
+        public override void _Process(double delta) {
             fps.Text = $"fps: {Mathf.RoundToInt(Engine.GetFramesPerSecond())}";
 
             frameIndex++;
@@ -61,24 +58,21 @@ namespace Player
             this.altitude.Text = $"{Mathf.RoundToInt(altitude)} m";
             airDensity.Text = $"{Math.Round(Air.GetLocalAirDensity(altitude), 2)} kg/m^3";
 
-            thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller)} N";
+
+            thrustOfPropeller.Text = $"thrust: {(int)thrustToDisplay}N";
 
             AoA.Text = $"{Math.Round(wingsManager.wings[0].angleOfAttack, 1)} °";
 
             speed.Text = $"{(velocity < 20 ? 0 : Math.Round(velocity))} km/h";
         }
-
-        private void UpdatePropeller(float velocity)
-        {
+        [Export] public float maxPropRpmBeforeSprite = 1000;
+        private void UpdatePropeller(float velocity) {
             if (!displayPropeller)
                 return;
-            if (velocity < 1)
-                velocity = 0;
-            bool ShowSprite = velocity > 40;
+            bool ShowSprite = velocity > maxPropRpmBeforeSprite;
             propellor.Visible = !ShowSprite;
-            if (!ShowSprite)
-            {
-                propellor.Rotate(Vector3.Forward, propRotationModifier * (velocity + thruster.throttle * 10f));
+            if (!ShowSprite) {
+                propellor.Rotate(Vector3.Forward, propRotationModifier * propellerRpm);
             }
 
             propAtHighSpeed.Visible = ShowSprite;

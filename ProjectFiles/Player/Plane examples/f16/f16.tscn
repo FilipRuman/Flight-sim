@@ -812,11 +812,10 @@ speedModifier = 5.0
 massOfPlane = 1000.0
 trimStepSize = 0.015
 
-[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "thruster", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "controls", "controlsToggleButton")]
+[node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "controls", "controlsToggleButton")]
 script = ExtResource("8_18030")
 rb = NodePath("..")
 wingsManager = NodePath("../wings/wings manager")
-thruster = NodePath("../Thruster")
 windController = NodePath("../SoundScene/WindController")
 speed = NodePath("Panel/HBoxContainer/Speed")
 AoA = NodePath("Panel/HBoxContainer/AoA")
@@ -830,7 +829,7 @@ propRotationModifier = 1.0
 controls = NodePath("Controls")
 controlsToggleButton = NodePath("Toggle controls Button")
 
-[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "thruster", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
+[node name="All hud" type="Control" parent="UIController" node_paths=PackedStringArray("playerRbController", "rb", "wingsManager", "cameraController", "horizon", "flightPathIndicator", "planeNoseDirectionIndicator", "Speed", "Altitude", "G", "Match", "AoA", "Rotation", "Heading", "thrustOfPropeller", "throttle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -842,7 +841,6 @@ playerRbController = NodePath("../..")
 rb = NodePath("../..")
 wingsManager = NodePath("../../wings/wings manager")
 cameraController = NodePath("../../CameraController")
-thruster = NodePath("../../Thruster")
 horizon = NodePath("Pitch line")
 flightPathIndicator = NodePath("Flight path")
 planeNoseDirectionIndicator = NodePath("Plane nose direction")
@@ -1339,6 +1337,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.74786, 1.75127)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
 script = null
+
+[node name="AudioStreamPlayer" parent="SoundScene/Engine synth" index="0"]
+stream_paused = false
 
 [node name="Engine controller" parent="SoundScene" index="3"]
 script = null

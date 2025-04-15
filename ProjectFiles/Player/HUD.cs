@@ -1,14 +1,12 @@
 using Godot;
 using System;
 
-public partial class HUD : Node
-{
+public partial class HUD : Node {
     [Export] PlayerRbController playerRbController;
     [Export] RigidBody3D rb;
     [Export] WingsManager wingsManager;
     Camera3D currentCam;
     [Export] CameraController cameraController;
-    [Export] private Thruster thruster;
 
     [Export] Control horizon;
     [Export] Control flightPathIndicator;
@@ -25,8 +23,9 @@ public partial class HUD : Node
     [Export] float FramesPerUpdate = 10;
     int frameIndex = 0;
 
-    public override void _Process(double delta)
-    {
+    public float throttleToDisplay;
+    public float thrustToDisplay;
+    public override void _Process(double delta) {
         currentCam = PlayerCam.Ref.cam;
 
         frameIndex++;
@@ -34,17 +33,16 @@ public partial class HUD : Node
         flightPathIndicator.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + rb.LinearVelocity);
         flightPathIndicator.RotationDegrees = -rb.RotationDegrees.Z;
         planeNoseDirectionIndicator.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + rb.Basis.Z);
-        throttle.Value = thruster.throttle;
+        throttle.Value = throttleToDisplay;
 
-        if (frameIndex < FramesPerUpdate)
-        {
+        if (frameIndex < FramesPerUpdate) {
             base._Process(delta);
             return;
         }
         G.Text = $"G {Math.Round(playerRbController.currentGForce, 1)}";
         Match.Text = $"M {Math.Round(Air.GetMatchNumber(wingsManager.FrontalVelocity, wingsManager.Altitude), 2)}";
         frameIndex = 0;
-        thrustOfPropeller.Text = $"{Math.Round(thruster.thrustOfPropeller / 1000)} kN";
+        thrustOfPropeller.Text = $"{Math.Round(thrustToDisplay / 1000)} kN";
 
         Speed.Text = AddDots(Mathf.RoundToInt(wingsManager.FrontalVelocity * 3.6f).ToString()); ;
         var altitude = Mathf.RoundToInt(wingsManager.Altitude).ToString();
@@ -55,15 +53,13 @@ public partial class HUD : Node
 
 
     }
-    static string AddDots(string input)
-    {
+    static string AddDots(string input) {
         bool endsWithSymbol = input[^1] is '+' or '-';
         int indexToAddDotOn = 3 + (endsWithSymbol ? 1 : 0);
         return (input.Length > indexToAddDotOn) ? input.Insert(input.Length - indexToAddDotOn, ".") : input;
     }
 
-    public void DrawHorizon()
-    {
+    public void DrawHorizon() {
         horizon.Position = currentCam.UnprojectPosition(currentCam.GlobalPosition + Vector3.Forward.Rotated(Vector3.Up, currentCam.GlobalRotation.Y)) - horizon.Size / 2;
         horizon.RotationDegrees = currentCam.GlobalRotationDegrees.Z;
 
