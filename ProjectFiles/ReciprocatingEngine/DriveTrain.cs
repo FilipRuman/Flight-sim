@@ -33,7 +33,7 @@ public partial class DriveTrain : Node {
 
         base._Ready();
     }
-
+    public float propellerRPM => crankshaft.RevolutionsPerSecond * 60 * gearRatio;
     // Maybe later add drivetrainUI 
     public override void _Process(double delta) {
         if (Input.IsActionJustPressed(starterInputAction))
@@ -41,10 +41,12 @@ public partial class DriveTrain : Node {
         starterCheckbox.ButtonPressed = starterButtonPressed;
         hud.throttleToDisplay = engine.throttle;
         hud.thrustToDisplay = currentThrust;
+
         uiController.thrustToDisplay = currentThrust;
+        uiController.propellerRpm = propellerRPM;
 
         engineSoundController.throttle = engine.throttle;
-        engineSoundController.rpm = crankshaft.RevolutionsPerSecond * 60;
+        engineSoundController.rpm = propellerRPM;
         base._Process(delta);
     }
     public float currentThrust;

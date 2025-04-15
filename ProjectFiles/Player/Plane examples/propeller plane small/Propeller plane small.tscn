@@ -363,7 +363,7 @@ wingsManager = NodePath("../wings/wings manager")
 propeller = NodePath("Propeller")
 crankshaft = NodePath("Engine controller/crankshaft")
 engine = NodePath("Engine controller")
-momentOfInertia = 18000.0
+momentOfInertia = 28000.0
 gearRatio = 1.0
 starterSpeed = 200.0
 starterCheckbox = NodePath("../UIController/Engine UI/GridContainer/starter")
@@ -389,7 +389,7 @@ script = ExtResource("6_psr18")
 ui = NodePath("Engine ui")
 statsSmoothing = NodePath("Stats smoothing")
 airFlow = NodePath("Airflow")
-cylinders = [NodePath("Cylinders/Cylinder 1"), NodePath("Cylinders/Cylinder 2"), NodePath("Cylinders/Cylinder 3"), NodePath("Cylinders/Cylinder 4")]
+cylinders = [NodePath("Cylinders/Cylinder 1"), NodePath("Cylinders/Cylinder 2"), NodePath("Cylinders/Cylinder 3"), NodePath("Cylinders/Cylinder 4"), NodePath("Cylinders/Cylinder 5"), NodePath("Cylinders/Cylinder 6")]
 crankshaft = NodePath("crankshaft")
 heatHandler = NodePath("Heat handler")
 rpmLimit = 3000.0
@@ -445,27 +445,42 @@ visible = false
 [node name="Cylinder 1" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
 script = ExtResource("11_8wpmy")
-currentStrokeType = 1
+angleOffset = 1080.0
+currentStrokeType = 3
 
 [node name="Cylinder 2" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
 script = ExtResource("11_8wpmy")
 cylinderIndex = 1
-angleOffset = 540.0
+angleOffset = 360.0
+currentStrokeType = 3
 
 [node name="Cylinder 3" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
 script = ExtResource("11_8wpmy")
 cylinderIndex = 2
-angleOffset = 180.0
-currentStrokeType = 2
+angleOffset = 720.0
+currentStrokeType = 1
 
 [node name="Cylinder 4" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
 script = ExtResource("11_8wpmy")
 cylinderIndex = 3
-angleOffset = 360.0
-currentStrokeType = 3
+angleOffset = 180.0
+currentStrokeType = 2
+
+[node name="Cylinder 5" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+cylinderIndex = 4
+angleOffset = 900.0
+currentStrokeType = 2
+
+[node name="Cylinder 6" type="Node3D" parent="Drivetrain/Engine controller/Cylinders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99942, 5)
+script = ExtResource("11_8wpmy")
+cylinderIndex = 5
+angleOffset = 540.0
 
 [node name="Wings" type="Node" parent="."]
 
@@ -1131,7 +1146,7 @@ text = "starter"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
-culindersCount = 4
+culindersCount = 6
 cylindersOffset = 1911.78
 frequency = 100.0
 amplitude = 4.05

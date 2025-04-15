@@ -24,6 +24,7 @@ namespace Player {
         [Export] private Node3D propellor;
         [Export] private Sprite3D propAtHighSpeed;
         [Export] private float propRotationModifier = 300;
+        [Export] public float maxPropRpmBeforeSprite = 1000;
 
 
         [ExportGroup("Controls")]
@@ -44,9 +45,7 @@ namespace Player {
             float velocity = wingsManager.FrontalVelocity * 3.6f; /* in km/h */
             windController.Speed = velocity;
 
-            UpdatePropeller(velocity);
-
-
+            UpdatePropeller();
 
             if (frameIndex < FramesPerUpdate)
                 return;
@@ -65,11 +64,10 @@ namespace Player {
 
             speed.Text = $"{(velocity < 20 ? 0 : Math.Round(velocity))} km/h";
         }
-        [Export] public float maxPropRpmBeforeSprite = 1000;
-        private void UpdatePropeller(float velocity) {
+        private void UpdatePropeller() {
             if (!displayPropeller)
                 return;
-            bool ShowSprite = velocity > maxPropRpmBeforeSprite;
+            bool ShowSprite = propellerRpm > maxPropRpmBeforeSprite;
             propellor.Visible = !ShowSprite;
             if (!ShowSprite) {
                 propellor.Rotate(Vector3.Forward, propRotationModifier * propellerRpm);
