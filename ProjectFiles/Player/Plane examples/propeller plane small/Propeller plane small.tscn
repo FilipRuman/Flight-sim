@@ -353,11 +353,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.0300107, 2.44941)
 visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Drivetrain" type="Node" parent="." node_paths=PackedStringArray("rb", "uiController", "hud", "wingsManager", "propeller", "crankshaft", "engine", "starterCheckbox", "angleOfAttackOfTip")]
+[node name="Drivetrain" type="Node" parent="." node_paths=PackedStringArray("rb", "uiController", "hud", "engineSoundController", "wingsManager", "propeller", "crankshaft", "engine", "starterCheckbox", "angleOfAttackOfTip")]
 script = ExtResource("4_7l70o")
 rb = NodePath("..")
 uiController = NodePath("../UIController")
 hud = NodePath("../UIController/All hud")
+engineSoundController = NodePath("../SoundScene/Engine controller")
 wingsManager = NodePath("../wings/wings manager")
 propeller = NodePath("Propeller")
 crankshaft = NodePath("Engine controller/crankshaft")
@@ -1130,13 +1131,18 @@ text = "starter"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63541)
 
 [node name="Engine synth" parent="SoundScene" index="0"]
-Duration = 10.0
-NoiseVolume = 0.1
-DistortionAmount = 1.5
-FeedbackAmount = 0.3
+culindersCount = 4
+cylindersOffset = 1911.78
+frequency = 100.0
+amplitude = 4.05
+dutyCycle = 0.35
+NoiseVolume = 1.0
+DistortionAmount = 9.595
+FeedbackAmount = 9.84
 
 [node name="AudioStreamPlayer" parent="SoundScene/Engine synth" index="0"]
 volume_db = 1.0
+autoplay = true
 stream_paused = false
 
 [node name="Engine controller" parent="SoundScene" index="3"]

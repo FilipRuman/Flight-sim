@@ -5,6 +5,7 @@ public partial class DriveTrain : Node {
     [Export] RigidBody3D rb;
     [Export] Player.UiController uiController;
     [Export] HUD hud;
+    [Export] EngineSoundController engineSoundController;
 
     [Export] WingsManager wingsManager;
     [Export] Propeller propeller;
@@ -41,6 +42,9 @@ public partial class DriveTrain : Node {
         hud.throttleToDisplay = engine.throttle;
         hud.thrustToDisplay = currentThrust;
         uiController.thrustToDisplay = currentThrust;
+
+        engineSoundController.throttle = engine.throttle;
+        engineSoundController.rpm = crankshaft.RevolutionsPerSecond * 60;
         base._Process(delta);
     }
     public float currentThrust;
