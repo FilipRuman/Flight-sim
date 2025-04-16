@@ -13,6 +13,7 @@ public partial class Thruster : Node3D {
 
 
     [Export] private WingsManager wingsManager;
+    [Export] private HUD hud;
     public override void _Process(double delta) {
         if (Input.IsActionPressed(throttleUpAction)) {
             ChangeThrottle(Input.GetActionStrength(throttleUpAction), delta);
@@ -20,6 +21,12 @@ public partial class Thruster : Node3D {
         if (Input.IsActionPressed(throttleDownAction)) {
             ChangeThrottle(-Input.GetActionStrength(throttleDownAction), delta);
         }
+
+        if (hud == null)
+            return;
+
+        hud.thrustToDisplay = thrustOfPropeller;
+        hud.throttleToDisplay = throttle;
     }
 
     private void ChangeThrottle(float amount, double delta) {
