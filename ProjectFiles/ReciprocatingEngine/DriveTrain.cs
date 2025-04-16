@@ -23,6 +23,10 @@ public partial class DriveTrain : Node {
     [Export] CheckBox starterCheckbox;
     [Export] Label angleOfAttackOfTip;
 
+    [Export] TextureProgressBar rpmPercentageBarHUD;
+    [Export] Label temperatureLabelHUD;
+
+
     [Export] private float enginePhysicsUpdatesPerSecond;
     private TickSystem enginePhysicsTickSystem = new();
     [Export] private string starterInputAction;
@@ -30,6 +34,10 @@ public partial class DriveTrain : Node {
         enginePhysicsTickSystem.updatesPerSecond = enginePhysicsUpdatesPerSecond;
         enginePhysicsTickSystem.toCall.Clear();
         enginePhysicsTickSystem.toCall.Add(HandlePhysics);
+
+        rpmPercentageBarHUD.MinValue = 0;
+        rpmPercentageBarHUD.MaxValue = engine.rpmLimit;
+
 
         base._Ready();
     }
@@ -49,6 +57,10 @@ public partial class DriveTrain : Node {
 
         engineSoundController.throttle = engine.throttle;
         engineSoundController.rpm = propellerRPM;
+
+        rpmPercentageBarHUD.Value = engine.crankshaft.RevolutionsPerSecond * 60f;
+        temperatureLabelHUD.Text = $"{(uint)(engine.heatHandler.cylinderWallTemperature - 273)}";
+
         base._Process(delta);
     }
     public float currentThrust;
