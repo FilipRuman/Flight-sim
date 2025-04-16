@@ -288,7 +288,7 @@ process_priority = 1
 process_physics_priority = 1
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.162489)
-mass = 900.0
+mass = 9000.0
 center_of_mass_mode = 1
 continuous_cd = true
 linear_velocity = Vector3(0, 0, 100)
@@ -554,7 +554,7 @@ script = ExtResource("3_fhl08")
 configResource = ExtResource("9_b2c42")
 airfoilSize = SubResource("Resource_7l70o")
 rotateWholeWing = true
-flapAngleModifier = 8.0
+flapAngleModifier = 5.0
 
 [node name="Elevator BR" type="Node3D" parent="wings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.173, 1.099, -3.442)
@@ -562,7 +562,7 @@ script = ExtResource("3_fhl08")
 configResource = ExtResource("9_b2c42")
 airfoilSize = SubResource("Resource_auc7s")
 rotateWholeWing = true
-flapAngleModifier = 8.0
+flapAngleModifier = 5.0
 
 [node name="Wg S" type="Node3D" parent="wings"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.138, -3.11)
@@ -589,7 +589,7 @@ yawWings = [NodePath("../Rudder S")]
 forcesModifiers = Vector3(20, 36, 8)
 rb = NodePath("../..")
 speedModifier = 1.0
-massOfPlane = 900.0
+massOfPlane = 2400.0
 trimStepSize = 0.005
 
 [node name="UIController" type="CanvasLayer" parent="." node_paths=PackedStringArray("rb", "wingsManager", "windController", "speed", "AoA", "altitude", "airDensity", "thrustOfPropeller", "fps", "propellor", "propAtHighSpeed", "controls", "controlsToggleButton")]
