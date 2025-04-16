@@ -67,8 +67,15 @@ namespace Player {
         private void UpdatePropeller() {
             if (!displayPropeller)
                 return;
-            bool ShowSprite = propellerRpm > maxPropRpmBeforeSprite;
-            propellor.Visible = !ShowSprite;
+
+            //So the graphic doesn't flicker
+            if (!propellor.Visible && propellerRpm < maxPropRpmBeforeSprite * .9f) {
+                propellor.Visible = true;
+            } else if (propellor.Visible && propellerRpm > maxPropRpmBeforeSprite * 1.1f) {
+                propellor.Visible = false;
+            }
+            bool ShowSprite = !propellor.Visible;
+
             if (!ShowSprite) {
                 propellor.Rotate(Vector3.Forward, propRotationModifier * propellerRpm);
             }
