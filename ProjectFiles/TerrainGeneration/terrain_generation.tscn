@@ -31,7 +31,7 @@ mesh = NodePath("StaticBody3D/terrain")
 collisionShape = NodePath("StaticBody3D/CollisionShape3D")
 resolution = 1
 water = NodePath("StaticBody3D/Water")
-noise1ValueModifier = 0.05
+noise1ValueModifier = 0.1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

@@ -34,7 +34,7 @@ noise = ExtResource("2_p54fb")
 [resource]
 render_priority = 0
 shader = ExtResource("1_dxhe3")
-shader_parameter/height = 6002.01
+shader_parameter/height = 1403.71
 shader_parameter/noiseVisibilityModifier = 8.495
 shader_parameter/colorGradient = SubResource("GradientTexture1D_p54fb")
 shader_parameter/albedoNoise = SubResource("NoiseTexture2D_7o8f0")

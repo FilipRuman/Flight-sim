@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bijbbsx1cx5cx"]
+[gd_scene load_steps=15 format=3 uid="uid://bijbbsx1cx5cx"]
 
+[ext_resource type="Texture2D" uid="uid://ct1ih4had0wvm" path="res://Sprites/kloofendal_48d_partly_cloudy_puresky_4k.exr" id="1_8xkvn"]
 [ext_resource type="Script" uid="uid://dcoas381nsb2u" path="res://LightRef.cs" id="2_5crlr"]
 [ext_resource type="Script" uid="uid://dvng2yn1127pt" path="res://Clouds/RayTarget.cs" id="3_hbc2u"]
 [ext_resource type="Script" uid="uid://csw3e6fsbf1up" path="res://Player/model selection/ModelSelector.cs" id="3_rf2cd"]
@@ -10,34 +11,29 @@
 [ext_resource type="Script" uid="uid://bhg2tqctm0nlh" path="res://CloudsPositionHandler.cs" id="9_8xkvn"]
 [ext_resource type="PackedScene" uid="uid://chkkgejdiovvn" path="res://Player/PlayerCam.tscn" id="9_torvr"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_torvr"]
-frequency = 0.0489
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p5x2j"]
+panorama = ExtResource("1_8xkvn")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8xkvn"]
-noise = SubResource("FastNoiseLite_torvr")
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p5x2j"]
-sky_top_color = Color(0.18981, 0.358289, 1, 1)
-sky_horizon_color = Color(0.172862, 3.85046e-07, 0.85199, 1)
-sky_curve = 0.0699777
-sky_cover = SubResource("NoiseTexture2D_8xkvn")
-
-[sub_resource type="Sky" id="Sky_emooe"]
-sky_material = SubResource("ProceduralSkyMaterial_p5x2j")
-radiance_size = 4
+[sub_resource type="Sky" id="Sky_yvb8b"]
+sky_material = SubResource("PanoramaSkyMaterial_p5x2j")
 
 [sub_resource type="Environment" id="Environment_su0ec"]
 background_mode = 2
 background_energy_multiplier = 1.36
-sky = SubResource("Sky_emooe")
+sky = SubResource("Sky_yvb8b")
 ambient_light_color = Color(0.641934, 0.641934, 0.641934, 1)
+ambient_light_sky_contribution = 0.0
+reflected_light_source = 1
 tonemap_mode = 2
-tonemap_exposure = 0.78
-tonemap_white = 2.05
+tonemap_exposure = 0.7
+tonemap_white = 5.18
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_min_cell_size = 5.97
+sdfgi_energy = 0.75
 glow_enabled = true
 glow_bloom = 0.1
 glow_blend_mode = 1
@@ -45,7 +41,7 @@ fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.530111, 0.68649, 0.8584, 1)
 fog_light_energy = 2.21
-fog_sun_scatter = 3.5
+fog_sun_scatter = 0.32
 fog_density = 1.0
 fog_aerial_perspective = 0.302
 fog_sky_affect = 0.765
@@ -63,7 +59,7 @@ adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hbc2u"]
 exposure_multiplier = 0.704
-auto_exposure_scale = 0.1
+auto_exposure_scale = 0.58
 dof_blur_far_enabled = true
 dof_blur_far_distance = 6200.6
 dof_blur_far_transition = 1294.64
@@ -80,12 +76,13 @@ camera_attributes = SubResource("CameraAttributesPractical_hbc2u")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.856267, 0.0959029, 0.507552, 0.0783717, -0.947115, 0.311176, 0.510553, 0.306228, 0.803467, 0, 0, 0)
 light_energy = 0.738
-light_indirect_energy = 4.752
+light_indirect_energy = 1.333
 light_volumetric_fog_energy = 7.977
-light_angular_distance = 84.1
+light_angular_distance = 60.75
 light_specular = 0.0
 light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_blend_splits = true
 script = ExtResource("2_5crlr")
 
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]

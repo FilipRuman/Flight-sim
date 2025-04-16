@@ -398,7 +398,7 @@ script = ExtResource("5_auc7s")
 hubRadius = 0.1
 bladeElements = 20
 blades = 2
-bladeLength = 1.0
+bladeLength = 1.5
 chordBasedOnDistanceFromBeginningOfBlade = SubResource("Curve_ts4k8")
 bladeAngleBasedOnDistanceFromBeginningOfBladeRad = SubResource("Curve_5cyn4")
 dragBasedOnAoA = SubResource("Curve_uhtmu")
@@ -1230,7 +1230,6 @@ FeedbackAmount = 9.84
 [node name="AudioStreamPlayer" parent="SoundScene/Engine synth" index="0"]
 volume_db = 1.0
 autoplay = true
-stream_paused = false
 
 [node name="Engine controller" parent="SoundScene" index="3"]
 volumeMinMax = Vector2(1, 11)
