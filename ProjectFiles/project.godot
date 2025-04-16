@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Flight-sim]
+
+config/ninetailsrabbit.terrainy/update_notification_enabled=true
+
 [application]
 
 config/name="Flight-sim"

@@ -304,6 +304,9 @@ bones/11/rotation = Quaternion(0.172061, 0.985086, -2.02892e-15, -3.54383e-16)
 bones/14/rotation = Quaternion(-0.00260063, -0.0624857, -0.379083, 0.923247)
 bones/16/rotation = Quaternion(0.399679, 0.916164, -0.00627751, 0.0293611)
 
+[node name="Tren_aterrizaje" parent="Model/Avion" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.568872, -7.45058e-09)
+
 [node name="Aleron_Der" parent="Model/Avion" index="2" node_paths=PackedStringArray("wing")]
 wing = NodePath("../../../wings/Alerone FR")
 rotationVector = Vector3(1, 0, 0)
@@ -325,6 +328,15 @@ script = ExtResource("2_00tjw")
 wing = NodePath("../../../wings/Rudder S")
 yaw = true
 rotationVector = Vector3(0, 1, 0)
+
+[node name="polySurface343" parent="Model/Avion/Chasis/Compuerta_ruedas" index="0"]
+transform = Transform3D(0.473543, 0.880625, 0.0160266, -0.875494, 0.472617, -0.100716, -0.0962672, 0.033662, 0.994787, 0.00322367, 0.0452657, 1.85149)
+
+[node name="polySurface344" parent="Model/Avion/Chasis/Compuerta_ruedas" index="1"]
+transform = Transform3D(0.499348, -0.861354, -0.0933884, 0.866233, 0.498467, 0.0342137, 0.0170809, -0.0979807, 0.995042, 0.00273454, 0.045321, 1.84095)
+
+[node name="Puerta_cabina" parent="Model/Avion" index="10"]
+transform = Transform3D(1, 0, 0, 0, 0.99924, 0.0389808, 0, -0.0389808, 0.99924, 0.00189702, 1.38824, 0.690983)
 
 [node name="Node" type="Node" parent="Model/Avion" index="11"]
 
@@ -365,7 +377,7 @@ crankshaft = NodePath("Engine controller/crankshaft")
 engine = NodePath("Engine controller")
 momentOfInertia = 28000.0
 gearRatio = 1.0
-starterSpeed = 200.0
+starterSpeed = 50.0
 starterCheckbox = NodePath("../UIController/Engine UI/GridContainer/starter")
 angleOfAttackOfTip = NodePath("../UIController/Engine UI/GridContainer/Angle of attack")
 enginePhysicsUpdatesPerSecond = 2000.0
