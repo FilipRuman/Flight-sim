@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://gebnblpa811q"]
+[gd_scene load_steps=64 format=4 uid="uid://gebnblpa811q"]
 
 [ext_resource type="PackedScene" uid="uid://p8hu1d662mb3" path="res://Player/Plane examples/propeller plane small/model/Plane.tscn" id="1_aoggf"]
 [ext_resource type="Script" uid="uid://dlx8drogpfy0x" path="res://Player/PlayerRbController.cs" id="1_o28un"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://y8jdxo21yuoi" path="res://Player/UiController.cs" id="6_a3tn1"]
 [ext_resource type="Resource" uid="uid://bpm0egleos585" path="res://Player/Plane examples/propeller plane small/airfoil settings/Stab.tres" id="6_od3ui"]
 [ext_resource type="Script" uid="uid://ccblf4w2x8ob8" path="res://ReciprocatingEngine/Data/Engine/EngineController.cs" id="6_psr18"]
+[ext_resource type="Script" uid="uid://bp4tmb4mdysnb" path="res://ReciprocatingEngine/DriveTrainUI.cs" id="6_ts4k8"]
 [ext_resource type="Script" uid="uid://b7ba3uaxjle7" path="res://ReciprocatingEngine/Data/Engine/Crankshaft.cs" id="7_1cmca"]
 [ext_resource type="Script" uid="uid://x2rwjvbchwku" path="res://Physics/Wings/Airfoil size/AirfoilSize.cs" id="8_mny0o"]
 [ext_resource type="Script" uid="uid://c0x5rause6t86" path="res://ReciprocatingEngine/Data/Engine/EngineUI.cs" id="8_psr18"]
@@ -371,25 +372,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.0300107, 2.44941)
 visible = false
 shape = SubResource("SphereShape3D_hdd2g")
 
-[node name="Drivetrain" type="Node" parent="." node_paths=PackedStringArray("rb", "uiController", "hud", "engineSoundController", "wingsManager", "propeller", "crankshaft", "engine", "starterCheckbox", "angleOfAttackOfTip", "rpmPercentageBarHUD", "temperatureLabelHUD")]
+[node name="Drivetrain" type="Node" parent="." node_paths=PackedStringArray("rb", "wingsManager", "propeller", "crankshaft", "engine", "ui")]
 script = ExtResource("4_7l70o")
 rb = NodePath("..")
-uiController = NodePath("../UIController")
-hud = NodePath("../UIController/All hud")
-engineSoundController = NodePath("../SoundScene/Engine controller")
 wingsManager = NodePath("../wings/wings manager")
 propeller = NodePath("Propeller")
 crankshaft = NodePath("Engine controller/crankshaft")
 engine = NodePath("Engine controller")
+ui = NodePath("Dricetrain ui")
 momentOfInertia = 28000.0
 gearRatio = 1.0
 starterSpeed = 50.0
-starterCheckbox = NodePath("../UIController/Engine UI/GridContainer/starter")
-angleOfAttackOfTip = NodePath("../UIController/Engine UI/GridContainer/Angle of attack")
-rpmPercentageBarHUD = NodePath("../UIController/All hud/HUD box that moves with camera/engine stats layout/Engine stats/Rpm progress bar")
-temperatureLabelHUD = NodePath("../UIController/All hud/HUD box that moves with camera/engine stats layout/Engine stats/Temp")
 enginePhysicsUpdatesPerSecond = 2000.0
-starterInputAction = "starter"
 dragModifier = 1.0
 enable = true
 
@@ -403,6 +397,18 @@ chordBasedOnDistanceFromBeginningOfBlade = SubResource("Curve_ts4k8")
 bladeAngleBasedOnDistanceFromBeginningOfBladeRad = SubResource("Curve_5cyn4")
 dragBasedOnAoA = SubResource("Curve_uhtmu")
 liftBasedOnAoA = SubResource("Curve_adap6")
+
+[node name="Dricetrain ui" type="Node" parent="Drivetrain" node_paths=PackedStringArray("main", "engineSoundController", "starterCheckbox", "angleOfAttackOfTip", "uiController", "hud", "rpmPercentageBarHUD", "temperatureLabelHUD")]
+script = ExtResource("6_ts4k8")
+main = NodePath("..")
+engineSoundController = NodePath("../../SoundScene/Engine controller")
+starterCheckbox = NodePath("../../UIController/Engine UI/GridContainer/starter")
+angleOfAttackOfTip = NodePath("../../UIController/Engine UI/GridContainer/Angle of attack")
+uiController = NodePath("../../UIController")
+hud = NodePath("../../UIController/All hud")
+rpmPercentageBarHUD = NodePath("../../UIController/All hud/HUD box that moves with camera/engine stats layout/Engine stats/Rpm progress bar")
+temperatureLabelHUD = NodePath("../../UIController/All hud/HUD box that moves with camera/engine stats layout/Engine stats/Temp")
+starterInputAction = "starter"
 
 [node name="Engine controller" type="Node" parent="Drivetrain" node_paths=PackedStringArray("ui", "statsSmoothing", "airFlow", "cylinders", "crankshaft", "heatHandler")]
 script = ExtResource("6_psr18")
@@ -1230,6 +1236,7 @@ FeedbackAmount = 9.84
 [node name="AudioStreamPlayer" parent="SoundScene/Engine synth" index="0"]
 volume_db = 1.0
 autoplay = true
+stream_paused = false
 
 [node name="Engine controller" parent="SoundScene" index="3"]
 volumeMinMax = Vector2(1, 11)

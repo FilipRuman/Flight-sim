@@ -3,70 +3,37 @@ using System;
 
 public partial class DriveTrain : Node {
     [Export] RigidBody3D rb;
-    [Export] Player.UiController uiController;
-    [Export] HUD hud;
-    [Export] EngineSoundController engineSoundController;
 
     [Export] WingsManager wingsManager;
     [Export] Propeller propeller;
     [Export] Crankshaft crankshaft;
     [Export] public EngineController engine;
+    [Export] DriveTrainUI ui;
 
     [Export] public float momentOfInertia;
 
-    [Export] float gearRatio;
+    [Export] public float gearRatio;
     [Export] public float starterSpeed;
     [Export] float currentAngularVelocity /* rad/s */;
 
     public bool starterButtonPressed;
 
-    [Export] CheckBox starterCheckbox;
-    [Export] Label angleOfAttackOfTip;
-
-    [Export] TextureProgressBar rpmPercentageBarHUD;
-    [Export] Label temperatureLabelHUD;
-
-
     [Export] private float enginePhysicsUpdatesPerSecond;
     private TickSystem enginePhysicsTickSystem = new();
-    [Export] private string starterInputAction;
+
     public override void _Ready() {
         enginePhysicsTickSystem.updatesPerSecond = enginePhysicsUpdatesPerSecond;
         enginePhysicsTickSystem.toCall.Clear();
         enginePhysicsTickSystem.toCall.Add(HandlePhysics);
-
-        rpmPercentageBarHUD.MinValue = 0;
-        rpmPercentageBarHUD.MaxValue = engine.rpmLimit;
-
-
         base._Ready();
     }
-    public float propellerRPM => crankshaft.RevolutionsPerSecond * 60 * gearRatio;
-    // Maybe later add drivetrainUI 
-    public override void _Process(double delta) {
-        if (Input.IsActionJustPressed(starterInputAction)) {
-            starterButtonPressed = !starterButtonPressed;
-            engine.holdIdle = true;
-        }
-        starterCheckbox.ButtonPressed = starterButtonPressed;
-        hud.throttleToDisplay = engine.throttle;
-        hud.thrustToDisplay = currentThrust;
 
-        uiController.thrustToDisplay = currentThrust;
-        uiController.propellerRpm = propellerRPM;
-
-        engineSoundController.throttle = engine.throttle;
-        engineSoundController.rpm = propellerRPM;
-
-        rpmPercentageBarHUD.Value = engine.crankshaft.RevolutionsPerSecond * 60f;
-        temperatureLabelHUD.Text = $"{(uint)(engine.heatHandler.cylinderWallTemperature - 273)}";
-
-        base._Process(delta);
-    }
     public float currentThrust;
     [Export] float dragModifier;
     [Export] bool enable;
     [Export] float engineShutdownDrag = 200;
+
+    public float PropellerAngularVelocity => currentAngularVelocity * gearRatio;
     private void HandlePhysics(float delta) {
         if (!enable)
             return;
@@ -77,8 +44,8 @@ public partial class DriveTrain : Node {
         engine.ambientAirTemperature = airTemperature;
         engine.ambientAirDensity = airDensity;
 
-        propeller.HandlePhysics(delta, wingsManager.FrontalVelocity, airDensity, currentAngularVelocity * gearRatio, out float thrust, out float propellerDrag, out string aoaDebug);
-        angleOfAttackOfTip.Text = "angles of attack of propeller elements: \n" + aoaDebug;
+        propeller.HandlePhysics(delta, wingsManager.FrontalVelocity, airDensity, PropellerAngularVelocity, out float thrust, out float propellerDrag, out string aoaDebug);
+        ui.angleOfAttackOfTip.Text = "angles of attack of propeller elements: \n" + aoaDebug;
         ApplyThrust(thrust);
 
         currentThrust = thrust;
