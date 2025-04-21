@@ -86,6 +86,7 @@ directional_shadow_blend_splits = true
 script = ExtResource("2_5crlr")
 
 [node name="TerrainGenControler" parent="." node_paths=PackedStringArray("terrainLayout") instance=ExtResource("3_rpqi1")]
+forceRegenerate = true
 terrainLayout = NodePath("../terrain layout")
 ViewDistance = 8000.0
 terrainScale = 5.0

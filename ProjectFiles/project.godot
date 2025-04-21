@@ -8,10 +8,6 @@
 
 config_version=5
 
-[Flight-sim]
-
-config/ninetailsrabbit.terrainy/update_notification_enabled=true
-
 [application]
 
 config/name="Flight-sim"
@@ -38,7 +34,7 @@ project/assembly_name="Flight-sim"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ninetailsrabbit.terrainy/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
@@ -165,6 +161,7 @@ throttle={
 
 common/physics_ticks_per_second=300
 common/max_physics_steps_per_frame=20
+common/physics_jitter_fix=2.0
 3d/physics_engine="Jolt Physics"
 2d/default_gravity=9.80665
 
