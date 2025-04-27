@@ -26,7 +26,7 @@ You can use it for your project under the <a href="https://github.com/LeaveMyAlp
 - 2 plane examples - f16 && propeller plane
 - Volumetric clouds compute shader 
 ### plans
-- More accurate engine simulation 
+I'll maybie some time ever do it.
 - Destruction system 
 - Fuel usage && weight simulation 
 ## Setup
