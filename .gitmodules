@@ -1,3 +1,6 @@
 [submodule "Submodules/Engine_Simulation"]
 	path = Submodules/Engine_Simulation
 	url = https://github.com/FilipRuman/Engine_Simulation
+[submodule "Submodules/proceduralMapGen"]
+	path = Submodules/proceduralMapGen
+	url = https://github.com/FilipRuman/proceduralMapGen
